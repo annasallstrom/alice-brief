@@ -1,0 +1,91 @@
+\documentclass{scotus}
+\usepackage{bluebook}
+
+\input{citations.tex}
+
+%
+% If you do not have these fonts, comment the next few lines out by changing
+% \iftrue to \iffalse
+%
+\iftrue
+    \usepackage{fontspec}
+    \setmainfont[BoldFont=ITC Century Std-Bold,Ligatures=TeX]{%
+        Century Expanded LT Std%
+    }
+    \def\titlefont{\fontspec{Cloister Black}\LARGE}
+\fi
+
+\docket{13-298}
+\casecaption{
+\textsc{Alice Corporation Pty. Ltd.},\\\The{Petitioner,}\\v.\\
+\textsc{CLS Bank International and CLS Services Ltd.},\\
+\The{Respondent.}
+}
+
+\posture{On Writ of Certiorari \\
+to the United States Court of Appeals \\
+for the Federal Circuit}
+
+\counsel{
+\textsc{Charles Duan} \\
+\counselofrecord \\
+\textsc{Public Knowledge} \\
+1818 N St NW, Suite 410 \\
+Washington, DC 20036 \\
+(202) 861-0020 \\
+cduan@publicknowledge.org \\
+\whois{Counsel for Amicus Curiae}
+}
+
+\title{Brief of Public Knowledge as
+\protect\\\emph{Amicus Curiae} in Support of Respondent}
+
+\begin{document}
+
+\maketitle
+
+\romanpagenumbers
+\tableofcontents
+
+\part{Table of Authorities}
+
+\tableofauthorities
+
+\clearpage
+\arabicpagenumbers
+
+\part{Interest of \emph{Amicus Curiae}}
+
+Public Knowledge is a non-profit organization that is dedicated to preserving
+the openness of the Internet and the public's access to knowledge; promoting
+creativity through balanced intellectual property rights; and upholding and
+protecting the rights of consumers to use innovative technology lawfully. As
+part of this mission, Public Knowledge advocates on behalf of the public
+interest for a balanced patent system, particularly with respect to new and
+emerging technologies.
+
+Public Knowledge has previously served as \emph{amici} in key patent cases.
+\sentence{e.g., i4i; bilski; quanta}.
+
+\fullcite{i4i}
+\fullcite{bilski}
+\fullcite{quanta}
+
+\part{Summary of Argument}
+
+*
+
+\part{Argument}
+
+\section{First Section}
+
+\section{Second Section}
+
+\part{Conclusion}
+
+For the foregoing reasons, \emph{amici} respectfully submit that the Court
+should affirm the district court.
+
+\signature
+
+\end{document}

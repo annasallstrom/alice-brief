@@ -1,0 +1,10 @@
+*.dvi
+*.toc
+*.toa
+*.aux
+*.log
+*.swp
+current
+current.pdf
+last
+out.pdf

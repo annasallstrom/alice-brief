@@ -1,0 +1,49 @@
+#!/bin/sh
+
+if git status --porcelain | grep -q '^' ; then
+    echo 'Please commit or stash changes before proceeding.'
+    exit 1
+fi
+
+DEFAULT_TEMPLATE=blank
+TEMPLATE="$1"
+NAME="$2"
+
+if [ x"$NAME" = x ] ; then
+    FILENAME="$TEMPLATE"
+else
+    FILENAME="$TEMPLATE-$NAME"
+fi
+
+if git branch --list "templates/$TEMPLATE" | grep -q '^' ; then : ; else
+    TEMPLATE="$DEFAULT_TEMPLATE"
+fi
+git checkout templates/"$TEMPLATE" || exit 1
+
+if git merge-base --is-ancestor master "templates/$TEMPLATE" ; then : ; else
+    echo "Template $TEMPLATE is not up to date; please run update-templates"
+    exit 1
+fi
+
+git checkout templates/"$TEMPLATE" || exit 1
+
+DATE="`date +%Y/%m/%d`"
+BRANCHNAME="$DATE-$FILENAME"
+
+git branch "$BRANCHNAME" || exit 1
+git checkout "$BRANCHNAME" || exit 1
+
+if [ -f "$TEMPLATE.tex" ] ; then
+    git mv "$TEMPLATE.tex" "$FILENAME.tex"
+fi
+
+DASHDATE="`date +%Y-%m-%d`"
+
+touch "$DASHDATE-$FILENAME"
+git add "$DASHDATE-$FILENAME"
+echo "$TEMPLATE" > template
+git add template
+
+git commit -m "Created $BRANCHNAME"
+git push --set-upstream origin "$BRANCHNAME"
+

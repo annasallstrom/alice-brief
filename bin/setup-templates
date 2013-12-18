@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#
+# setup-templates
+#
+# Ensures that there is a local branch for every template.
+#
+
+for template in `git branch --remote --list origin/templates/\* | \
+        sed 's/origin\///'` ; do
+    if git show-ref --verify --quiet refs/heads/"$template" ; then : ; else
+        git branch --track "$template" origin/"$template"
+    fi
+done
+

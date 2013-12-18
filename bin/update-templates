@@ -1,0 +1,27 @@
+#!/bin/sh
+
+#
+# update-templates
+#
+# Incorporates changes to master, into all of the templates.
+#
+
+if git status --porcelain | grep -q '^' ; then
+    echo 'Please commit or stash changes before proceeding.'
+    exit 1
+fi
+
+BASE_BRANCH=master
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+for template in `git branch --list templates/\*` ; do
+    echo Updating $template...
+    git checkout $template || { echo 'Checkout failed.' ; exit 1 ; }
+    git pull
+    git merge -m 'Updating template' $BASE_BRANCH || \
+        { echo 'Merge failed.' ; exit 1 ; }
+done
+
+git push
+git checkout $CURRENT_BRANCH
+echo 'All templates updated.'

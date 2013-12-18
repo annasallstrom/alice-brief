@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#
+# make-template [template-name]
+#
+# Creates a new template.
+#
+
+if git status --porcelain | grep -q '^' ; then
+    echo 'Please commit or stash changes before proceeding.'
+    exit 1
+fi
+
+BASE_BRANCH=master
+
+TEMPLATE="$1"
+
+git checkout "$BASE_BRANCH" || exit 1
+git branch templates/"$TEMPLATE" || exit 1
+git checkout templates/"$TEMPLATE" || exit 1
+git push --set-upstream origin templates/"$TEMPLATE" || exit 1
+
+echo "Created template $TEMPLATE."

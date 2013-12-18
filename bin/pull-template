@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#
+# pull-template
+#
+# In a working document based on a template, pulls the most recent version of
+# the template in.
+#
+
+[ -f template ] || { echo 'Could not determine template' ; exit 1 ; }
+
+git merge --no-edit templates/`cat template`
