@@ -1,0 +1,28 @@
+ALL PATENTS
+5,970,479 (the ’479 Patent)
+6,912,510 (the ’510 Patent)
+7,149,720 (the ’720 Patent)
+7,725,375 (the ’375 Patent)
+LAURIE PICKS
+Method-- Claim 33 of the ’479 patent
+System-- Claim 1 of the ’720 patent
+Beauregard-- Claim 39 of the ’375 patent
+RADER PICKS
+Method-- Claim 33 of the ’479 Patent (same as Laurie)
+System-- Claim 26 of the ’375 Patent
+(didn’t see a Beauregard example)
+
+WE PROBABLY SHOULD USE RADER’S SYSTEM CLAIM:
+ 
+26. A data processing system to enable the exchange of an obligation between parties, the system comprising:
+a communications controller,
+a first party device, coupled to said communications controller,
+a data storage unit having stored therein
+(a) information about a first account for a first party, independent from a second account maintained by a first exchange institution, and
+(b) information about a third account for a second party, independent from a fourth account maintained by a second exchange institution; and
+a computer, coupled to said data storage unit and said communications controller, that is configured to
+(a) receive a transaction from said first party device via said communications controller;
+(b) electronically adjust said first account and said third account in order to effect an exchange obligation arising from said transaction between said first party and said second party after ensuring that said first party and/or said second party have adequate value in said first account and/or said third account, respectively; and
+(c) generate an instruction to said first exchange institution and/or said second exchange institution to adjust said second account and/or said fourth account in accordance with the adjustment of said first account and/or said third account, wherein said instruction being an irrevocable, time invariant obligation placed on said first exchange institution and/or said second exchange institution.
+
+

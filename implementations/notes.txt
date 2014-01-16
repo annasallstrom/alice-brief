@@ -1,0 +1,19 @@
+NOTES ON HOW TO RUN THE IMPLEMENTATIONS:
+
+--- C++:
+My Mac running OS 10.9 with xcode had multiple c++ compilers installed.
+I can compile using either:
+  clang++ test.cp
+  g++ test.cp
+  clang++ test.cp
+then run using:
+  ./a.out
+
+--- BASIC:
+I installed Vintage BASIC, http://www.vintage-basic.net/
+The command to compile & run is:
+   vintbas test.bas
+
+--- PYTHON:
+As with c++, my Mac already had this:
+   python test.py
