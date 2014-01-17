@@ -1,5 +1,5 @@
 \documentclass{scotus}
-\usepackage{bluebook}
+\usepackage[ignoremissing]{bluebook}
 
 \input{citations.tex}
 
@@ -125,16 +125,61 @@ Under Section 101}
 
 Under this Court's precedent, a patent claim is ineligible under \inline{101} if
 that claim has the practical effect of removing all uses of an abstract idea
-from the public domain. The Court has justified this principle on the argument
-that such abstract ideas are the basic tools of innovation, and allowing patents
-on such abstract ideas would prevent further development of new technologies and
-thus hinder rather than incentivize innovation.
+from the public domain. In the present case, the claim would have the practical
+effect of removing all uses of an abstract idea \emph{on a general purpose
+computer} from the public domain. The Court should find such a claim ineligible
+as well, for the following reasons.
 
-These same principles militate against patent eligibility of the claims at
-issue. The patented claims do not require significantly more than performance of
-the abstract idea of accounting by a third-party escrow, using a general purpose
-computer. Such a patent potentially denies all other innovators the right to use
-computers to perform that abstract idea, debilitating further innovation.
+First, the addition of a general purpose computer is no more significant than
+the addition of post-solution or pre-solution activity that the Court has
+previously held not to render an otherwise abstract idea patentable. Cases such
+as \inline{mayo} and \inline{flook} have disregarded post-solution and
+pre-solution activity on the rationale that
+%
+% Note: I have no idea if this is actually the rationale
+[it does not significantly contribute to the subject matter of the claim, and
+that any competent draftsman could render a claim patentable by simple and
+insignificant addition of such limitations].
+The same applies to the addition of a general-purpose computer. It does not
+contribute significantly to the inventive aspect of the claim, and any competent
+draftsman could easily insert a general purpose computer.
+
+Furthermore, the Court has reasoned that abstract ideas must remain unpatentable
+to ensure that the basic tools of innovation remain free to all. \sentence{see
+bilski; mayo; benson}. Allowing patents on those basic tools of innovation would
+hinder, rather than promote, the progress of technology. Computers are also a
+basic tool of innovation, which enable software developers to test out new
+ideas, improve on existing ones, and create new innovations. They are essential
+to the progress of technology.  Allowing patents on abstract ideas merely
+implemented on general purpose computers would thus equally hinder the progress
+of technology.
+
+Finally, strong policy considerations indicate that mere inclusion of a general
+purpose computer should not render an otherwise abstract idea patentable.
+Computers are in widespread use today, and are effectively unavoidable. Thus,
+while as a truly formal matter a general purpose computer is only one possible
+way of implementing an abstract idea, in a practical sense a general purpose
+computer is the only way of implementing almost any of the abstract ideas used
+in society today. Condemning the public to resort to pencil and paper to avoid
+patent infringement is a simply untenable demand.
+
+%
+% This argument needs further elaboration.
+%
+The Federal Circuit's holding in \inline{alappat} should not affect this
+conclusion. There, the lower court held that a general-purpose computer, when
+instructed to perform a specific program, becomes a special-purpose computer.
+This is simply a statement of how a computer works internally, and says nothing
+about the degree to which a patent claim is limited by incorporation of a
+general purpose computer.
+
+%
+% This may better belong in II.C.
+%
+For similar reasons, the mere recitation in a patent claim of computer hardware,
+not specifically related to the inventive aspects of the claim, should not
+affect eligibility of the claim. This would enable a clever draftsman to evade
+\inline{101}.
 
 \section{The Court Should Proactively Clarify the Law of Subject Matter
 Eligibility in Order to Avoid Further Errors Relating to Abstract Ideas
