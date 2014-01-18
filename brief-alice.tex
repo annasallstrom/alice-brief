@@ -1,18 +1,25 @@
 \documentclass{scotus}
 \usepackage[ignoremissing]{bluebook}
+\usepackage{ifxetex}
+
+\usepackage{listings}
+\input{lsthack.tex}
 
 \input{citations.tex}
 
 %
 % If you do not have these fonts, comment the next few lines out by changing
-% \iftrue to \iffalse
+% \ifxetex to \iffalse
 %
-\iftrue
+\ifxetex
     \usepackage{fontspec}
     \setmainfont[BoldFont=ITC Century Std-Bold,Ligatures=TeX]{%
         Century Expanded LT Std%
     }
     \def\titlefont{\fontspec{Cloister Black}\LARGE}
+    \def\basickeywordstyle{\addfontfeatures{Letters=UppercaseSmallCaps}}
+\else
+    \def\basickeywordstyle{\bfseries}
 \fi
 
 \docket{13-298}
@@ -93,6 +100,13 @@ To demonstrate this, we prepare a computer program that implements all the
 features of the claims. The computer program is very short, indicating that the
 verbose language of the claims does not in fact demand specific, particular
 implementations but rather can expansively cover all implementations.
+
+\begingroup
+\lstset{keywordstyle=\basickeywordstyle,identifierstyle=\itshape}
+\lstset{breaklines=true,showstringspaces=false}
+\lstset{language=[Visual]Basic,columns=fullflexible}
+\lstinputlisting[lastline=7]{implementations/375claim26.bas}
+\endgroup
 
 Certain judges of the Federal Circuit were clearly misled by the claim language.
 They believed that the claim required particular, specific implementation
