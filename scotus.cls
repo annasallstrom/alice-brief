@@ -367,8 +367,8 @@
 \setcounter{tocdepth}{3}
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
-    \vskip \z@ \@plus.2\p@
     {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+     \parskip=.5\parskip\@plus 3pt
      \parindent #2\relax\@afterindenttrue
      \interlinepenalty\@M
      \leavevmode
@@ -383,7 +383,7 @@
      \par}%
   \fi}
 \newcommand\tableofcontents{%
-    \part{\contentsname
+    \part*{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
