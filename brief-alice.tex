@@ -1,11 +1,13 @@
 \documentclass{scotus}
 \usepackage[ignoremissing]{bluebook}
 \usepackage{ifxetex}
+\usepackage{xspace}
 
 \usepackage{listings}
 \input{lsthack.tex}
 
 \input{citations.tex}
+\input{claim26.tex}
 
 %
 % If you do not have these fonts, comment the next few lines out by changing
@@ -21,6 +23,62 @@
 \else
     \def\basickeywordstyle{\bfseries}
 \fi
+
+%
+% Macros for how long the computer program is
+%
+\def\numlines{seven\xspace}
+\def\Numlines{Seven\xspace}
+\def\wholeprogram{\programlines{1}{7}}
+
+%
+% Macros to format the claim language and/or computer program
+%
+\def\programlines#1#2{%
+    \lstset{keywordstyle=\basickeywordstyle,identifierstyle=\itshape}
+    \lstset{breaklines=true,showstringspaces=false}
+    \lstset{aboveskip=0pt,belowskip=0pt}
+    \lstset{language=[Visual]Basic,columns=fullflexible}
+    \lstinputlisting[firstline=#1,lastline=#2]{%
+        implementations/375claim26.bas%
+    }%
+}
+\long\def\inlinebox#1{%
+    \vskip\parskip
+    \hrule\kern1.5pt \hrule\nobreak
+    \begingroup
+        \vskip 4pt
+        \parskip=0pt
+        #1\par
+        \nobreak\vskip 4pt
+    \endgroup
+    \hrule\kern1.5pt \hrule
+}
+\long\def\claimbox#1#2{%
+    \vskip.5\baselineskip
+    \inlinebox{%
+        \noindent\textsc{Claim 26, #1:}\par
+        {\itshape#2\unskip}%
+    }%
+}
+\long\def\codeandclaimbox#1#2#3#4{%
+    \vskip.5\baselineskip
+    \inlinebox{%
+        \noindent\textsc{Claim 26, #1:}\par
+        {\itshape#2\unskip}%
+        \vskip 4pt
+        \hrule
+        \vskip 4pt
+        \noindent
+        \ifnum#3=#4\relax
+            \textsc{Computer code, line #30:}\par
+        \else
+            \textsc{Computer code, lines #30--#40:}\par
+        \fi
+        \programlines{#3}{#4}%
+    }%
+}%
+
 
 \docket{13-298}
 \casecaption{
@@ -87,7 +145,7 @@ Public Knowledge has previously served as \emph{amicus} in key patent cases.
 \section{The Claims at Issue Are Ineligible Under Section 101 Because They
 Effectively Preempt Substantially All Uses of an Abstract Idea}
 
-\subsection{A Fourteen-Line Computer Implementation of the Patented Technology
+\subsection{A \Numlines-Line Computer Implementation of the Patented Technology
 Illustrates that the Claims Are Not Meaningfully Limited Beyond an Abstract
 Idea}
 
@@ -310,5 +368,125 @@ For the foregoing reasons, \emph{amicus} respectfully submits that the Court
 should affirm the district court.
 
 \signature
+
+\appendix{Implementation of Claim 26 of the '375 Patent in \Numlines Lines of
+Computer Code}
+
+The following \numlines-line computer program, written in the \textsc{basic}
+programming language, implements Claim 26 of the '375 Patent.
+
+\inlinebox{\wholeprogram}
+
+The subsequent text reviews the elements of the claim in detail and explains how
+a general-purpose computer, running the above computer program, would satisfy
+all the elements of the claim. For convenience, the entirety of the claim is
+reprinted in the next appendix.
+
+\claimbox{preamble}{\claimelt0}
+
+The preamble recites that the claim covers a general purpose computing system,
+called a ``data processing system'' by the claim language. The recitation that
+the system is ``to enable the exchange of an obligation'' is a statement of
+intended use, which should not contribute to the scope of the claim.
+
+\claimbox{elements 1--2}{\claimelt1\par\claimelt2}
+
+These elements recite general hardware inherent in a general purpose computer. A
+``communications controller'' broadly refers to a component of a computer that
+receives and processes communications, and a ``first party device'' could refer
+to any computer hardware. A standard keyboard could potentially satisfy this
+limitation.
+
+\codeandclaimbox{elements 3--5}{\claimelt3\par\claimelt4\par\claimelt5}{1}{2}
+
+These elements of the claim simply require that a computer store two numbers
+representing account balances. The ``data storage unit'' might be any computer
+storage component, such as a hard disk or memory. The ``information about'' the
+first and third accounts broadly encompass any account information, such as an
+account balance.
+
+The recitations that the information be stored ``independent from'' various
+accounts maintained by exchange institutions are simply statements of intended
+use, which should not contribute to the patentability of the claim. Petitioners
+have never suggested that the external exchange institutions are necessary
+parties to infringement of their claims.
+
+The computer code implements these elements of the claim by instructing a
+computer to store two account balances, into variables named \emph{account1} and
+\emph{account3}.
+
+\claimbox{element 6}{\claimelt6}
+
+This element is simply further recitation of details about a general purpose
+computer. Any computer would necessarily be coupled to a data storage unit, so
+that it might access data for processing, and further be coupled to a
+communications controller, so that it may receive and output information.
+
+\codeandclaimbox{element 7}{\claimelt7}{3}{3}
+
+According to this element, the computer receives a ``transaction.'' An exchange
+of money between two accounts is one type of transaction. Thus, this element
+requires nothing more than receipt of an instruction to transfer money between
+two accounts.
+
+The computer code implements this by requesting input of an amount of money to
+transfer between the first and third account. Upon running this line of code,
+a computer would print out a prompt message, and then await an outside user to
+enter a number indicating the amount of money to transfer. The amount to
+exchange is stored in a variable named \emph{exchange}.
+
+\codeandclaimbox{element 8}{\claimelt8}{4}{6}
+
+This element describes two operations. First, a computer must check that at
+least one of the accounts has a large enough balance to permit the desired
+transfer of money (``ensuring that said first party...ha[s] adequate value in
+said first account''). Second, the computer must record the transfer by
+adjusting the balances of the accounts (``electronically adjust said first
+account and said third account'').
+
+Note the substantial presence of inoperative language in this claim element. The
+recitation ``in order to effect an exchange obligation arising from said
+transaction between said first party and said second party'' does nothing more
+than reiterate that the computer is transferring money between accounts.
+Furthermore, the claim recites that the computer must ensure ``adequate value in
+said first account and/or said third account,'' and the disjunctive ``and/or''
+means that the claim element is satisfied if only one of those accounts is
+checked.
+
+The computer code implements the step of checking the account balances at line
+40, which halts execution (with \textsc{stop}) if the balance of
+\emph{account1} is less than the amount to be exchanged. The code implements the
+step of effecting the transfer at lines 50--60, which deducts the amount to be
+exchanged from \emph{account1} and adds that amount to \emph{account3}.
+
+\codeandclaimbox{element 9}{\claimelt9}{7}{7}
+
+This claim element requires only that a computer output an instruction to
+perform the desired transfer of money. The claim element recites ``an
+instruction to said first exchange institution and/or said second exchange
+institution,'' but the disjunctive ``and/or'' means that a single instruction
+suffices. Similarly, the recitation of an instruction ``to adjust said second
+account and/or said fourth account'' only requires an instruction with regard to
+a single account.
+
+The requirement that the instruction be ``an irrevocable, time invariant
+obligation'' is merely a statement of intended use that should not contribute to
+the patentability of the claim. An instruction is simply a text, and the
+recipient of the instruction chooses whether to treat that text as irrevocable
+or time-invariant. Although this claim language could plausibly have been
+defined in the specification to require some sort of special format for the
+instruction, Petitioners have never identified any such special definition in
+any of their briefs to this Court or the Federal Circuit, and the text of the
+specification contains neither term outside of the claims. Furthermore, even if
+these terms did have some special meaning, it would only dictate the content of
+the instruction text, and content of text does not contribute to patentability.
+
+The computer code implements this element by causing a computer to print an
+instruction to adjust the second account. The instruction directs the
+first institution to deduct the amount \emph{exchange} from the account.
+
+\appendix{Claim 26 of the '375 Patent}
+
+\wholeclaim
 
 \end{document}

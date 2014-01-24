@@ -3,25 +3,22 @@
 % quotation marks for strings with proper directional quotation marks.
 %
 \makeatletter
-\def\lst@CArg@#1#2#3#4\@empty#5\relax#6{%
-    \if\noexpand#2"%
-        \let#1\lst@hack@quote
+\def\lst@Append#1{%
+    \advance\lst@length\@ne
+    \if\noexpand#1"%
+        \lst@hack@quote
     \else
-        \let#1#2%
+        \lst@token=\expandafter{\the\lst@token#1}%
     \fi
-    \ifx\@empty#3\@empty
-        \def\lst@next{#6{#2{}{}}}%
-    \else
-        \def\lst@next{#6{#2#3{#4}}}%
-    \fi
-    \lst@next #1%
 }
 \newif\if@lst@hack@inquote
 \def\lst@hack@quote{%
     \if@lst@hack@inquote
-        ''\global\@lst@hack@inquotefalse
+        \global\@lst@hack@inquotefalse
+        \lst@token=\expandafter{\the\lst@token''}%
     \else
-        ``\global\@lst@hack@inquotetrue
+        \global\@lst@hack@inquotetrue
+        \lst@token=\expandafter{\the\lst@token``}%
     \fi
 }
 \makeatother

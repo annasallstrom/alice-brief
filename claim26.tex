@@ -1,0 +1,50 @@
+\newcounter{claimcounter}
+\def\theclaim{%
+A data processing system to enable the exchange of an obligation
+between parties, the system comprising:
+  \element a communications controller,
+  \element a first party device, coupled to said communications controller,
+  \element a data storage unit having stored therein
+    \element\sub (a)\ind information about a first account for a first party,
+    independent from a second account maintained by a first exchange
+    institution, and
+    \element\sub (b)\ind information about a third account for a second party,
+    independent from a fourth account maintained by a second exchange
+    institution; and
+  \element a computer, coupled to said data storage unit and said
+  communications controller, that is configured to
+    \element\sub (a)\ind receive a transaction from said first party device via
+    said communications controller;
+    \element\sub (b)\ind electronically adjust said first account and said
+    third account in order to effect an exchange obligation arising from said
+    transaction between said first party and said second party after ensuring
+    that said first party and/or said second party have adequate value in said
+    first account and/or said third account, respectively; and
+    \element\sub (c)\ind generate an instruction to said first exchange
+    institution and/or said second exchange institution to adjust said second
+    account and/or said fourth account in accordance with the adjustment of said
+    first account and/or said third account, wherein said instruction being an
+    irrevocable, time invariant obligation placed on said first exchange
+    institution and/or said second exchange institution.
+}
+\newcount\claimeltcount
+\def\claimelt#1{%
+    \begingroup
+        \let\element\or
+        \let\sub\relax
+        \let\preamble\relax
+        \let\ind\space
+        \claimeltcount=#1\relax
+        \expandafter\ifcase\expandafter\claimeltcount\theclaim\fi
+        \unskip
+    \endgroup
+}
+\def\wholeclaim{%
+    \begingroup
+        \let\preamble\par
+        \def\element{\par\endgroup\begingroup\advance\leftskip\parindent}%
+        \def\sub{\advance\leftskip\parindent}%
+        \let\ind\quad
+        \begingroup\theclaim\par\endgroup
+    \endgroup
+}
