@@ -1,4 +1,3 @@
-\newcounter{claimcounter}
 \def\theclaim{%
 A data processing system to enable the exchange of an obligation
 between parties, the system comprising:
@@ -41,10 +40,18 @@ between parties, the system comprising:
 }
 \def\wholeclaim{%
     \begingroup
+        \claimeltcount=0\relax
         \let\preamble\par
-        \def\element{\par\endgroup\begingroup\advance\leftskip\parindent}%
-        \def\sub{\advance\leftskip\parindent}%
+        \def\element{%
+            \par
+            \advance\claimeltcount1\relax
+            \advance\hangindent\parindent
+            \noindent
+            \hbox to \parindent{[\the\claimeltcount]\hss}%
+            \kern\parindent
+        }%
+        \def\sub{\advance\hangindent\parindent\kern\parindent}%
         \let\ind\quad
-        \begingroup\theclaim\par\endgroup
+        \theclaim\par
     \endgroup
 }

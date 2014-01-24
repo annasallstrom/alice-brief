@@ -54,18 +54,22 @@
     \endgroup
     \hrule\kern1.5pt \hrule
 }
+\long\def\claimtext#1#2{%
+    \noindent
+    \bblabel{appx:claim:#1}%
+    \textsc{Claim 26, #1:}\par
+    {\itshape#2\unskip}%
+}
 \long\def\claimbox#1#2{%
     \vskip.5\baselineskip
     \inlinebox{%
-        \noindent\textsc{Claim 26, #1:}\par
-        {\itshape#2\unskip}%
+        \claimtext{#1}{#2}%
     }%
 }
 \long\def\codeandclaimbox#1#2#3#4{%
     \vskip.5\baselineskip
     \inlinebox{%
-        \noindent\textsc{Claim 26, #1:}\par
-        {\itshape#2\unskip}%
+        \claimtext{#1}{#2}%
         \vskip 4pt
         \hrule
         \vskip 4pt
@@ -79,6 +83,11 @@
     }%
 }%
 
+%
+% Other useful macros
+%
+\def\Amicus{\emph{Amicus}\xspace}
+\def\amicus{\emph{amicus}\xspace}
 
 \docket{13-298}
 \casecaption{
@@ -129,7 +138,7 @@ part of this mission, Public Knowledge advocates on behalf of the public
 interest for a balanced patent system, particularly with respect to new and
 emerging technologies.
 
-Public Knowledge has previously served as \emph{amicus} in key patent cases.
+Public Knowledge has previously served as \amicus in key patent cases.
 \sentence{e.g., i4i; bilski; quanta}.
 
 \fullcite{i4i}
@@ -159,12 +168,7 @@ features of the claims. The computer program is very short, indicating that the
 verbose language of the claims does not in fact demand specific, particular
 implementations but rather can expansively cover all implementations.
 
-\begingroup
-\lstset{keywordstyle=\basickeywordstyle,identifierstyle=\itshape}
-\lstset{breaklines=true,showstringspaces=false}
-\lstset{language=[Visual]Basic,columns=fullflexible}
-\lstinputlisting[lastline=7]{implementations/375claim26.bas}
-\endgroup
+\inlinebox{\wholeprogram}%
 
 Certain judges of the Federal Circuit were clearly misled by the claim language.
 They believed that the claim required particular, specific implementation
@@ -176,20 +180,80 @@ beliefs to be in error.
 Computer Implementations of a Basic, Abstract Accounting Idea of Third-Party
 Escrow}
 
-As can be plainly seen, the computer program presented is nothing more than the
-basic steps of accounting performed by a third-party escrow. All of the steps
-relate either directly to inherent aspects of this idea or insignificant pre- or
-post-solution activity.
+The example computer program shows that the asserted claims, though lengthy and
+technical in appearance, are actually directed only to a very simple, basic
+computer procedure. \Amicus now turns to using this example computer program to
+show that the asserted claims are directed only to an abstract idea.
 
-Since the computer program implements all the features of the claims at issue,
-this necessarily means that the patent claims are directed to nothing more than
-the abstract idea of accounting by a third-party escrow. Accordingly,
-practically anyone implementing this abstract idea would need to include the
-same steps as those in our computer program, and thus would infringe the claims
-of the patent.
+An abstract idea is [DEFINITION]. Claims directed merely to an abstract idea are
+not eligible under \inline{101}. Furthermore, inclusion of ``insignificant''
+post-solution or pre-solution activity to an otherwise abstract idea does not
+render a claim eligible, as this Court has held, because otherwise any
+``competent draftsman'' could circumvent the limitations of patent eligibility.
 
-Thus, the patent claims preempt essentially all computer-implemented uses of
-accounting by a third-party escrow.
+As Respondents have argued, the claim is directed to nothing more than a
+general-purpose computer tied to the abstract idea of accounting by a
+third-party escrow. The following exposition will consider Claim 26, line by
+line, to determine that every claim element is an inherent aspect of this
+abstract idea, a standard component of a general-purpose computer, or
+insignificant pre- or post-solution activity.
+
+
+Elements 1--2\footnote{Elements will be referenced by numbers corresponding to
+the claim reprinted in the appendix. \sentence{see this at appx:claim}.} of the
+claim describe ordinary components of a general-purpose computer. \sentence{see
+this at appx:claim:elements 1--2}. The ``communications controller'' and
+``first party device'' are broad, general terms that encompass basic computer
+components for interacting with users. Furthermore, these two components are
+only recited in conjunction with a step of receiving data, which as explained
+below is insignificant pre-solution activity.
+
+Elements 3--5 describe basic recordkeeping operations inherent in the idea of
+third-party escrow. Although the claim language verbosely describes a ``data
+storage unit'' with ``information about a first account'' and second account,
+the computer implementation demonstrates that these claim elements in fact
+require nothing more than storing account balances---that is, recording two
+numbers in a computer. \sentence{see this at appx:claim:elements 3--5}.
+Certainly one would necessarily store such account information as part of an
+escrow service.
+
+Element 6 recites ``a computer,'' and as such only further describes a
+general-purpose computer.
+
+Element 7 states that the computer must ``receive a transaction.'' Steps of
+receiving data have been held by this Court and others to constitute
+insignificant pre-solution activity. \sentence{see, e.g., mayo}. As such, this
+claim element does not contribute to the eligibility of the claim.
+
+Element 8 describes two steps to be performed by the computer, both of which are
+inherent in the idea of third-party escrow. First, the computer is tasked with
+``ensuring that said first party and/or said second party have adequate value''
+in their accounts. The computer code shows that this amounts to nothing more
+than a comparison, checking whether an account balance is greater than an amount
+to be transferred out of that account. \sentence{see this at appx:claim:element
+8}. This is a necessary operation performed by a third-party escrow broker, who
+must ensure that the parties' accounts can satisfy the desired transaction.
+
+Second, element 8 requires the computer to ``electronically adjust said first
+account and said third account.'' This is performed in two lines of computer
+code, one of which subtracts from the first account and the other of which adds
+to the third account. \sentence{see this at appx:claim:element 8}. Again, this
+is inherent in a third-party escrow service, which must adjust account balance
+records to account for a transaction.
+
+Element 9 instructs that the computer ``generate an instruction to said first
+exchange institution and/or said second exchange institution to adjust said
+second account and/or said fourth account.'' Despite the fifty-nine-word length
+of this element, it reduces to a single computer operation of printing out a
+message describing the transaction that was just completed. \sentence{see this
+at appx:claim:element 9}. This elementary output step is post-solution activity
+that should not contribute to the eligibility of the claim. \sentence{see
+flook}.
+
+Accordingly, this claim is directed to nothing more than an abstract idea of
+third-party escrow, in conjunction with insignificant pre-solution and
+post-solution activity, and ordinary, albeit verbosely described, components of
+a general purpose computer.
 
 \subsection{The Court Should Disapprove the Preemption of Substantially All
 Computer Uses of an Abstract Idea, and Thus Hold the Claims at Issue Ineligible}
@@ -364,7 +428,7 @@ However, as this Court's precedent makes clear, this is not the case.
 
 \part{Conclusion}
 
-For the foregoing reasons, \emph{amicus} respectfully submits that the Court
+For the foregoing reasons, \amicus respectfully submits that the Court
 should affirm the district court.
 
 \signature
@@ -486,6 +550,10 @@ instruction to adjust the second account. The instruction directs the
 first institution to deduct the amount \emph{exchange} from the account.
 
 \appendix{Claim 26 of the '375 Patent}
+\bblabel[Appendix \#]{appx:claim}
+
+\emph{Numbers, in square brackets, have been inserted before each element of the
+claim, to assist in referring to claim elements within the brief.}
 
 \wholeclaim
 
