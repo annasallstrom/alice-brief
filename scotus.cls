@@ -505,6 +505,11 @@
     \c@page=\@ne
     \pagenumbering{arabic}%
 }
+\def\appendixpagenumbers{%
+    \c@page=\@ne
+    \pagenumbering{arabic}%
+    \gdef\thepage{A\@arabic\c@page}%
+}
 \flushbottom
 \onecolumn
 \sloppy
