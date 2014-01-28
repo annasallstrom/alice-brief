@@ -154,27 +154,116 @@ Public Knowledge has previously served as \amicus in key patent cases.
 \section{The Claims at Issue Are Ineligible Under Section 101 Because They
 Effectively Preempt Substantially All Uses of an Abstract Idea}
 
+The issue of this case is whether Petitioner's claims are directed to
+patent-eligible subject matter. Although the statute states that ``any new and
+useful process, machine, manufacture, or composition of matter'' is eligible for
+patenting, \clause{101}, the Court has identified three exceptional fields that
+are nevertheless ineligible: laws of nature, physical phenomena, and abstract
+ideas. \sentence{see, e.g., mayo at ?}.
+
+The claims of these patents, as with many patents in the computer technology
+field, are full of complex technical language. To facilitate the Court's
+analysis of this case, \amicus has prepared a \numlines-line computer program
+that implements all the features of one of the claims. Based on this program,
+\amicus believes, the claims recite not specialized, technical systems, but
+rather a broad, general, simple algorithm that reduces to nothing more than an
+abstract idea run on a computer. Because mere application of a general-purpose
+computer should not render an otherwise abstract idea patentable, \amicus
+urges the Court to find the present claims ineligible for patenting.
+
 \subsection{A \Numlines-Line Computer Implementation of the Patented Technology
 Illustrates that the Claims Are Not Meaningfully Limited Beyond an Abstract
 Idea}
 
-The claims use complex, technical-sounding language like ``shadow accounts''
-that make the claim to appear substantially limited beyond a mere abstract idea.
-However, a careful reading of the claims shows that this complex language does
-not in fact actually provide such substantial limitations.
+A great deal of the disagreement in the lower court's fractured decision stemmed
+from a disagreement over the nature of the patent claims at issue. One plurality
+of the court found the claims to be highly generic, reciting ``a handful of
+computer components in generic, functional terms that would encompass any
+device'' and unduly preempt an abstract idea. \sentence{see cls-enbanc at ?34
+(Lourie, J., concurring)}. Another found those same claims narrowly tailored,
+``limited to an implementation that inclueds at least four separate structural
+components'' rendering the claim patent-eligible. \sentence{see cls-enbanc at
+?31 (Rader, J., concurring-in-part and dissenting-in-part)}.
 
-To demonstrate this, we prepare a computer program that implements all the
-features of the claims. The computer program is very short, indicating that the
-verbose language of the claims does not in fact demand specific, particular
-implementations but rather can expansively cover all implementations.
+Indeed, the claims do use complex, technical-sounding language, making them
+appear to be directed to a narrowly tailored invention. One of the claims at
+issue recites, among other things, a ``communications controller,'' a
+``data storage unit,'' and an ``instruction being an irrevocable, time invariant
+obligation.'' \sentence{pat375 at claim 26, col. 66-67}.\footnote{Claim 26 of
+\inline{pat375} is considered in this brief because it was found patentable by
+the greatest number of judges of the lower court decision. \sentence{see
+cls-enbanc at ?34 (Rader, Linn, Moore \& O'Malley, JJ., concurring-in-part and
+dissenting-in-part); cls-enbanc at ?14 (Newman, J., concurring-in-part and
+dissenting-in-part)}. The analysis applied by \amicus to this claim can, of
+course, be applied to other claims at issue in this case. For reference, Claim
+26 is reprinted in \inline{this at appx:claim}.}
 
+However, upon closer inspection, the Court should find that beneath this veneer
+of technical language is a very simple, basic idea being patented. To
+demonstrate this, we prepare a computer program that implements all the
+features of the claims:
+
+\vskip.5\baselineskip
 \inlinebox{\wholeprogram}%
+\vskip.5\baselineskip
 
-Certain judges of the Federal Circuit were clearly misled by the claim language.
-They believed that the claim required particular, specific implementation
-details, due to the apparently technical language of the claims and the patent
-specification. However, our presented computer implementation shows these
-beliefs to be in error.
+The program is written in the \textsc{basic} programming language, which was
+selected both because it is simple to understand and because it predates the
+earliest priority date of the patent. A complete explanation of the working of
+this program as it relates to Claim 26 of \inline{pat375} is presented in
+\inline{this at appx:code}.
+
+As the Court will observe, the computer program is very short, indicating that
+the verbose language of the claims does not in fact demand specific, particular
+implementations but rather expansively preempts all uses of a simple, basic
+idea.
+
+Certain judges of the Federal Circuit were clearly misled by the language of the
+claims and the patent.
+One plurality believed that this very claim ``covers the use of a computer and
+other hardware specifically programmed to solve a complex problem'' through the
+use of ``at least four separate structural components.'' \sentence{cls-enbanc at
+?31 (Rader, J.)}. The plurality reviewed the ``at least thirty two figures which
+provide detailed algorithms for the software'' to conclude that ``[l]abeling
+this system claim an `abstract concept' wrenches all meaning from those words.''
+\sentence{cls-enbanc at ?34 (Rader, J.)}. Another plurality found a
+similarly-worded claim ``limited to one that is configured to perform certain
+functions in a particular fashion'' and proceeded to review one of the
+flowcharts of the patent to suggest that the claims demanded a dizzyingly long
+and complex algorithm. \sentence{cls-enbanc at ?11 (Moore, J.,
+dissenting-in-part)}. A third plurality concluded that, while they may be based
+on an abstract idea, ``the claims here are directed to very specific ways of
+doing that,'' proceeding to enumerate seven claim terms from a related claim.
+\sentence{cls-enbanc at ?12 (Linn, J., dissenting)}.
+
+The common thread among all of these judges is an assumption, based on technical
+language recited in the specification and claims of the patents, that only a
+specific, complex, technical computer program could infringe the patents. As the
+above \numlines-line computer program demonstrates, this assumption was in
+error.
+
+Those same judges are wont to criticize analyses such as this as failing to
+``read the claims as a whole.'' \sentence{see cls-enbanc at ?13 (Rader, J.);
+cls-enbanc at ?6 (Moore, J.) (``My colleagues erroneously apply
+\emph{Prometheus}'s `inventive concept' language by stripping away all known
+elements from the asserted system claims\ldots.''); cls-enbanc at ?9 (Linn, J.)
+(criticizing Judge Lourie's opinion because ``he actually strips the claims of
+their detail and limitations''); see also cls-panel at ?23 n.4 (Linn, J.)
+(criticizing the dissenting judge for providing a ``plain English translation''
+of the claims)}.
+
+However, the use of a computer program overcomes even these criticisms and does
+indeed read the claim as a whole. As shown in detail in the appendix, every
+claim limitation has been considered and implemented appropriately in the
+computer program, so it cannot be said that details or limitations have been
+stripped from the claim. \sentence{see this at appx:code}. Furthermore, because
+the computer program is a functional, working implementation of the claim, it
+cannot be argued that it is a mere abstraction or generalization of the claims.
+
+Accordingly, Claim 26 of \inline{pat375} is directed not to a complex, technical
+system requiring specialized hardware, but rather a simple, basic,
+\numlines-line computer algorithm. \Amicus thus turns next to show that this
+basic algorithm is an abstract idea not eligible for patenting.
 
 \subsection{Read with Proper Expansiveness, the Claims Cover Substantially All
 Computer Implementations of a Basic, Abstract Accounting Idea of Third-Party
@@ -185,11 +274,23 @@ technical in appearance, are actually directed only to a very simple, basic
 computer procedure. \Amicus now turns to using this example computer program to
 show that the asserted claims are directed only to an abstract idea.
 
-An abstract idea is [DEFINITION]. Claims directed merely to an abstract idea are
-not eligible under \inline{101}. Furthermore, inclusion of ``insignificant''
+``A principle, in the abstract, is a fundamental truth; an original cause; a
+motive; these cannot be patented, as no one can claim in either of them an
+exclusive right.'' \sentence{benson at 67 (quoting \sentence{leroy at 175})}.
+Claims directed merely to an abstract idea are
+not eligible under \inline{101}, because they are the ``basic tools of
+scientific and technological work,'' \clause{benson at 67}, which therefore
+are ``part of the storehouse of knowledge of all men\ldots free to all men and
+reserved exclusively to none, \clause{bilski at ? (quoting \sentence{funkbros at
+130}) (omission in original)}. Furthermore, inclusion of ``conventional or
+obvious''
 post-solution or pre-solution activity to an otherwise abstract idea does not
-render a claim eligible, as this Court has held, because otherwise any
-``competent draftsman'' could circumvent the limitations of patent eligibility.
+render a claim eligible, as this Court has held, because otherwise
+``a competent draftsman could attach some form of post-solution activity'' to
+``transform an unpatentable principle into a patentable process.''
+\sentence{flook at 590; see also mayo at ? (holding ``conventional steps,
+specified at a high level of generality,'' to similarly not confer patent
+eligibility)}.
 
 As Respondents have argued, the claim is directed to nothing more than a
 general-purpose computer tied to the abstract idea of accounting by a
@@ -208,7 +309,7 @@ components for interacting with users. Furthermore, these two components are
 only recited in conjunction with a step of receiving data, which as explained
 below is insignificant pre-solution activity.
 
-Elements 3--5 describe basic recordkeeping operations inherent in the idea of
+Elements 3--5 describe basic record-keeping operations inherent in the idea of
 third-party escrow. Although the claim language verbosely describes a ``data
 storage unit'' with ``information about a first account'' and second account,
 the computer implementation demonstrates that these claim elements in fact
@@ -221,8 +322,10 @@ Element 6 recites ``a computer,'' and as such only further describes a
 general-purpose computer.
 
 Element 7 states that the computer must ``receive a transaction.'' Steps of
-receiving data have been held by this Court and others to constitute
-insignificant pre-solution activity. \sentence{see, e.g., mayo}. As such, this
+obtaining data to be used for processing have been held by this Court and others
+to constitute insignificant pre-solution activity. \sentence{see, e.g., mayo at
+? (treating as pre-solution activity a step of determining a level of
+metabolites prior to adjusting a treatment)}. As such, this
 claim element does not contribute to the eligibility of the claim.
 
 Element 8 describes two steps to be performed by the computer, both of which are
@@ -247,8 +350,9 @@ second account and/or said fourth account.'' Despite the fifty-nine-word length
 of this element, it reduces to a single computer operation of printing out a
 message describing the transaction that was just completed. \sentence{see this
 at appx:claim:element 9}. This elementary output step is post-solution activity
-that should not contribute to the eligibility of the claim. \sentence{see
-flook at 156 (quoting \sentence{benson at 57})}.
+that should not contribute to the eligibility of the claim. \sentence{cf.
+flook at 590 (treating as post-solution activity a step of adjusting an alarm
+limit in response to a computation)}.
 
 Accordingly, this claim is directed to nothing more than an abstract idea of
 third-party escrow, in conjunction with insignificant pre-solution and
@@ -502,6 +606,7 @@ should affirm the district court.
 
 \appendix{Implementation of Claim 26 of the '375 Patent in \Numlines Lines of
 Computer Code}
+\bblabel[Appendix \#]{appx:code}
 
 The following \numlines-line computer program, written in the \textsc{basic}
 programming language, implements Claim 26 of the '375 Patent.

@@ -255,6 +255,9 @@
 	\expandafter\let\expandafter\bb@kv@name\csname case@#1@name\endcsname
     }%
 }
+%
+% TODO: Need to support multiple prior/subsequent history entries
+%
 \bb@newparam{prior}{Prior history for a case}
 \bb@newparam{subsequent}{Subsequent history for a case}
 \bb@defparam{year}{Year/date of the case, article, regulation}{%
@@ -1178,7 +1181,8 @@
 	\noexpand\@bb@inlcommatrue
     }%
     \expandafter\protected@xdef\csname sc@#1\endcsname{%
-	\bb@kv@inline\space Patent
+	\noexpand\if@bb@inline \@capnext the \noexpand\fi
+        \bb@kv@inline\space Patent%
     }%
 }
 \bb@newcite\defbook{A book or non-periodic material, BB R. 15}{%
@@ -2363,7 +2367,7 @@
 \def\@fmtpg@divname#1#2{%
     \@ifundefined{bb@t17@#1}{%
 	\protect\@fmtpg@warngraph{#1}%
-	#1%
+	#1\space
     }{%
         \@ifempty{#2}{%
             \@expand\chop@space{\csname bb@t17@#1\endcsname}{iii}%
@@ -4222,20 +4226,14 @@
 \def\bb@case@history{%
     \bb@ifset\bb@kv@prior{%
 	\let\bb@tmp@and\@empty
-	\@for\reserved@a:=\bb@kv@prior\do{%
-	    \expandafter\bb@case@split@expl\expandafter{\reserved@a}%
-	    {}\bb@paren@prior
-	    \def\bb@tmp@and{and }%
-	}%
+        \@expand\bb@case@split@expl\bb@kv@prior{i}{}\bb@paren@prior
+        %\def\bb@tmp@and{and }% For supporting multiple entries
     }\relax
     \bb@ifset\bb@kv@subsequent{%
 	\let\bb@tmp@and\@empty
-	\@for\reserved@a:=\bb@kv@subsequent\do{%
-	    \expandafter\bb@case@split@expl\expandafter{\reserved@a}{ % Space
-		sub nom.%
-	    }\bb@paren@subseq
-	    \def\bb@tmp@and{and }%
-	}%
+        \@expand\bb@case@split@expl\bb@kv@subsequent{i}%
+                {sub nom.}\bb@paren@subseq
+        % \def\bb@tmp@and{and }%
     }\relax
 }
 \def\bb@case@split@expl#1#2#3{%
@@ -4327,6 +4325,7 @@
 \def\bb@expl@split#1{%
     \let\bb@expl@phrase\@empty
     \let\bb@expl@cite\@empty
+    \message{bb@expl@split #1}%
     % If there's a colon, then split by that.
     \in@{:}{#1}\ifin@ \@split{:}{#1}\bb@case@hist@ \else
 	% If there's a comma, split by that.
@@ -4348,6 +4347,7 @@
     \ifx\bb@expl@cite\@empty \bb@expl@err \fi
 }
 \def\bb@case@hist@#1#2{%
+    \message{bb@case@hist `#1' `#2'}%
     \protected@edef\bb@expl@cite{\chop@space{#2}}%
     \protected@edef\bb@expl@phrase{\chop@space{#1}}%
 }
