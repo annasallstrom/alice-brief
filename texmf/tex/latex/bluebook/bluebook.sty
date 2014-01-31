@@ -1181,8 +1181,11 @@
 	\noexpand\@bb@inlcommatrue
     }%
     \expandafter\protected@xdef\csname sc@#1\endcsname{%
-	\noexpand\if@bb@inline \@capnext the \noexpand\fi
-        \bb@kv@inline\space Patent%
+        \bb@citeguts{%
+            \noexpand\if@bb@inline \@capnext the \noexpand\fi
+            \bb@kv@inline\space Patent%
+            \bb@maybepage{ }%
+        }%
     }%
 }
 \bb@newcite\defbook{A book or non-periodic material, BB R. 15}{%
