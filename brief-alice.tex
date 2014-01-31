@@ -136,7 +136,14 @@ creativity through balanced intellectual property rights; and upholding and
 protecting the rights of consumers to use innovative technology lawfully. As
 part of this mission, Public Knowledge advocates on behalf of the public
 interest for a balanced patent system, particularly with respect to new and
-emerging technologies.
+emerging technologies.\footnote{Per Supreme Court Rule 37(6), no counsel for a
+party authored this brief in whole or in part, and no counsel or party made a
+monetary contribution intended to fund the preparation or submission of the
+brief. No person or entity, other than \amicus, its members, or its counsel,
+made a monetary contribution to the preparation or submission of this brief. Per
+Rule 37(3)(a), consent has been granted for the filing of this brief, as
+indicated by the blanket consents from counsel for petitioner and counsel for
+respondents docketed December 11, 2013.}
 
 Public Knowledge has previously served as \amicus in key patent cases.
 \sentence{e.g., i4i; bilski; quanta}.
@@ -594,7 +601,9 @@ The recitations that the information be stored ``independent from'' various
 accounts maintained by exchange institutions are simply statements of intended
 use, which should not contribute to the patentability of the claim. Petitioners
 have never suggested that the external exchange institutions are necessary
-parties to infringement of their claims.
+parties to infringement of their claims. Furthermore, so long as the two stored
+numbers reflect actual account balances in external banks, the ``independent
+from'' limitations are satisfied.
 
 The computer code implements these elements of the claim by instructing a
 computer to store two account balances, into variables named \emph{account1} and
@@ -637,7 +646,9 @@ than reiterate that the computer is transferring money between accounts.
 Furthermore, the claim recites that the computer must ensure ``adequate value in
 said first account and/or said third account,'' and the disjunctive ``and/or''
 means that the claim element is satisfied if only one of those accounts is
-checked.
+checked. \sentence{see mpep at S 2103/IC (``Language that suggests or makes
+optional but does not require steps to be performed\ldots does not limit the
+scope of a claim or claim limitation.'')}.
 
 The computer code implements the step of checking the account balances at line
 40, which halts execution (with \textsc{stop}) if the balance of
@@ -647,7 +658,7 @@ exchanged from \emph{account1} and adds that amount to \emph{account3}.
 
 \codeandclaimbox{element 9}{\claimelt9}{7}{7}
 
-This claim element requires only that a computer output an instruction to
+This claim element requires only that a computer display an instruction to
 perform the desired transfer of money. The claim element recites ``an
 instruction to said first exchange institution and/or said second exchange
 institution,'' but the disjunctive ``and/or'' means that a single instruction
