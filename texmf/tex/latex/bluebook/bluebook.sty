@@ -3393,7 +3393,6 @@
 	\protected@edef#2{\bb@parseurl@#1\bb@parseurl@}%
 	\protected@edef#2{%
 	    {%
-		\noexpand\hyphenchar\noexpand\font\noexpand\m@ne
 		\bb@tag{a href="#2"}{#2}%
 	    }%
 	}%
@@ -3401,10 +3400,11 @@
 \else
     \def\bb@parseurl#1#2{%
 	\protected@edef#2{%
-	    {%
-		\noexpand\hyphenchar\noexpand\font\noexpand\m@ne
+	    \begingroup
+                \leavevmode\hbox\bgroup
 		\bb@parseurl@#1\bb@parseurl@
-	    }%
+                \egroup
+	    \endgroup
 	}%
     }
 \fi
@@ -3416,16 +3416,18 @@
 	    \@test \ifcat\noexpand#1\relax \fi{%
 		% Control sequence
 		\@ifundefined{bb@url@\string#1}{%
-		    \string#1%
+		    \egroup\string#1\hbox\bgroup
 		}{%
-		    \csname bb@url@\string#1\endcsname
+		    \egroup\csname bb@url@\string#1\endcsname\hbox\bgroup
 		}%
 	    }{%
 		% Normal character
 		\@ifundefined{bb@url@\bb@url@bslash\string#1}{%
 		    \string#1%
 		}{%
-		    \csname bb@url@\bb@url@bslash\string#1\endcsname
+		    \egroup
+                    \csname bb@url@\bb@url@bslash\string#1\endcsname
+                    \hbox\bgroup
 		}%
 	    }%
 	    \bb@parseurl@
