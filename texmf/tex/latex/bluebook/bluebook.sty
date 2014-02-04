@@ -4335,7 +4335,6 @@
 \def\bb@expl@split#1{%
     \let\bb@expl@phrase\@empty
     \let\bb@expl@cite\@empty
-    \message{bb@expl@split #1}%
     % If there's a colon, then split by that.
     \in@{:}{#1}\ifin@ \@split{:}{#1}\bb@case@hist@ \else
 	% If there's a comma, split by that.
@@ -4357,7 +4356,6 @@
     \ifx\bb@expl@cite\@empty \bb@expl@err \fi
 }
 \def\bb@case@hist@#1#2{%
-    \message{bb@case@hist `#1' `#2'}%
     \protected@edef\bb@expl@cite{\chop@space{#2}}%
     \protected@edef\bb@expl@phrase{\chop@space{#1}}%
 }
