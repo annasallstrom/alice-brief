@@ -1,0 +1,106 @@
+HOW TO CITE REFERENCES
+
+This brief uses a special citation formatting program to automatically format
+citations, calculate proper short and id.-citation forms, and generate the Table
+of Authorities.
+
+To cite a reference, DO NOT format the citation yourself. This will only require
+me to undo the formatting in order to properly generate the Table of
+Authorities. Instead, follow this procedure.
+
+
+1. SELECT A NICKNAME AND OPTIONALLY UPDATE citations.tex
+
+Each reference should be given a short nickname, to be used within the document
+text. For example, the nickname for "Bilski v. Kappos, 130 S. Ct. 3218 (2010)"
+is "bilski".
+
+The file "citations.tex" identifies all nicknames of references and defines the
+relevant information for each reference. For example, Bilski is defined as
+follows:
+
+    \defcase{bilski}{
+        p=Bilski,
+        d=Kappos,
+        cite=130 S. Ct. 3218,
+        year=2010
+    }
+
+You MAY append your new references to citations.tex, but it is not necessary. I
+can do that for you if you just tell me what reference each nickname refers to.
+
+
+2. SENTENCE AND CLAUSE CITATIONS
+
+Most citations are either sentence-type citations or clause citations, the
+difference being that sentence-type citations appear as independent sentences
+and clauses as comma-set clauses within a sentence. For example:
+
+Sentence citation:
+The MOT test is an important clue. Bilski, 130 S. Ct. at 3220.
+  Generating code:  ...important clue. \sentence{bilski at 3220}. 
+
+Clause citation:
+But it is not the only test, Bilski, 130, S. Ct. at 3221, and others may be more
+proper.
+  Generating code: ...only test, \clause{bilski at 3221}, and...
+
+The generating code is what you should type to cite a reference in sentence or
+clause form. Note the period required after \sentence{...}.
+
+You must use one of these forms for every citation to a reference. There is no
+id.-citation; the program will automatically determine when id. is appropriate
+and insert it for you.
+
+
+3. FEATURES OF CITATIONS
+
+The contents inside the braces of \sentence and \clause may use any of the
+features described below.
+
+To string-cite multiple references, separate them with semicolons:
+
+  \sentence{bilski at 3221; diehr at 188}.
+
+Signals may be introduced by just typing the signal before the nickname, always
+in lowercase. Do not repeat signals in the citation, and ensure that signals
+go in the proper order.
+
+  \sentence{see mayo; see also flook; see generally chisum}.
+
+You may cite page ranges and multiple page numbers with dashes and commas. Do
+not abbreviate page numbers to the last two digits. You may also cite a
+reference with no pin cite, if that is desired.
+
+  \sentence{bilski at 3221-3222, 3225; see also flook}.
+
+To cite footnotes, tables, or other subdivisions, fully type out the subdivision
+name. You may use S for the section symbol, and P for the paragraph symbol (no
+need to double them for multiple sections).
+
+  \sentence{bilski at 3227 note 5, table 1}.
+  \sentence{usconst at article 1, S 8, clause 8}.
+
+Parentheticals may be typed just like regular parentheticals.
+
+  \sentence{bilski at 3230 (Stevens, J., dissenting)}.
+
+A parenthetical may include nested citations:
+
+  \sentence{bilski at 3231 (quoting \sentence{flook at 590})}.
+
+
+4. INLINE CITATIONS
+
+Sometimes you want the name of a case, statute, or other reference inside the
+text of a sentence. This is easily done:
+
+  The Court held in \inline{bilski} that...
+
+At the start of a sentence use \Inline instead. This is important, for example,
+when the inline citation form starts with a lowercase letter in some cases.
+
+  \Inline{pat375} has over 30 claims.
+  -> The '375 Patent has over 30 claims.
+
+
