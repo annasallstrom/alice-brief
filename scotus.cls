@@ -508,7 +508,7 @@
 \def\appendixpagenumbers{%
     \c@page=\@ne
     \pagenumbering{arabic}%
-    \gdef\thepage{A\@arabic\c@page}%
+    \gdef\thepage{\@arabic\c@page a}%
 }
 \flushbottom
 \onecolumn
