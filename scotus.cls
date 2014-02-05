@@ -107,6 +107,7 @@
       \separator
     \end{centering}\par
     \hb@xt@\textwidth{%
+      \footnotesize
       \hfil
       \parindent\z@
       \hsize.45\textwidth
@@ -161,11 +162,11 @@
         \raggedright
         \leftskip=.33\textwidth
         \everypar{\hangindent=1em\relax}%
+        \stopbreaks
         \def\\{\@testopt\@parwithskip\z@}%
         \def\@parwithskip[##1]{\par\vskip##1\relax}
         \def\and{\\[.5\baselineskip]}%
         \vskip2\baselineskip minus 1\baselineskip
-        \stopbreaks
         \emph{Respectfully submitted,}\par\vskip.5\baselineskip
         \@counsel\par
     \endgroup
