@@ -3916,11 +3916,16 @@
     \endgroup
 }
 \def\bb@case@proc@paren{%
-    \expandafter\push@toks\expandafter\bb@param@parens\expandafter{%
-	\expandafter\bb@addparen\expandafter\bb@paren@casealt\expandafter{%
-	    \bb@kv@ainline
-	}%
-    }%
+    \protected@edef\reserved@a{%
+        \noexpand\in@{\bb@kv@inline}{\bb@kv@p;\bb@kv@d;\bb@kv@name}%
+    }\reserved@a
+    \ifin@\else
+        \expandafter\push@toks\expandafter\bb@param@parens\expandafter{%
+            \expandafter\bb@addparen\expandafter\bb@paren@casealt\expandafter{%
+                \bb@kv@ainline
+            }%
+        }%
+    \fi
 }
 %
 % If there is a name or title defined, process that.
