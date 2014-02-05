@@ -9,87 +9,8 @@
 \input{citations.tex}
 \input{claim26.tex}
 
-\setcounter{passimnum}{5}
-
-%
-% If you do not have these fonts, comment the next few lines out by changing
-% \ifxetex to \iffalse
-%
-\ifxetex
-    \usepackage{fontspec}
-    \setmainfont[BoldFont=ITC Century Std-Bold,Ligatures=TeX]{%
-        Century Expanded LT Std%
-    }
-    \def\titlefont{\fontspec{Cloister Black}\LARGE}
-    \def\basickeywordstyle{\addfontfeatures{Letters=UppercaseSmallCaps}}
-\else
-    \def\basickeywordstyle{\bfseries}
-\fi
-
-%
-% Macros for how long the computer program is
-%
-\def\numlines{seven\xspace}
-\def\Numlines{Seven\xspace}
-\def\wholeprogram{\programlines{1}{7}}
-
-%
-% Macros to format the claim language and/or computer program
-%
-\def\programlines#1#2{%
-    \lstset{keywordstyle=\basickeywordstyle,identifierstyle=\itshape}
-    \lstset{breaklines=true,showstringspaces=false}
-    \lstset{aboveskip=0pt,belowskip=0pt}
-    \lstset{language=[Visual]Basic,columns=fullflexible}
-    \lstinputlisting[firstline=#1,lastline=#2]{%
-        implementations/375claim26.bas%
-    }%
-}
-\long\def\inlinebox#1{%
-    \vskip\parskip
-    \hrule\kern1.5pt \hrule\nobreak
-    \begingroup
-        \vskip 4pt
-        \parskip=0pt
-        #1\par
-        \nobreak\vskip 4pt
-    \endgroup
-    \hrule\kern1.5pt \hrule
-}
-\long\def\claimtext#1#2{%
-    \noindent
-    \bblabel{appx:claim:#1}%
-    \textsc{Claim 26, #1:}\par
-    {\itshape#2\unskip}%
-}
-\long\def\claimbox#1#2{%
-    \vskip.5\baselineskip
-    \inlinebox{%
-        \claimtext{#1}{#2}%
-    }%
-}
-\long\def\codeandclaimbox#1#2#3#4{%
-    \vskip.5\baselineskip
-    \inlinebox{%
-        \claimtext{#1}{#2}%
-        \vskip 4pt
-        \hrule
-        \vskip 4pt
-        \noindent
-        \ifnum#3=#4\relax
-            \textsc{Computer code, line #30:}\par
-        \else
-            \textsc{Computer code, lines #30--#40:}\par
-        \fi
-        \programlines{#3}{#4}%
-    }%
-}%
-
-%
-% Other useful macros
-%
-\def\Amicus{\emph{Amicus}\xspace}
-\def\amicus{\emph{amicus}\xspace}
+% This sets up various macros used in this brief.
+\input{macros-for-brief.tex}
 
 \docket{13-298}
 \casecaption{
