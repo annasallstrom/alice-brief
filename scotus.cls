@@ -101,7 +101,7 @@
       \separator
       \@drawcasecaption
       \separator
-      \textbf{\@posture}%
+      \textsc{\@posture}%
       \separator
       \textbf{\MakeUppercase{\@title}}
       \separator
@@ -173,17 +173,39 @@
 }
 \setcounter{secnumdepth}{3}
 \newcounter {part}
-\newcounter {section}
+\newcounter {section}[part]
 \newcounter {subsection}[section]
 \newcounter {subsubsection}[subsection]
 \newcounter {paragraph}[subsubsection]
 \newcounter {subparagraph}[paragraph]
+\newcounter {appendix}
 \renewcommand \thepart {}
 \renewcommand \thesection {\@Roman\c@section}
 \renewcommand\thesubsection   {\@Alph\c@subsection}
 \renewcommand\thesubsubsection{\@arabic\c@subsubsection}
 \renewcommand\theparagraph    {\@alph\c@paragraph}
 \renewcommand\thesubparagraph {\@roman\c@subparagraph}
+\renewcommand\theappendix{\@Alph\c@appendix}
+\def\appendix#1{%
+    \clearpage
+    \refstepcounter{appendix}%
+    \ifnum \c@secnumdepth >\m@ne
+      \vskip\baselineskip
+      \begin{centering}
+          \leavevmode
+          \refstepcounter{part}%
+          \addcontentsline{toc}{part}{%
+            \MakeUppercase{\appendixname\ \theappendix}: #1%
+          }\nobreak
+          \bfseries\MakeUppercase{\appendixname\ \theappendix}\par
+          #1\par
+      \end{centering}
+      \nobreak
+      \@afterheading
+    \else
+      \@spart{#1}
+    \fi
+}
 \newcommand\part{%
    \secdef\@part\@spart}
 
@@ -302,10 +324,6 @@
       \setcounter{page}\@ne
     }%
     {\newpage}
-\newcommand\appendix{\par
-  \setcounter{section}{0}%
-  \setcounter{subsection}{0}%
-  \gdef\thesection{\@Alph\c@section}}
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -368,8 +386,8 @@
 \setcounter{tocdepth}{3}
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
-    \vskip \z@ \@plus.2\p@
     {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+     \parskip=.5\parskip\@plus 3pt
      \parindent #2\relax\@afterindenttrue
      \interlinepenalty\@M
      \leavevmode
@@ -384,7 +402,7 @@
      \par}%
   \fi}
 \newcommand\tableofcontents{%
-    \part{\contentsname
+    \part*{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
