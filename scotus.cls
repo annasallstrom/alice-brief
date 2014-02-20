@@ -198,7 +198,7 @@
             \MakeUppercase{\appendixname\ \theappendix}: #1%
           }\nobreak
           \bfseries\MakeUppercase{\appendixname\ \theappendix}\par
-          #1\par
+          \textsc{#1}\par
       \end{centering}
       \nobreak
       \@afterheading
@@ -237,15 +237,15 @@
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {\baselineskip}%
                                    {1pt}%
-                                   {\normalfont\bfseries}}
+                                   {\normalfont\bfseries\scshape}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {\baselineskip}%
                                      {1pt}%
-                                     {\normalfont\bfseries}}
+                                     {\normalfont\bfseries\scshape}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {\baselineskip}%
                                      {1pt}%
-                                     {\normalfont\bfseries}}
+                                     {\normalfont\bfseries\scshape}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {0.5\baselineskip}%
                                     {-1em}%
