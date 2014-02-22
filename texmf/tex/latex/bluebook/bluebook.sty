@@ -3258,7 +3258,9 @@
 % does \let\thepage\relax
 \def\bb@addtotoa@#1#2{%
     \addtocontents{toa}{%
-        \protect\contentsline{bb@toa}{#1}{\thepage}{\the\c@page}{#2}%
+        \protect\contentsline{bb@toa}{#1}{\thepage}{%
+            \noexpand\the\noexpand\c@page
+        }{#2}%
     }%
 }%
 \newif\if@bb@in@toa
@@ -3458,7 +3460,7 @@
 %
 % These characters accept no breakpoints, but are often backslashed; including
 % them forces the removal of the backslash.
-\def\UrlNobreaks{\do\%\do\^\do\$}
+\def\UrlNobreaks{\do\^\do\$}
 %
 % These characters require special treatment when they are seen.
 \if@bb@html

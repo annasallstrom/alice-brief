@@ -108,16 +108,27 @@
     \end{centering}\par
     \hb@xt@\textwidth{%
       \footnotesize
-      \hfil
       \parindent\z@
       \hsize.45\textwidth
       \everypar{\hangindent=1em\relax}%
       \def\\{\@testopt\@parwithskip\z@}%
       \def\@parwithskip[##1]{\par\vskip##1\relax}
       \rightskip=0pt plus \hsize
-      \def\and{\egroup\hfil\vtop\bgroup}%
-      \vtop\bgroup\@counsel\egroup
+      \def\and{\egroup\unhbox\@tempboxa\egroup
+        \setbox\@tempboxa\hbox\bgroup\hfil\vtop\bgroup}%
+      \setbox\@tempboxa\hbox{}%
+      \setbox\@tempboxa\hbox\bgroup\hfil\vtop\bgroup
+          \@counsel
+          \egroup\unhbox\@tempboxa
+      \egroup
+      \unhbox\@tempboxa
     }%
+    \ifx\@counselis\relax\else
+        \vskip\baselineskip
+        \hb@xt@\textwidth{%
+            \hfil\footnotesize\itshape\@counselis\hfil
+        }%
+    \fi
   \vfill\null
   \hrule
   \vskip 2pt
@@ -149,6 +160,7 @@
 }}
 \def\posture#1{\gdef\@posture{#1}}
 \def\counsel#1{\gdef\@counsel{#1}}
+\def\counselis#1{\gdef\@counselis{#1}}
 \newcommand*{\stopbreaks}{%
     \interlinepenalty\@M
     \def\par{\@@par\nobreak}%
@@ -169,6 +181,8 @@
         \vskip2\baselineskip minus 1\baselineskip
         \emph{Respectfully submitted,}\par\vskip.5\baselineskip
         \@counsel\par
+        \vskip.5\baselineskip
+        \emph{\@counselis}\par
     \endgroup
 }
 \setcounter{secnumdepth}{3}
