@@ -3174,8 +3174,8 @@
 		% parenthetical. It needs to (1) be typeset differently, and (2)
 		% caused to update the short citation form.
 		\ifnum\bb@citelevel=\@ne % Only when not in parenthetical
-			\space[hereinafter ##2]%
 		    \if@bb@in@toa\else      % Not in TOA
+			\space[hereinafter ##2]%
 			\@expand{\g@addto@macro\bb@hia@cites}{\@this@case,}i%
 			\bb@supra@form\@this@case{##2}%
 			\did@full@cite\@this@case

@@ -401,7 +401,6 @@
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
     {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
-     \parskip=.5\parskip\@plus 3pt
      \parindent #2\relax\@afterindenttrue
      \interlinepenalty\@M
      \leavevmode
