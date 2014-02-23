@@ -2,6 +2,8 @@
 \usepackage[ignoremissing]{bluebook}
 \usepackage{ifxetex}
 \usepackage{xspace}
+\usepackage{enumitem}
+\setlist{topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=\parskip}
 
 \usepackage{listings}
 \input{lsthack.tex}
@@ -101,8 +103,9 @@ assert overly broad patents, propounding unfounded infringement allegations and
 aggressive litigation threats, which deeply chill innovation.
 
 Inconsistency and uncertainty in areas of patent law, such as subject matter
-eligibility, give rise to many of the patents asserted by PAEs, which are
-directed to ineligible ideas cloaked in eligible-sounding language. This forces
+eligibility, are enabling factors in PAE litigation, as they enable aggressive
+patent assertors to take improper, overbroad positions.
+\sentence{e.g., eon-net at 1326-1328}. This forces
 app developers to conclude that innovation is not worth the expensive baggage of
 defending against such claims, resulting in delays to and deficiencies in app
 development and overall innovation.\footnote{\sentence{see, e.g., chien-oti at
@@ -211,7 +214,7 @@ Judge Rader, writing for four judges, found those same claims narrowly tailored,
 components'' rendering the claim patent-eligible. \sentence{see cls-enbanc at
 1307}.
 
-Here, the claims at issue use complex, technical-sounding language, making them
+The claims at issue do use technical-sounding, complex language, making them
 appear to be directed to a narrowly tailored invention. One of the claims at
 issue recites, among other things, a ``communications controller,'' a
 ``data storage unit,'' and an ``instruction being an irrevocable, time invariant
@@ -228,6 +231,9 @@ But beneath this veneer
 of technical language is a very simple, basic idea being patented. As a
 demonstration, the computer program shown in Figure~\ref{code-listing}
 implements all the features of Claim 26 of \inline{pat375}.
+A complete explanation of the working of
+this program as it relates to Claim 26 of \inline{pat375} is presented in
+\inline{this at appx:code}.
 
 \def\floatpagefraction{.1}
 \begin{figure}[p]
@@ -237,35 +243,30 @@ implements all the features of Claim 26 of \inline{pat375}.
 \label{code-listing}
 \end{figure}
 
-\Amici selected the \textsc{basic} programming language for this program both
-because it is simple to understand and because it predates the
-patent.\footnote{The earliest
-possible priority date of the patent is 1992. The \textsc{basic} language dates
-back to 1964. \sentence{see basic-manual}. Thus,
-the computer techniques used in this brief were
-``well-understood, routine, conventional activity
-previously engaged in by researchers in the field'' as of the priority date of
-the patent. \sentence{mayo at 1294; cf.
-cls-enbanc at 1310 (Rader, J.) (asserting that the use of computers in the
-claims did not involve such conventional activity)}.}
-A complete explanation of the working of
-this program as it relates to Claim 26 of \inline{pat375} is presented in
-\inline{this at appx:code}.
-
 As the Court will observe, the computer program is only \numlines lines long,
 indicating that
 the verbose language of the claims does not in fact demand specific, particular
 implementations but rather expansively preempts all uses of a simple, basic
-idea.
+idea. A \numlines-line computer program is remarkably simple in comparison to
+ordinary computer programming:
+\begin{itemize}
+\item A single page of the Supreme Court's website is 926 lines long, including
+145 lines of computer code.\footnote{\sentence{scotus-web}.}
+\item A fourteen-year-old wrote an iPhone app with over 11,000 lines of
+code.\footnote{\sentence{forbes-iphone}.}
+\item The computer program that formatted the citations
+and table of authorities of this brief is 7,932 lines long.\footnote{That
+program, which was written by counsel of record to this brief, is available at
+\url{https://github.com/charlesduan/alice-brief}.}
+\end{itemize}
 
 Certain
 \bblabel{computer-quotes}
 judges below were misled by the language of the
 claims and the patent.
-Judge Rader believed that Claim 26 ``covers the
-use of a computer and
-other hardware specifically programmed to solve a complex problem'' through the
-use of ``at least four separate structural components.'' \sentence{cls-enbanc at
+Judge Rader believed that Claim 26 involved
+``a complex problem'' that could only be solved with a specialized system
+with ``at least four separate structural components.'' \sentence{cls-enbanc at
 1307}. He reviewed the ``at least thirty two figures
 which
 provide detailed algorithms'' to conclude that ``[l]abeling
@@ -273,7 +274,7 @@ this system claim an `abstract concept' wrenches all meaning from those words.''
 \sentence{cls-enbanc at 1309}. Judge Moore similarly found a
 similarly-worded claim ``limited to one that is configured to perform certain
 functions in a particular fashion'' and, based on one of the
-flowcharts, suggested that the claims demanded a dizzyingly long
+flowcharts, she suggested that the claims demanded a dizzyingly long
 and complex algorithm. \sentence{cls-enbanc at 1318}. And Judge Linn
 concluded that, while they may be based
 on an abstract idea, ``the claims here are directed to very specific ways of
@@ -377,7 +378,7 @@ Element 6 recites ``a computer,'' and as such only further describes a
 general-purpose computer.
 
 Element 7 states that the computer must ``receive a transaction.'' This Court
-and others have repeatedly held that Steps of
+and others have repeatedly held that steps of
 obtaining data to be used for processing
 constitute insignificant pre-solution activity. \sentence{see, e.g., mayo at
 1297-1298 (treating as pre-solution activity a step of determining a level of
@@ -396,9 +397,8 @@ to be transferred out of that account. \sentence{see this at appx:claim:element
 must ensure that the parties' accounts contain sufficient funds.
 
 Second, element 8 requires the computer to ``electronically adjust said first
-account and said third account.'' Two lines of computer
-code perform this whole operation.
-\sentence{see this at appx:claim:element 8}. Again, this
+account and said third account.'' This operation, which amounts to only two
+lines of computer code,
 is inherent in any third-party escrow service, which must adjust account balance
 records to account for a transaction.
 
@@ -475,7 +475,7 @@ The basic tools of innovation must remain basic tools, available to all even
 when they are, or must be, implemented on general-purpose technologies.
 
 As an analogy, consider a patent claim directed to long division performed with
-pencil and paper. In theory, long division could be practiced in the mind, but
+pencil and paper. Long division can, in theory, be practiced in the mind, but
 as a practical matter no ordinary person can do so. Thus, this pencil-and-paper
 patent would effectively make the abstract idea of long division unusable.
 Similarly, computers are capable of tasks that ordinary
@@ -489,7 +489,7 @@ protection.  \sentence{see cls-enbanc at 1292 (Lourie, J., concurring)
 machines'')}. Equally so would be advances in pencil technology. But these are
 distinguishable from mere annexation of abstract ideas to computers or pencils.}
 
-In view of this important principle, the Court has eschewed
+In view of this important principle, this Court has eschewed
 formalistic exegesis in favor of a practical analysis of the actual, effective
 scope of the claims.
 So, for example,
@@ -503,7 +503,7 @@ recitation of ``well-understood, routine, conventional activity previously
 engaged by researchers in the field,''
 \clause{mayo at 1300}.
 
-In view of this clear precedent, the Court should hold that
+Based on this clear precedent, the Court should hold that
 attachment of a general-purpose computer does not render an abstract idea
 patentable, in the present claims or otherwise.
 Implementing an
@@ -520,9 +520,7 @@ machine, \clause{see * at 187}, because unlike a rubber-curing machine, a
 computer is able to perform any possible algorithm or mathematical
 procedure.
 Thus, in the claims at issue, the recitation of a general-purpose computer
-should not render the claims eligible under \inline{101}.\footnote{The
-contention that general-purpose computers become ``special-purpose computers''
-when executing particular software is addressed in \inline{this at sec2c}.}
+should not render the claims eligible under \inline{101}.
 
 
 
@@ -530,8 +528,8 @@ when executing particular software is addressed in \inline{this at sec2c}.}
 %
 % SECTION II
 %
-\section{The Court Should Proactively Clarify the Law of Subject Matter
-Eligibility in Order to Avoid Further Errors Relating to Abstract Ideas}
+\section{To Avoid Further Errors in the Lower Courts, the Court Should
+Proactively Clarify the Law of Patent Eligibility}
 
 The Supreme Court has taken numerous subject matter eligibility cases recently.
 It does so because the Federal Circuit is in a confused state about the law of
@@ -706,10 +704,21 @@ http://www.vintage-basic.net/.}
 \inlinebox{\wholeprogram}
 \vskip\baselineskip
 
-The subsequent text reviews the elements of the claim in detail and explains how
+The text below reviews the elements of the claim in detail and explains how
 a general-purpose computer, running the above computer program, would satisfy
 all the elements of the claim. For convenience, the entirety of the claim is
 reprinted in the next appendix.
+
+All of the computer programming techniques used here predate the patent.
+The earliest
+possible priority date of the patent is 1992. The \textsc{basic} language dates
+back to 1964. \sentence{see basic-manual}. Thus,
+the computer techniques used in this brief were
+``well-understood, routine, conventional activity
+previously engaged in by researchers in the field'' as of the priority date of
+the patent. \sentence{mayo at 1294; cf.
+cls-enbanc at 1310 (Rader, J.) (asserting that the use of computers in the
+claims did not involve such conventional activity)}.
 
 \claimbox{preamble}{\claimelt0}
 
@@ -745,10 +754,10 @@ These elements of the claim simply require that a computer store two numbers
 representing account balances. The ``data storage unit'' might be any computer
 storage component, such as a hard disk or memory. The ``information about'' the
 first and third accounts broadly encompass any account information, such as an
-account balance.\looseness=1
+account balance.
 
 The recitations that the information be stored ``independent from'' various
-accounts maintained by exchange institutions are simply statements of intended
+accounts maintained by exchange institutions are statements of intended
 use, which should not contribute to the patentability of the claim. Petitioners
 have never suggested that the external exchange institutions are necessary
 parties to infringement of their claims. Furthermore, so long as the two stored

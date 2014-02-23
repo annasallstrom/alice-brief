@@ -3250,7 +3250,9 @@
 \def\bb@addtotoa#1{%
     \if@bb@in@toa\else
 	\@ifundefined{tc@#1}\relax{%
-            \@expand{\bb@addtotoa@{#1}}{\meaning\thepage}i%
+            \@expand{\bb@addtotoa@{#1}}{%
+                \expandafter\strip@prefix\meaning\thepage
+            }i%
         }%
     \fi
 }
@@ -3387,6 +3389,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+% User command to display a URL.
+\def\url#1{\bb@parseurl{#1}\reserved@a\reserved@a}%
 % Parses the url (#1) and puts it into control sequence (#2). The resulting URL
 % should have appropriate breakpoints put in, and be totally unexpandable or
 % protected.
@@ -3403,39 +3407,53 @@
     \def\bb@parseurl#1#2{%
 	\protected@edef#2{%
 	    \begingroup
-                \leavevmode\hbox\bgroup
-		\bb@parseurl@#1\bb@parseurl@
-                \egroup
+                \leavevmode
+		\bb@parseurl@{\hbox\bgroup}#1\bb@parseurl@
 	    \endgroup
 	}%
     }
 \fi
-\def\bb@parseurl@#1{%
-    \@ifonechar{#1}{%
-	\@test \ifx#1\bb@parseurl@ \fi{%
-	    % End of URL, do nothing
+%
+% Parses a single character from a URL. #2 is the character. #1 is a state for
+% whether we are inside an \hbox or not. If it is empty, we are inside a box. If
+% it is not empty, we are inside a box, and the text is the command to start the
+% box.
+\def\bb@parseurl@#1#2{%
+    \@ifonechar{#2}{%
+	\@test \ifx#2\bb@parseurl@ \fi{%
+	    % End of URL. If we're inside a box, end it.
+            \@ifempty{#1}\egroup\@empty
 	}{%
-	    \@test \ifcat\noexpand#1\relax \fi{%
-		% Control sequence
-		\@ifundefined{bb@url@\string#1}{%
-		    \egroup\string#1\hbox\bgroup
+	    \@test \ifcat\noexpand#2\relax \fi{%
+		% Control sequence.
+                % End any box we're in.
+                \@ifempty{#1}\egroup\@empty
+		\@ifundefined{bb@url@\string#2}{%
+                    \string#2%
 		}{%
-		    \egroup\csname bb@url@\string#1\endcsname\hbox\bgroup
+		    \csname bb@url@\string#2\endcsname
 		}%
+                % Parse the next character, setting the state to being outside a
+                % box.
+                \bb@parseurl@{\hbox\bgroup}%
 	    }{%
-		% Normal character
-		\@ifundefined{bb@url@\bb@url@bslash\string#1}{%
-		    \string#1%
+                % Not a control sequence.
+		\@ifundefined{bb@url@\bb@url@bslash\string#2}{%
+                    % Normal character. Start a box if we are not in one.
+                    #1%
+		    \string#2%
+                    % Parse the next character, setting the state as in a box.
+                    \bb@parseurl@{}%
 		}{%
-		    \egroup
-                    \csname bb@url@\bb@url@bslash\string#1\endcsname
-                    \hbox\bgroup
+                    % A character with special meaning. End any box we're in.
+                    \@ifempty{#1}\egroup\@empty
+                    \csname bb@url@\bb@url@bslash\string#2\endcsname
+                    \bb@parseurl@{\hbox\bgroup}%
 		}%
 	    }%
-	    \bb@parseurl@
 	}%
     }{%
-	\bb@parseurl@\{#1\}%
+	\bb@parseurl@{#1}\{#2\}%
     }%
 }
 % \bb@url@bslash is just a backslash character.
@@ -3474,7 +3492,7 @@
 \fi
 \def\bb@underscore{%
     \kern\p@\nobreak
-    \leaders\hrule\hskip .3em \@plus .2em \@minus .1em\relax
+    \leaders\hrule\@height -.15ex\@depth.2ex\hskip .3em \@plus .2em \@minus .1em\relax
     \nobreak\hbox{}%
     \hskip\p@
 }
@@ -3503,9 +3521,9 @@
     }%
 }
 \UrlBreaks
-\newskip\urlbreakskip \urlbreakskip=0pt plus 1pt
+\newskip\urlbreakskip \urlbreakskip=0pt plus .4pt
 \def\do#1{%
-    \expandafter\edef\csname bb@url@\string#1\endcsname{%
+    \expandafter\protected@edef\csname bb@url@\string#1\endcsname{%
         \unskip\unpenalty
 	\nobreak\hskip\urlbreakskip
 	\expandafter\@gobble\string#1\penalty\exhyphenpenalty\hskip\urlbreakskip

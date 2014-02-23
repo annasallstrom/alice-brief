@@ -36,14 +36,14 @@
 }
 \long\def\inlinebox#1{%
     \vskip\parskip
-    \hrule\kern1.5pt \hrule\nobreak
+    \hrule height 1.2pt \kern1.2pt \hrule\nobreak
     \begingroup
         \vskip 4pt
         \parskip=0pt
         #1\par
         \nobreak\vskip 4pt
     \endgroup
-    \hrule\kern1.5pt \hrule
+    \hrule\kern1.2pt \hrule height 1.2pt\relax
 }
 \long\def\claimtext#1#2{%
     \noindent
