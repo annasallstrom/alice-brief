@@ -103,7 +103,7 @@
       \separator
       \textsc{\@posture}%
       \separator
-      \textbf{\MakeUppercase{\@title}}
+      \textbf{\textsc{\@title}}
       \separator
     \end{centering}\par
     \hb@xt@\textwidth{%

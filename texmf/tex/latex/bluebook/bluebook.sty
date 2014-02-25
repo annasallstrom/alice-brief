@@ -1476,9 +1476,7 @@
 	    \bb@ifset\bb@kv@number{Pub. L. No.~\bb@kv@number}{%
 		ch.~\bb@kv@chapter
 	    },
-	    \noexpand\ifx\noexpand\@this@opt\relax\noexpand\else
-		\noexpand\@format@pageno{\noexpand\@this@opt},
-	    \noexpand\fi
+            \bb@this@opt@as@pageno
 	    \bb@ifset\bb@kv@vol\bb@kv@vol\bb@kv@year \space
 	    \bb@kv@rep \space
             \bb@pageordefault{}{%
@@ -1503,6 +1501,11 @@
 	\ifx\@this@opt\relax\else \bb@statsess@opterr \fi
     \else
 	\ifx\@this@opt@relax      \bb@statsess@opterr \fi
+    \fi
+}
+\DeclareRobustCommand\bb@this@opt@as@pageno{%
+    \ifx\@this@opt\relax\else
+        \expandafter\@format@pageno\expandafter{\@this@opt},\space
     \fi
 }
 \def\bb@statsess@opterr{%
