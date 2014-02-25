@@ -1,5 +1,5 @@
 \documentclass{scotus}
-\usepackage[ignoremissing]{bluebook}
+\usepackage{bluebook}
 \usepackage{ifxetex}
 \usepackage{xspace}
 \usepackage{enumitem}
@@ -255,7 +255,7 @@ ordinary computer programming:
 \item A fourteen-year-old wrote an iPhone app with over 11,000 lines of
 code.\footnote{\sentence{forbes-iphone}.}
 \item The computer program that formatted the citations
-and table of authorities of this brief is 7,932 lines long.\footnote{That
+and table of authorities of this brief is 7,936 lines long.\footnote{That
 program, which was written by counsel of record to this brief, is available at
 \url{https://github.com/charlesduan/alice-brief}.}
 \end{itemize}
@@ -528,19 +528,25 @@ should not render the claims eligible under \inline{101}.
 %
 % SECTION II
 %
-\section{To Avoid Further Errors in the Lower Courts, the Court Should
-Proactively Clarify the Law of Patent Eligibility}
+\section{This Court Should Clarify the Law of Patent Eligibility}
 
-The Supreme Court has taken numerous subject matter eligibility cases recently.
-It does so because the Federal Circuit is in a confused state about the law of
-\inline{101}, primarily because a small faction of that court repeatedly applies
-incorrect analytical techniques to improperly find patents eligible even when
-this Court's precedents demand otherwise.
+In past decisions, the Court has placed important limits on patentable subject
+matter to ensure that the building blocks of invention, including abstract ideas
+and laws of nature, remain available to all. \sentence{mayo at 1293}.  The flood
+of software patent litigation in recent years, and the ruthless exploitation of
+such litigation by patent assertion entities, have made these limitations more
+important than ever. \sentence{gao-report at 13}. However, recent Federal
+Circuit decisions have weakened these limitations and muddied the waters on
+patentable subject matter.  \sentence{gao-report at 13}.
 
-To clearly enunciate the law for the Federal Circuit and to prevent the need for
-further appeals, this Court should explicitly reject those improper analytical
-techniques, some of which have been catalogued below.
-
+The Court should now reaffirm the importance of \inline{101} limitations and
+refute the use of incorrect analytical methods. In particular, the Court should
+instruct the lower courts not to rely on red herrings such as: details in the
+specification, drafting decisions such as the decision to identify a claim as a
+system or method, or the addition of a generic platform such as a computer when
+determining subject matter eligibility. By advising lower courts to consider
+eligibility carefully and thoroughly, this Court will help bring certainty to
+patent litigation and relief to innovators. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -550,28 +556,82 @@ techniques, some of which have been catalogued below.
 \subsection{Courts Should Not Rely on
 Specification Details to Evaluate Eligibility}
 
-In assessing whether a claim is ineligible under \inline{101}, courts must
-consider the entire breadth of the claim. Claims directed to an abstract idea
-will still cover specific, concrete implementations of that abstract idea, so
-the mere fact that a claim covers a concrete implementation is no indicator that
-a claim is directed to eligible subject matter.
+This Court should reaffirm that the proper focus of a \inline{101} subject
+matter inquiry is on the scope of the patent claims, and that courts must not
+rely on language in the specification to decide if claims are sufficiently
+narrow. This would correct, among other things, errors by certain judges in the
+decision below, that improperly used examples from the specification in finding
+the claims eligible.
 
-Nevertheless, certain judges of the Federal Circuit persistently err by relying
-on specific examples to find patent claims eligible. In the present case, the
-plurality opinion justified its finding that the system claims of the patents at
-issue were eligible, by selecting a complex-looking flowchart from the
-specification to point to the supposed complexity and concreteness of the claim.
-By doing so, they failed to contemplate the possibility that other, simpler,
-abstract ideas were \emph{also} covered by that same claim---ideas such as the
-14-line computer program presented in this brief.
+It has long been established that claims, and claims alone, set forth the metes
+and bounds of patent grants. \sentence{white at 51-52}. Since 1836, all patents
+have been required to contain a claim section, ``particularly pointing out and
+distinctly claiming the subject matter'' of the invention. \sentence{112 at /b}.
+While patent claims may be read and construed in light of the patent
+specification and the prosecution history, it is the claims alone that determine
+the scope of patents. \sentence{phillips at 1317; white at 52; graver-tank at
+538-539 (``We have frequently held that it is the claim which measures the grant
+to the patentee.'')}.
+        
+The text of the specification does not define the scope of an invention.
+Instead, specifications are meant to describe how to make and use the claimed
+invention. \sentence{112 at /a}. Therefore, specifications, by their nature,
+will almost certainly include some detailed, concrete implementations of the
+invention at hand.
 
-Ironically, those same judges of the Federal Circuit criticize their opposed
-colleagues for failing to read the ``claims as a whole.'' It is in fact those
-opposed colleagues who have actually read the claims as a whole, contemplating
-the vast scope of what they cover. It is that plurality of the Federal Circuit,
-instead, who fails to read the claims as a whole, focusing wrongly on specific
-examples and obfuscatory language that misleadingly make abstract ideas appear
-patentable.
+But a patent may disclose non-abstract embodiments in its specification, and
+nevertheless claim abstract ideas. As one court said, ``the complexity of the
+implementing software or the level of detail in the specification does not
+transform a claim reciting only an abstract concept into a patent-eligible
+system or method.'' \sentence{accenture at 1345; see also oreilly at 120
+(holding ineligible a broad patent claim to use of electromagnetism, despite a
+specification disclosing telegraphy)}. It is therefore critical for courts,
+when determining subject matter eligibility, to pay close
+attention to what is actually being claimed, without being distracted by details
+from the specification.
+
+In the present case, Judge Lourie applied the correct approach. This plurality
+correctly observed that the claims were simply calling for: ``a handful of
+computer components, in generic, functional terms that would encompass any
+device capable of performing the same ubiquitous calculation, storage, and
+connectivity functions.'' \sentence{cls-enbanc at 1290}.
+
+Several other judges in this case, however, mistakenly relied on examples in the
+specification in determining patent eligibility.
+For instance, Judge Rader concluded that the claims
+were directed to patentable subject matter, in part by looking to
+complex-looking flowcharts and descriptions in the specification. Referring to
+Claim 26 of \inline{pat375}, he wrote: ``Lest it be
+said that these structural and functional limitations are
+mere conventional post-solution activity, \emph{the specification explains
+implementation} of the recited special purpose computer system.''
+\sentence{cls-enbanc at 1307 (emphasis added)}. The error is in the assumption
+that the specification-explained implementation somehow can turn claims from
+abstract to eligible.
+
+This is not the only example of this error by the Federal Circuit.
+\Inline{ultramercial} found certain
+computer-implemented patent claims to be patent-eligible, and not abstract
+ideas, in part because of the ``intricate and complex computer programming''
+in the specification. \sentence{* at 1350}. In doing so, the panel missed the
+highly abstract nature of the claims, which essentially cover basic e-commerce
+concepts. \sentence{see wildtangent-amicus at 8-10}.
+
+If this Court does not direct judges to focus on the scope of the
+claim in determining subject matter eligibility, the confusion in the case below
+and the Federal Circuit's error in \inline{ultramercial} will allow clever
+drafters to circumvent this Court's precedent on patentable subject matter,
+simply by adding details to the specification. This danger is particularly acute
+where software patents are concerned, as the inherent flexibility of computers
+makes it easy to add technical recitations of computer processes into the
+specification, even though they may not actually limit the claims in any
+meaningful way.  If judges get lost in obfuscatory language in patent
+specifications, then many more abstract patents will be incorrectly held valid,
+which will effectively sanction improper litigation.
+
+Accordingly, \amici urge this Court to instruct the lower courts, in unequivocal
+terms, not to rely on details in the specification determine if an
+invention is eligible subject matter.
 
 
 
@@ -582,37 +642,79 @@ patentable.
 \subsection{System Claims Are No More Eligible for Patenting than Method Claims}
 \bblabel[Section \#]{sec2b}
 
-The formalistic approach favored by some judges of the Federal Circuit lends to
-easy circumvention by clever patent drafting. For example, the suggestion that
-the method claims in the present case are ineligibile, while system claims
-directed to the same technology are eligible, simply encourages patent
-applicants to use system claims in order to skirt the abstract ideas test.
+The Court should reiterate that patent subject matter eligibility turns on the
+substance and not the form of patent claims.  This would send a clear message to
+the lower courts that patent eligibility may not be determined by drafting
+decisions such as claiming “systems” as opposed to “methods.” 
 
-Granting such weight to mere formal drafting practices ignores the basic
-rationale behind the Supreme Court's exceptions to \inline{101}. In explaining
-the basis for the three exceptions to \inline{101}, this Court has applied the
-fundamental principle that patents must ultimately incentivize innovation. While
-patents on many inventions do serve this principle, patents to abstract ideas,
-laws of nature and physical phenomena would in fact deter innovation by taking
-away those ``basic tools of research available to all.''
+It has long been established that drafting formalities should not distract from
+the substantive \inline{101} analysis.  As this Court reaffirmed in Mayo, to
+state an abstract idea and then append it with a phrase such as “apply it” does
+not make otherwise ineligible subject matter suddenly patentable. \sentence{mayo
+at 1294}.  To hold differently would permit clever drafting to maneuver around
+\inline{101}'s important limitations. \sentence{see flook at 590}.
 
-Several judges of the Federal Circuit ignore this basic rationale. Judge Rader,
-for example, has intimated that the three exceptions to \inline{101} are
-essentially tautological, because one ``cannot invent an abstract idea, law of
-nature or physical phenomenon'' since they have been around the whole time.
+Granting such weight to drafting formalities would ignore the basic rationale
+behind the Supreme Court’s exceptions to \inline{101}.  In articulating these
+exceptions, this Court has time and again underscored the principle that patents
+must ultimately incentivize innovation. \sentence{mayo at 1293; bilski at 3228
+(Kennedy, J., op.)}. While many patents do serve this principle, any claim that
+covers an abstract idea, law of nature or physical phenomenon in fact deters
+innovation by taking away those “basic tools of scientific and technological
+work”  available to all. \sentence{benson at 67}. Permitting such a patent claim
+would create uncertainty and hesitation for innovators, who may decide
+that developing technologies or releasing products is prohibitively
+expensive.
 
-This unduly narrow, formalistic view of the exceptions to \S~101 fails to
-adequately protect the concerns about incentives for innovation explicitly
-relied upon by this Court. Under Judge Rader's view, mere addition of even the
-most insignificant step to an otherwise abstract method would suddenly make that
-abstract method patentable, because the combination would not have existed
-before. The Court has specifically denounced this possibility, in holding
-numerous times that insignificant post-solution activity and pre-solution
-activity cannot render an otherwise abstract idea patentable.
+One such drafting formality is drafting a claim in the form of a system or
+method.  Such claims are certainly different in theory: A system claim covers a
+machine while a method claim covers a process with steps. But, particularly for
+software, the difference is merely a drafting exercise, because any method can
+be transformed into a system claim by reciting “a computer configured to perform
+certain steps” rather than claiming the steps alone. 
 
-\sentence{see johnson at 1077 (``\emph{Benson} applies equally whether an
+Lower courts have long noticed that system and method claims can and sometimes
+do identify the same subject matter.  One court, for example, observed
+that this Court's precedent on \inline{101} ``applies equally whether an
 invention is claimed as an apparatus or process, because the form of the claim
-is often an exercise in drafting.'') (quoted in \sentence{alappat at 1542})}.
+is often an exercise in drafting.'' \sentence{johnson at 1070 (quoted in
+\sentence{alappat at 1542})}. Indeed, the Federal Circuit has previously held
+that ``the form of the claims should not trump basic issues of patentability.''
+\sentence{bancorp at 1277; accord cybersource at 1374 (``[W]e look to the
+underlying invention for patent-eligibility purposes.'')}.
+
+Despite this precedent, some federal circuit judges still rely too heavily on
+the statutory class of a claim.  According to Judge Rader,
+the system claims of this case “do not claim only an abstract concept without
+limitations\ldots because they require a machine.” \sentence{cls-enbanc at
+1309}. Thus, Judge Rader held those system claims eligible, while holding
+method claims with nearly equivalent wording ineligible. \sentence{see
+cls-enbanc at 1312-1313}.
+
+Judge Rader’s reasoning inappropriately turns formalistic drafting practice into
+a substantive distinction.  As Judge Lourie observed, the “method and system
+claims use similar and often identical language to describe those actions,” so
+to have a threshold test turn on this designation would be unreasonable.
+\sentence{cls-enbanc at 1289}. He correctly determined that “despite minor
+differences in terminology\ldots the asserted method and system claims require
+performance of the same basic process.” \sentence{cls-enbanc at 1290}.  To hold
+otherwise would allow the form of the claims to trump basic issues of
+patentability, and would elevate an exercise in drafting to substantive
+significance.
+
+A formalistic approach to system and method claims would be more than a
+departure from Supreme Court precedent and long standing tradition; it would
+essentially make the abstract ideas exception a dead letter for a huge swath of
+patents in the computer arts. Judge Rader’s reasoning implies that a patent
+attorney can turn practically any method---abstract or not---into patentable
+subject matter simply by relabeling that claim as a “system” with a simple
+reference to computer implementation.  This would contravene \inline{diehr}’s
+caution about the clever draftsman and obliterate the purpose behind the
+abstract ideas exception, and the Court should explicitly reject such a result.
+
+\Amici therefore urge this Court to reaffirm that lower courts must examine
+system and method claims with equal vigor, and that the entirety of
+\inline{101}’s applicability cannot turn on superficial drafting distinctions.  
 
 
 
@@ -633,8 +735,8 @@ nothing more than parts of a general-purpose computer, \clause{this at
 computer-quotes}, and the Court should seek to counteract that position.
 
 Consider a hypothetical ineligible claim to a method of performing long
-division using pencil and paper, as explained above. It would be possible to
-recite at length the physical attributes of the pencil and paper (``a pencil
+division using pencil and paper, as explained above. One could
+recite at length the physical attributes of the pencil (``a pencil
 comprising a wooden shaft surrounding a cylindrical graphite barrel, the wooden
 shaft having a distal end including a rubber eraser, etc.''). But such a
 recitation would affect neither the tendency of such a claim to effectively
@@ -643,31 +745,33 @@ patent eligibility to turn on this sort of insignificant detail ``would make the
 determination of patentable subject matter depend simply on the draftsman's
 art,'' a result that the Court should seek to avoid. \sentence{flook at 593}.
 
-Just as recitation of detail about a pencil should not confer patent
-eligibility, neither should recitation of detail about a general-purpose
+Just as details about a pencil should not confer patent
+eligibility, neither should details about a general-purpose
 computer.
 Thus, language from the claims at issue, such as
 ``data storage unit'' and ``communications controller,'' should not affect the
 ineligibility of the claims. The Court should reaffirm this point clearly.
 
 One reason that the lower courts make this error is that they place undue
-reliance on the 1994 Federal Circuit decision \inline{alappat}. In that case,
+reliance on the 1994 Federal Circuit decision \inline{alappat}. Although that
+case actually dealt with a special form of oscilloscope,
 the lower court stated in dicta
 that ``a general purpose computer in effect becomes a special purpose computer
-once it is programmed'' with software. \sentence{* at
-1545},\footnote{\inline{alappat} itself did not involve a general purpose
-computer, but rather a special form of oscilloscope. \sentence{* at 1537}.}
+once it is programmed'' with software. \sentence{* at 1545}.
 Courts have used this statement to support a mistaken conclusion that recitation
 of general-purpose computer hardware can confer patent eligibility.
 \sentence{see, e.g., cls-enbanc at 1305 (Rader, J.); ultramercial at 1353}.
 
 This reliance on \inline{alappat} is mistaken because the
-Court's precedent regarding the abstract idea exception to \inline{101} does not
-turn on whether a computer is labeled ``general purpose'' or ``special
-purpose.''\footnote{As Judge Archer noted in dissent in \inline{alappat}, a
+Court's precedent regarding abstract ideas does not
+distinguish between whether something is labeled ``general'' or
+``special purpose.'' A
 compact disc becomes special-purpose when music is recorded on it, but no patent
 should issue on such a ``special-purpose compact disc.'' \sentence{* at
-1553-1554}.} It turns on whether a patented claim would preempt virtually all
+1553-1554 (Archer, J., dissenting)}.
+
+The law of subject matter eligibility does not turn on labels. It
+turns on whether a patented claim would preempt virtually all
 implementations of an idea, suppressing innovation along the way.
 The Court should thus reject the
 continued reliance of the lower courts on this dicta from \inline{alappat}.
@@ -677,7 +781,8 @@ such as recitation of system-style claims or inclusion of details of
 general-purpose computer hardware, the Court will take \inline{101} analysis
 from the metaphysical confusion that the lower courts have created, and return
 it to first principles. At the core of those first principles, which date back
-to the drafting of the Constitution, is the imperative
+to the drafting of the Constitution, are the imperatives that patents must
+be calibrated to promote innovation, and
 that the toolbox of abstract ideas must remain available to all. It is these
 principles that
 should guide the Court's decision.
@@ -686,7 +791,7 @@ should guide the Court's decision.
 \part{Conclusion}
 
 For the foregoing reasons, \amici respectfully submit that the Court
-should affirm the district court.
+should affirm the judgment below.
 
 \signature
 

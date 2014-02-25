@@ -2375,10 +2375,18 @@
         \@ifempty{#2}{%
             \@expand\chop@space{\csname bb@t17@#1\endcsname}{iii}%
         }{%
-            \@expand{#2}{\csname bb@t17@#1\endcsname}{ii}%
+            \@expand{\@fmtpg@handlespc#2}{\csname bb@t17@#1\endcsname}{ii}%
         }%
     }%
 }
+\def\@fmtpg@handlespc#1#2{%
+    \@expand\@fmtpg@handlespc@{#1{#2}}{ii}%
+}
+\def\@fmtpg@handlespc@#1{\@fmtpg@handlespc@@#1\@mark. \@mark.\@stop}
+\def\@fmtpg@handlespc@@#1 \@mark.#2\@stop{%
+    \@ifempty{#2}{\@fmtpg@handlespc@@@#1}{#1~}%
+}
+\def\@fmtpg@handlespc@@@#1\@mark.{#1}
 \def\@fmtpg@plural#1{\@thirdofthree#1}
 \def\@fmtpg@singular#1{\@secondofthree#1}
 \def\@fmtpg@warngraph#1{%
@@ -2456,18 +2464,12 @@
 %
 % Special definitions for S and P
 %
-\@namedef{bb@t17@S}{%
-    \@firstoftwo{\textsection\space}{\textsection\textsection\space}%
+\def\bb@txvii#1#2{%
+    \@namedef{bb@t17@#1}{\@firstoftwo{#2 }{#2#2 }}%
+    \@namedef{bb@t17@#1#1}{\@secondoftwo{#2 }{#2#2 }}%
 }
-\@namedef{bb@t17@SS}{%
-    \@secondoftwo{\textsection\space}{\textsection\textsection\space}%
-}
-\@namedef{bb@t17@P}{%
-    \@firstoftwo{\textparagraph\space}{\textparagraph\textparagraph\space}%
-}
-\@namedef{bb@t17@PP}{%
-    \@secondoftwo{\textparagraph\space}{\textparagraph\textparagraph\space}%
-}
+\bb@txvii S\textsection
+\bb@txvii P\textparagraph
 %
 % Special macro for the word "at"
 \def\@fmtpg@at{\@firstoftwo{at }{at }}
@@ -3918,9 +3920,6 @@
 		\@expand\bb@abbrev@name\bb@kv@inline i{\def\bb@kv@ainline}%
 	    }%
 	    \def\bb@tmp@runlast{%
-		\protected@xdef\bb@kv@name{%
-		    \bb@kv@name\space(\bb@kv@inline)%
-		}%
 		\aftergroup\bb@case@proc@paren
 	    }%
 	}\relax
@@ -3940,6 +3939,9 @@
         \noexpand\in@{\bb@kv@inline}{\bb@kv@p;\bb@kv@d;\bb@kv@name}%
     }\reserved@a
     \ifin@\else
+        \protected@xdef\bb@kv@name{%
+            \bb@kv@name\space(\bb@kv@inline)%
+        }%
         \expandafter\push@toks\expandafter\bb@param@parens\expandafter{%
             \expandafter\bb@addparen\expandafter\bb@paren@casealt\expandafter{%
                 \bb@kv@ainline
