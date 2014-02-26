@@ -1,0 +1,24 @@
+%
+% This is a really awful hack that causes the listings package to output double
+% quotation marks for strings with proper directional quotation marks.
+%
+\makeatletter
+\def\lst@Append#1{%
+    \advance\lst@length\@ne
+    \if\noexpand#1"%
+        \lst@hack@quote
+    \else
+        \lst@token=\expandafter{\the\lst@token#1}%
+    \fi
+}
+\newif\if@lst@hack@inquote
+\def\lst@hack@quote{%
+    \if@lst@hack@inquote
+        \global\@lst@hack@inquotefalse
+        \lst@token=\expandafter{\the\lst@token''}%
+    \else
+        \global\@lst@hack@inquotetrue
+        \lst@token=\expandafter{\the\lst@token``}%
+    \fi
+}
+\makeatother

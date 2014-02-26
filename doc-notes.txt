@@ -1,0 +1,246 @@
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 11 of 76
+
+The proper construction of those terms mandates an electronic credit and debit
+record implemented using a computer and data storage unit; there is no way to
+interpret the specification to the contrary.
+
+
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 14 of 76
+
+The “communications controller” is a specific hardware component that allows
+communications over a wide-area computer network. The “data storage unit” is a
+specific component, such as a disk drive or file server, capable of storing
+data. Ex. 1, Ginsberg Decl. ¶¶ 48, 54. The “computer,” coupled to the data
+storage unit, is a computer that is configured, including by the use of
+software, to manipulate the data on the data storage unit in order to carry out
+the recited functions. Id. ¶¶ 47, 49.
+Each independent computer system claim of the ’375 system patent recites the
+“communications controller” (and/or a “first party device”), “computer,” and a
+“data storage unit” required to run the system, and those terms are incorporated
+into each dependent claim. Even without a Markman hearing to construe the claim
+terms, it is beyond dispute that Alice’s claims recite concrete computer system
+hardware configured to perform a specific function, id. ¶¶ 46-54, 56-58, which
+is sufficient to establish as a matter of law that the ’375 patent does not
+claim an “abstract idea” and satisfies the requirements of § 101.
+
+
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 17 of 76
+
+The settlement transaction is “effect[ed]” when the “first account” and “third
+account” are “electronically adjusted.” Ex. 1, Ginsberg Decl. ¶ 36. This step,
+at a minimum, requires the use of an “electronic” device capable of adjusting
+two accounts that it “maintains”—i.e., a computer. Id. ¶ 38. In addition, the
+electronic adjustment of account data maintained by the supervisory institution
+necessarily results in a physical, electronic change in the medium in which the
+data are stored, thus requiring an electronic data storage unit. Id. ¶ 37.
+Each claim of the ’510 patent contains the term “electronically.” The
+prosecution history indicates that the term “electronically” was added to
+overcome a rejection under § 101. In other words, the patent examiner considered
+and rejected the argument CLS now makes—that the ’510 patent is not directed to
+patent-eligible subject matter. In this regard, the examiner initially rejected
+the claims as “lack[ing] any specific technology such as a computer.” See CLS
+Ex. 5, Office Action at 3 (Sep. 3, 2003). An initial rejection is common, and is
+part of the process of ensuring that patents which issue are valid.2 Alice then
+added the term “electronically” to the claims of the ’510 patent to overcome the
+examiner’s rejection and expedite the prosecution of the patents. See CLS Ex. 6,
+Amend. and Reply Under 37 C.F.R. § 1.111, at 22 (Oct. 31, 2003). The addition of
+the term “electronically” to Alice’s claims satisfied the examiner’s concerns—
+i.e., it required “specific technology such as a computer.” Id. Indeed, the
+examiner agreed with Alice that its claims were directed to a “real world”
+exchange of obligations and were an improvement on the state of the art. See CLS
+Ex. 6, Amend. and Reply at 22.
+
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 18 of 76
+While these claims do not expressly recite that the method must be implemented
+“electronically,” these claims use the terms “shadow credit record” and “shadow
+debit record.” A person of ordinary skill in the art would recognize these are
+electronic records requiring the implementation of these methods on a computer,
+using an electronic data storage unit. Id.; see also ’479 patent, col. 24 l.
+65–col. 25 l. 2 (“The process effects these payment/receipts in a two-stage
+process. First, by debiting/crediting, on a real-time basis, the relevant shadow
+records (in the data file PAYACC SHADOW) of the applicable stakeholder
+accounts.”). “[D]ata file PAYACC SHADOW” is a reference to data files in a data
+storage unit.
+
+LOOK UP PTO GUIDELINES
+
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 44 of 76
+“Electronic[] adjust[ment]” is not performed merely in order to speed up a
+calculation that could otherwise be performed off line. CLS Mem. at 31. That
+electronic adjustment step, along with the maintenance of electronic accounts,
+and the generation of electronic instructions, are carried out because the
+computer implementing the claimed method acts as an electronic third party
+between two counterparties in an effort to minimize the risk that one
+counterparty will default.
+
+
+Case 1:07-cv-00974-RMC Document 95 Filed 09/22/10 Page 49 of 76
+“Electronically adjusting” is part of the “solution” itself. The purpose of the
+“adjust[ment]” step is not to store the result of any calculation, but instead
+to effectuate the exchange in a risk-free manner.
+...
+The method of the ’510 patent as a whole is performed electronically. The same
+accounts or records that are electronically adjusted are also “maintain[ed].”
+E.g., ’510 patent, claim 68 (“maintaining a first account . . . ; electronically
+adjusting said first account”). An account or record that is amenable to
+electronic adjustment will necessarily be stored electronically. The transaction
+begins when an electronic instruction is “receiv[ed]” and the transaction ends
+when an electronic instruction is “generat[ed]” to the exchange institution. Ex.
+1, Ginsberg Decl. ¶¶ 37-38. Thus, the entirety of Alice’s method—including the
+“adjusting” step that effectuates the claimed exchange of obligations—must be
+performed electronically using a computer and memory. Id. The same is true for
+claims 33 and 34 of the ’479 patent, when properly construed.
+NOTE: Alice does not argue that "receiving" and "generating" steps are not
+pre/post solution activity here.
+
+Case: 11-1301 Document: 22 Page: 14 Filed: 06/24/2011
+This execution of an agreed-upon exchange, known in the financial world as
+"settlement," typically happens sometime after the parties' agreement to do the
+exchange, and carries with it the risk that one party will perform but the other
+party
+will not, a risk that could exceed the economic value of the transaction. For
+example, the expected profit from a currency exchange might be far less than the
+amount of money that one party would lose if it performed its half of the
+transaction (sending, for instance, its dollars) while its counterparty failed
+to
+perform (that is, not sending the agreed amount of euros in return).
+
+Case: 11-1301 Document: 22 Page: 15 Filed: 06/24/2011
+in the case of currency trades). JA868 (e.g., '375 patent, claim 14). Upon
+receiving a transaction from the user, and after ensuring that there was
+adequate
+value in each party's account, the computer would (in real time) adjust the
+accounts it maintained to effect the exchange. Id. (If either party's account
+lacked
+adequate value, the computer would not initiate the exchange.) Finally, sometime
+thereafter, the computer would generate an instruction to the exchange
+institution
+or institutions to carry out the transaction in their "real-world" accounts. Id.
+For
+example, in the case of currency settlements, the system might generate and send
+instructions to the U.S. Federal Reserve Bank and the European Central Bank to
+move dollars and euros to the parties' accounts with those central banks.
+
+Case: 11-1301 Document: 22 Page: 17 Filed: 06/24/2011
+The "communications controller" is a specific hardware component that
+allows communications over a wide-area computer network. JA1017 (¶ 54). The
+"data storage unit" is a specific component, such as a disk drive or file
+server,
+capable of storing data. JA1015, 1017 (¶¶ 48, 54). The "computer" is a computer
+that is coupled to the data storage unit and configured with software to
+manipulate
+the data on that data storage unit in a particular way in order to carry out the
+recited
+functions.
+
+Case: 11-1301 Document: 22 Page: 55 Filed: 06/24/2011
+For example, if two counterparties want to exchange dollars for euros, they want
+either the dollars to flow one way and the euros to flow the other or neither
+the
+dollars nor the euros to flow. The situation to be avoided is one where the
+dollars
+flow one way and the corresponding euros do not. The claims require that a
+computer system first carry out the transaction in its own internal records by
+"updating shadow records in real-time," and second "effect... the exchange of
+obligations in accounts maintained external[ly] .... from time to time."
+
+
+Case: 11-1301 Document: 33 Page: 8 Filed: 09/16/2011
+Alice's claims require that a computer maintain electronic accounts for the
+parties
+to an exchange that are separate from the parties' real-world accounts. The
+computer performs the parties' exchange in these separate, or "shadow," accounts
+if there is sufficient value in each account, and then, sometime thereai_er,
+generates
+an instruction to make the appropriate adjustments in the parties' real-world
+accounts.
+
+
+Case: 11-1301 Document: 194 Page: 44 Filed: 01/10/2013
+As the panel correctly observed, Alice's claims require a particular sequence
+ofcomputer-implemented steps that "exchang[e] obligations maintained at an
+exchange institution" in a "specific way." Panel Op., 685 F.3d at 1355 (citing
+JA386, claim 33). That "specific way" requires "creating electronically
+maintained shadow credit and shadow debit records" which must "be held
+independently" ofthe parties' real-world accounts at exchange institutions. !d.
+It requires that those records be adjusted electronically "based on only certain
+specified allowed transactions," i.e., when particular criteria are met to
+ensure that both parties have adequate value to perform the exchange. !d. It
+requires, at least in the case of claim 33 ofthe '479 patent, that
+"start-of-the-day balances be obtained from the exchange institution," that
+"adjustments be made in chronological order," and that "at the end of the day,
+instructions be given to the
+exchange institution to reflect the adjustments made on the basis ofthe
+permitted transactions." !d. And it requires that the instructions sent to the
+exchange institution be "irrevocable, time invariant obligations placed on the
+exchange institution." !d.
+
+Case: 11-1301 Document: 194 Page: 48 Filed: 01/10/2013
+Alice's claims have numerous additional limitations, including that the shadow
+accounts that are created and maintained by the computer be "held independently"
+ofaccounts at the exchange institution; that transactions only affect the
+account balances ifparticular criteria are met; that adjustments be made in
+chronological order; and that the exchange culminate with the issuance o f an
+"irrevocable, time invariant obligation[] placed on the exchange institution."
+
+
+Case 1:07-cv-00974-RMC Document 53 Filed 04/03/2009 Page 35 of 70
+Because the claim term “electronically” (which is present in every claim of the
+’510 patent) limits the claimed settlement method to an implementation tied to
+electronic hardware (a machine), the claimed methods are patent-eligible.
+
+Case 1:07-cv-00974-RMC Document 53 Filed 04/03/2009 Page 45 of 70
+Because a proper analysis requires the Court to interpret the meaning of the
+claim terms, with reference to the specification and from the perspective of a
+person of ordinary skill in the art, and because CLS will be able to dispute
+Alice’s interpretation of the relevant claim terms other than the clear
+“computer,” “data storage unit,” and “electronically” terms found only in the
+’720 system patent and the ’510 method patent (and discussed above), Alice has
+not cross-moved for partial summary judgment as to the ’479 patent. Such a claim
+construction will reveal that certain claim terms in the ’479 patent—which are
+common to all three patents—would be understood by a person of ordinary skill in
+the art to limit the claims to a computer or the use of a computer. Id.
+
+
+The ’510 patent, however, is amenable to summary judgment in Alice’s favor (even
+without considering other issues of claim construction) because the term
+“electronically” ties the
+Case 1:07-cv-00974-RMC Document 68 Filed 05/19/2009 Page 6 of 30
+method to a particular machine, even without construction of all the other claim
+terms. There is no serious dispute about what the term “electronically” means.
+
+
+
+The specification undoubtedly provides context for reading a patent’s claims,
+but the plain language of the claims themselves is the measure of the breadth of
+patent protection granted. See Innova/Pure Water, Inc. v. Safari Water
+Filtration Sys., 381 F.3d 1111, 1116 (Fed. Cir. 2004).
+
+
+Case 1:07-cv-00974-RMC Document 104 Filed 03/09/11 Page 43 of 57
+Also, that the methods entail an irrevocable instruction, assumed to be
+electronic in nature, to require that exchange institutions adjust their
+accounts or records according to the exchange conducted by the supervisory
+institution is subsumed within the abstract idea itself, if not insignificant
+postsolution activity. See Flook, 437 U.S. at 590 (“The notion that
+post-solution activity, no matter how conventional or obvious in itself, can
+transform an unpatentable principle into a patentable process exalts form over
+substance.”); Bilski I, 545 F.3d at 966 (noting that abstract hedging claims
+required “performing the post-solution step of consummating those
+transactions”). In claiming the abstract idea of using an intermediary to
+guarantee the exchange of obligations to minimize risk, the final action that
+the parties, or their account holders, be met with an irrevocable instruction to
+adjust their account or record to reflect the consummated transaction is no more
+an inherent and necessary step in the abstract idea, if not an obvious
+post-solution step.
+
+Case 1:07-cv-00974-RMC Document 104 Filed 03/09/11 Page 51 of 57
+System claim 64, on the other hand, essentially enables a purchase between a
+buyer and seller, in which the system recited maintains a shadow account for a
+buyer and seller independent of those held by a bank, and the computer is
+configured to receive a transaction, adjust the accounts of the buyer and seller
+to effectuate the purchase if the accounts have sufficient value, and to
+generate an irrevocable instruction to the bank(s) to adjust their account(s)
+accordingly. See ’720 Patent, col. 68:62–66 & col. 69:1–11.
+
+

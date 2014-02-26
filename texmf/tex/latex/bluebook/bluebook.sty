@@ -255,6 +255,9 @@
 	\expandafter\let\expandafter\bb@kv@name\csname case@#1@name\endcsname
     }%
 }
+%
+% TODO: Need to support multiple prior/subsequent history entries
+%
 \bb@newparam{prior}{Prior history for a case}
 \bb@newparam{subsequent}{Subsequent history for a case}
 \bb@defparam{year}{Year/date of the case, article, regulation}{%
@@ -1178,7 +1181,11 @@
 	\noexpand\@bb@inlcommatrue
     }%
     \expandafter\protected@xdef\csname sc@#1\endcsname{%
-	\bb@kv@inline\space Patent
+        \bb@citeguts{%
+            \noexpand\if@bb@inline \@capnext the \noexpand\fi
+            \bb@kv@inline\space Patent%
+            \bb@maybepage{ }%
+        }%
     }%
 }
 \bb@newcite\defbook{A book or non-periodic material, BB R. 15}{%
@@ -1469,9 +1476,7 @@
 	    \bb@ifset\bb@kv@number{Pub. L. No.~\bb@kv@number}{%
 		ch.~\bb@kv@chapter
 	    },
-	    \noexpand\ifx\noexpand\@this@opt\relax\noexpand\else
-		\noexpand\@format@pageno{\noexpand\@this@opt},
-	    \noexpand\fi
+            \bb@this@opt@as@pageno
 	    \bb@ifset\bb@kv@vol\bb@kv@vol\bb@kv@year \space
 	    \bb@kv@rep \space
             \bb@pageordefault{}{%
@@ -1496,6 +1501,11 @@
 	\ifx\@this@opt\relax\else \bb@statsess@opterr \fi
     \else
 	\ifx\@this@opt@relax      \bb@statsess@opterr \fi
+    \fi
+}
+\DeclareRobustCommand\bb@this@opt@as@pageno{%
+    \ifx\@this@opt\relax\else
+        \expandafter\@format@pageno\expandafter{\@this@opt},\space
     \fi
 }
 \def\bb@statsess@opterr{%
@@ -2363,15 +2373,23 @@
 \def\@fmtpg@divname#1#2{%
     \@ifundefined{bb@t17@#1}{%
 	\protect\@fmtpg@warngraph{#1}%
-	#1%
+	#1\space
     }{%
         \@ifempty{#2}{%
             \@expand\chop@space{\csname bb@t17@#1\endcsname}{iii}%
         }{%
-            \@expand{#2}{\csname bb@t17@#1\endcsname}{ii}%
+            \@expand{\@fmtpg@handlespc#2}{\csname bb@t17@#1\endcsname}{ii}%
         }%
     }%
 }
+\def\@fmtpg@handlespc#1#2{%
+    \@expand\@fmtpg@handlespc@{#1{#2}}{ii}%
+}
+\def\@fmtpg@handlespc@#1{\@fmtpg@handlespc@@#1\@mark. \@mark.\@stop}
+\def\@fmtpg@handlespc@@#1 \@mark.#2\@stop{%
+    \@ifempty{#2}{\@fmtpg@handlespc@@@#1}{#1~}%
+}
+\def\@fmtpg@handlespc@@@#1\@mark.{#1}
 \def\@fmtpg@plural#1{\@thirdofthree#1}
 \def\@fmtpg@singular#1{\@secondofthree#1}
 \def\@fmtpg@warngraph#1{%
@@ -2449,18 +2467,12 @@
 %
 % Special definitions for S and P
 %
-\@namedef{bb@t17@S}{%
-    \@firstoftwo{\textsection\space}{\textsection\textsection\space}%
+\def\bb@txvii#1#2{%
+    \@namedef{bb@t17@#1}{\@firstoftwo{#2 }{#2#2 }}%
+    \@namedef{bb@t17@#1#1}{\@secondoftwo{#2 }{#2#2 }}%
 }
-\@namedef{bb@t17@SS}{%
-    \@secondoftwo{\textsection\space}{\textsection\textsection\space}%
-}
-\@namedef{bb@t17@P}{%
-    \@firstoftwo{\textparagraph\space}{\textparagraph\textparagraph\space}%
-}
-\@namedef{bb@t17@PP}{%
-    \@secondoftwo{\textparagraph\space}{\textparagraph\textparagraph\space}%
-}
+\bb@txvii S\textsection
+\bb@txvii P\textparagraph
 %
 % Special macro for the word "at"
 \def\@fmtpg@at{\@firstoftwo{at }{at }}
@@ -3167,9 +3179,9 @@
 		% parenthetical. It needs to (1) be typeset differently, and (2)
 		% caused to update the short citation form.
 		\ifnum\bb@citelevel=\@ne % Only when not in parenthetical
+		    \if@bb@in@toa\else      % Not in TOA
 			\space[hereinafter ##2]%
 			\@expand{\g@addto@macro\bb@hia@cites}{\@this@case,}i%
-		    \if@bb@in@toa\else      % Not in TOA
 			\bb@supra@form\@this@case{##2}%
 			\did@full@cite\@this@case
 		    \fi
@@ -3242,21 +3254,79 @@
 \def\bb@dotoa#1#2{\def#1{#2}}
 \def\bb@addtotoa#1{%
     \if@bb@in@toa\else
-	\@ifundefined{tc@#1}\relax{\addcontentsline{toa}{bb@toa}{#1}}%
+	\@ifundefined{tc@#1}\relax{%
+            \@expand{\bb@addtotoa@{#1}}{%
+                \expandafter\strip@prefix\meaning\thepage
+            }i%
+        }%
     \fi
 }
+% Have to separate this into a separate macro because \addtocontents temporarily
+% does \let\thepage\relax
+\def\bb@addtotoa@#1#2{%
+    \addtocontents{toa}{%
+        \protect\contentsline{bb@toa}{#1}{\thepage}{%
+            \noexpand\the\noexpand\c@page
+        }{#2}%
+    }%
+}%
 \newif\if@bb@in@toa
-\def\l@bb@toa#1#2{%
+%
+% Each entry in the TOA file has three parameters (other than the leading
+% bb@toa):
+% #1: the citation names
+% #2: the display-form page number
+% #3: the numeric page number
+% #4: the relevant definition of \thepage (to identify different page counting
+%     schemes)
+%
+% The goal is to generate two types of items:
+% 1. Lists, called bb@toa@[type], of citation names falling within that [type]
+% 2. Macros of the form \bb@pg@[citation], identifying the page numbers.
+%
+% The macros of (2) take on the following form:
+%   {last-display-page}{last-numeric-page}{last-\thepage}{built-page-list}
+%
+% The rule is that appending built-page-list and last-display-page will always
+% result in the correct page list. Algorithm is as follows:
+%
+% - For the first page number, leave last-display-page empty
+%
+\def\l@bb@toa#1#2#3#4{%
     \@ifundefined{bb@pg@#1}{%
 	\advance\@tempcnta\@ne
 	\message{(\the\@tempcnta)}%
 	\AddToList{bb@toa@\csname tc@#1\endcsname}{#1}%
-	\@namedef{bb@pg@#1}{#2}%
+	\@namedef{bb@pg@#1}{{}{#3}{#4}{#2}}%
     }{%
-	\expandafter\edef\csname bb@pg@#1\endcsname{%
-	    \csname bb@pg@#1\endcsname, #2%
-	}%
+	\expandafter\bb@toa@addpg\csname bb@pg@#1\endcsname{#2}{#3}{#4}%
     }%
+}
+\def\bb@toa@addpg#1#2#3#4{%
+    \expandafter\bb@toa@addpg@#1#1{#2}{#3}{#4}%
+}
+% #1-#4 are the four bb@pg@[citation] parameters
+% #5 is \bb@pg@[citation] macro
+% #6-#8 are #2-#4 of \l@bb@toa
+\def\bb@toa@addpg@#1#2#3#4#5#6#7#8{%
+    \def\reserved@a{#3}\def\reserved@b{#8}%
+    \ifx\reserved@a\reserved@b
+        \@tempcnta=#2\relax
+        \ifnum#7=\@tempcnta\else
+            \advance\@tempcnta\@ne
+            \ifnum#7=\@tempcnta
+                \@ifempty{#1}{%
+                    \def#5{{#6}{#7}{#8}{#4--}}%
+                }{%
+                    \def#5{{#6}{#7}{#8}{#4}}%
+                }%
+            \else
+                \def#5{{}{#7}{#8}{#4#1, #6}}%
+            \fi
+        \fi
+    \else
+        \def#5{{}{#7}{#8}{#4#1, #6}}%
+    \fi
 }
 \def\tableofauthorities{%
     \begingroup
@@ -3275,13 +3345,7 @@
     \IfEmptyList{bb@toa@#1}{}{%
 	\section*{#1}%
 	\ShowList{bb@toa@#1}{%
-	    \@tempcnta\m@ne
-	    \@tempcntb\@ne
-	    \@expand{\expandafter\bb@toa@rn\csname bb@pg@##1\endcsname}%
-		    {\csname bb@pg@##1\endcsname}{ii}%
-	    \ifnum\c@passimnum>\z@ \ifnum\@tempcntb<\c@passimnum\else
-		\@namedef{bb@pg@##1}{\bb@fn@sig{passim}}%
-	    \fi \fi
+	    \expandafter\bb@toa@renumber\csname bb@pg@##1\endcsname
 	}%
 	\parindent\z@
 	\parskip\baselineskip
@@ -3291,66 +3355,25 @@
     }%
 }
 \newcounter{passimnum} \c@passimnum=\z@
-\def\bb@toa@rn#1#2{\bb@toa@renumber#1#2, , \@stop}
-\def\bb@toa@renumber#1#2, #3\@stop{%
-    \@ifempty{#3}{}{%
-	\@test \ifnum\@tempcnta=\m@ne\fi{%
-	    % This is the first number
-	    \@tempcnta#2\relax
-	    \def#1{#2}%
-	    \bb@toa@renumber#1#3\@stop
-	}{%
-	    \@test \ifnum#2=\@tempcnta\fi{%
-		% If the number is the same as the last number
-		\bb@toa@renumber#1#3\@stop
-	    }{%
-		\advance\@tempcnta\@ne
-		\advance\@tempcntb\@ne
-		\@test \ifnum#2=\@tempcnta\fi{%
-		    % This number is one more than the last number
-		    \bb@toa@rnseq#1#3\@stop
-		}{%
-		    % This number is 2+ more than the last number
-		    \edef#1{#1, #2}%
-		    \@tempcnta#2\relax
-		    \bb@toa@renumber#1#3\@stop
-		}%
-	    }%
-	}%
-    }%
+\def\bb@toa@renumber#1{\expandafter\bb@toa@count\expandafter#1#1}%
+\def\bb@toa@count#1#2#3#4#5{%
+    \def#1{#5#2}%
+    \ifnum\c@passimnum>\z@
+        \@tempcnta=\@ne
+        \bb@toa@count@#1#5#2, \@stop
+    \fi
 }
-\def\bb@toa@rnseq#1#2, #3\@stop{%
+\def\bb@toa@count@#1#2, #3\@stop{%
     \@ifempty{#3}{%
-	% No more pages left. So we should drop in the trailing number.
-	\edef#1{#1--\number\@tempcnta}%
+        \ifnum\@tempcnta<\c@passimnum\else
+            \def#1{\bb@fn@sig{passim}}%
+        \fi
     }{%
-	\@test \ifnum#2=\@tempcnta\fi{%
-	    % Duplicate number. Go on to the next one.
-	    \bb@toa@rnseq#1#3\@stop
-	}{%
-	    \advance\@tempcnta\@ne
-	    \@test \ifnum#2=\@tempcnta\fi{%
-		% This number is still part of a sequence, one more than the
-		% previous number. Increase \@tempcntb because we found another
-		% number to add to the sequence. Then, go on to the next one.
-		\advance\@tempcntb\@ne
-		\bb@toa@rnseq#1#3\@stop
-	    }{%
-		% This number is not part of a sequence any more. Add the
-		% completion of the sequence (\@tempcnta), and then this number.
-		% Increment \@tempcntb by one, to account for the number we just
-		% added.
-		\advance\@tempcntb\@ne
-		% Reduce \@tempcnta by one, because it gets its old value back
-		\advance\@tempcnta\m@ne
-		\edef#1{#1--\number\@tempcnta, #2}%
-		\@tempcnta#2\relax
-		\bb@toa@renumber#1#3\@stop
-	    }%
-	}%
+        \advance\@tempcnta\@ne
+        \bb@toa@count@#1#3\@stop
     }%
 }
-\def\@tocrmarg{2.55em\@plus 2.55em}
+%\def\@tocrmarg{2.55em\@plus 2.55em}
 \def\@toaline#1#2{%
     {\leftskip\z@\rightskip \@tocrmarg \parfillskip -\rightskip
      \parindent \z@\@afterindenttrue
@@ -3371,6 +3394,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+% User command to display a URL.
+\def\url#1{\bb@parseurl{#1}\reserved@a\reserved@a}%
 % Parses the url (#1) and puts it into control sequence (#2). The resulting URL
 % should have appropriate breakpoints put in, and be totally unexpandable or
 % protected.
@@ -3379,7 +3404,6 @@
 	\protected@edef#2{\bb@parseurl@#1\bb@parseurl@}%
 	\protected@edef#2{%
 	    {%
-		\noexpand\hyphenchar\noexpand\font\noexpand\m@ne
 		\bb@tag{a href="#2"}{#2}%
 	    }%
 	}%
@@ -3387,37 +3411,54 @@
 \else
     \def\bb@parseurl#1#2{%
 	\protected@edef#2{%
-	    {%
-		\noexpand\hyphenchar\noexpand\font\noexpand\m@ne
-		\bb@parseurl@#1\bb@parseurl@
-	    }%
+	    \begingroup
+                \leavevmode
+		\bb@parseurl@{\hbox\bgroup}#1\bb@parseurl@
+	    \endgroup
 	}%
     }
 \fi
-\def\bb@parseurl@#1{%
-    \@ifonechar{#1}{%
-	\@test \ifx#1\bb@parseurl@ \fi{%
-	    % End of URL, do nothing
+%
+% Parses a single character from a URL. #2 is the character. #1 is a state for
+% whether we are inside an \hbox or not. If it is empty, we are inside a box. If
+% it is not empty, we are inside a box, and the text is the command to start the
+% box.
+\def\bb@parseurl@#1#2{%
+    \@ifonechar{#2}{%
+	\@test \ifx#2\bb@parseurl@ \fi{%
+	    % End of URL. If we're inside a box, end it.
+            \@ifempty{#1}\egroup\@empty
 	}{%
-	    \@test \ifcat\noexpand#1\relax \fi{%
-		% Control sequence
-		\@ifundefined{bb@url@\string#1}{%
-		    \string#1%
+	    \@test \ifcat\noexpand#2\relax \fi{%
+		% Control sequence.
+                % End any box we're in.
+                \@ifempty{#1}\egroup\@empty
+		\@ifundefined{bb@url@\string#2}{%
+                    \string#2%
 		}{%
-		    \csname bb@url@\string#1\endcsname
+		    \csname bb@url@\string#2\endcsname
 		}%
+                % Parse the next character, setting the state to being outside a
+                % box.
+                \bb@parseurl@{\hbox\bgroup}%
 	    }{%
-		% Normal character
-		\@ifundefined{bb@url@\bb@url@bslash\string#1}{%
-		    \string#1%
+                % Not a control sequence.
+		\@ifundefined{bb@url@\bb@url@bslash\string#2}{%
+                    % Normal character. Start a box if we are not in one.
+                    #1%
+		    \string#2%
+                    % Parse the next character, setting the state as in a box.
+                    \bb@parseurl@{}%
 		}{%
-		    \csname bb@url@\bb@url@bslash\string#1\endcsname
+                    % A character with special meaning. End any box we're in.
+                    \@ifempty{#1}\egroup\@empty
+                    \csname bb@url@\bb@url@bslash\string#2\endcsname
+                    \bb@parseurl@{\hbox\bgroup}%
 		}%
 	    }%
-	    \bb@parseurl@
 	}%
     }{%
-	\bb@parseurl@\{#1\}%
+	\bb@parseurl@{#1}\{#2\}%
     }%
 }
 % \bb@url@bslash is just a backslash character.
@@ -3442,7 +3483,7 @@
 %
 % These characters accept no breakpoints, but are often backslashed; including
 % them forces the removal of the backslash.
-\def\UrlNobreaks{\do\%\do\^\do\$}
+\def\UrlNobreaks{\do\^\do\$}
 %
 % These characters require special treatment when they are seen.
 \if@bb@html
@@ -3456,7 +3497,7 @@
 \fi
 \def\bb@underscore{%
     \kern\p@\nobreak
-    \leaders\hrule\hskip .3em \@plus .2em \@minus .1em\relax
+    \leaders\hrule\@height -.15ex\@depth.2ex\hskip .3em \@plus .2em \@minus .1em\relax
     \nobreak\hbox{}%
     \hskip\p@
 }
@@ -3485,9 +3526,9 @@
     }%
 }
 \UrlBreaks
-\newskip\urlbreakskip \urlbreakskip=0pt plus 1pt
+\newskip\urlbreakskip \urlbreakskip=0pt plus .4pt
 \def\do#1{%
-    \expandafter\edef\csname bb@url@\string#1\endcsname{%
+    \expandafter\protected@edef\csname bb@url@\string#1\endcsname{%
         \unskip\unpenalty
 	\nobreak\hskip\urlbreakskip
 	\expandafter\@gobble\string#1\penalty\exhyphenpenalty\hskip\urlbreakskip
@@ -3529,6 +3570,7 @@
     }%
 }
 \def\pc@this#1{#1}
+\let\idc@this\fc@this
 \def\bb@xref@get#1#2{\expandafter#2#1}%
 \@test \if@bb@review \fi {
     \newcommand*\bblabel[2][]{\@bsphack
@@ -3881,9 +3923,6 @@
 		\@expand\bb@abbrev@name\bb@kv@inline i{\def\bb@kv@ainline}%
 	    }%
 	    \def\bb@tmp@runlast{%
-		\protected@xdef\bb@kv@name{%
-		    \bb@kv@name\space(\bb@kv@inline)%
-		}%
 		\aftergroup\bb@case@proc@paren
 	    }%
 	}\relax
@@ -3899,11 +3938,19 @@
     \endgroup
 }
 \def\bb@case@proc@paren{%
-    \expandafter\push@toks\expandafter\bb@param@parens\expandafter{%
-	\expandafter\bb@addparen\expandafter\bb@paren@casealt\expandafter{%
-	    \bb@kv@ainline
-	}%
-    }%
+    \protected@edef\reserved@a{%
+        \noexpand\in@{\bb@kv@inline}{\bb@kv@p;\bb@kv@d;\bb@kv@name}%
+    }\reserved@a
+    \ifin@\else
+        \protected@xdef\bb@kv@name{%
+            \bb@kv@name\space(\bb@kv@inline)%
+        }%
+        \expandafter\push@toks\expandafter\bb@param@parens\expandafter{%
+            \expandafter\bb@addparen\expandafter\bb@paren@casealt\expandafter{%
+                \bb@kv@ainline
+            }%
+        }%
+    \fi
 }
 %
 % If there is a name or title defined, process that.
@@ -4221,20 +4268,14 @@
 \def\bb@case@history{%
     \bb@ifset\bb@kv@prior{%
 	\let\bb@tmp@and\@empty
-	\@for\reserved@a:=\bb@kv@prior\do{%
-	    \expandafter\bb@case@split@expl\expandafter{\reserved@a}%
-	    {}\bb@paren@prior
-	    \def\bb@tmp@and{and }%
-	}%
+        \@expand\bb@case@split@expl\bb@kv@prior{i}{}\bb@paren@prior
+        %\def\bb@tmp@and{and }% For supporting multiple entries
     }\relax
     \bb@ifset\bb@kv@subsequent{%
 	\let\bb@tmp@and\@empty
-	\@for\reserved@a:=\bb@kv@subsequent\do{%
-	    \expandafter\bb@case@split@expl\expandafter{\reserved@a}{ % Space
-		sub nom.%
-	    }\bb@paren@subseq
-	    \def\bb@tmp@and{and }%
-	}%
+        \@expand\bb@case@split@expl\bb@kv@subsequent{i}%
+                {sub nom.}\bb@paren@subseq
+        % \def\bb@tmp@and{and }%
     }\relax
 }
 \def\bb@case@split@expl#1#2#3{%

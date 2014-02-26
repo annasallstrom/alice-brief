@@ -92,8 +92,8 @@
       \vskip-3\baselineskip
       No.~\@docket\strut
       \vskip .5\baselineskip
-      \hrule
-      \vskip 2pt
+      \hrule\@height\p@
+      \vskip\p@
       \hrule
       \vskip .5\baselineskip
       \textsc{In the}\par
@@ -101,26 +101,38 @@
       \separator
       \@drawcasecaption
       \separator
-      \textbf{\@posture}%
+      \textsc{\@posture}%
       \separator
-      \textbf{\MakeUppercase{\@title}}
+      \textbf{\textsc{\@title}}
       \separator
     \end{centering}\par
     \hb@xt@\textwidth{%
-      \hfil
+      \footnotesize
       \parindent\z@
-      \hsize.45\textwidth
+      \hsize.47\textwidth
       \everypar{\hangindent=1em\relax}%
       \def\\{\@testopt\@parwithskip\z@}%
       \def\@parwithskip[##1]{\par\vskip##1\relax}
       \rightskip=0pt plus \hsize
-      \def\and{\egroup\hfil\vtop\bgroup}%
-      \vtop\bgroup\@counsel\egroup
+      \def\and{\egroup\unhbox\@tempboxa\egroup
+        \setbox\@tempboxa\hbox\bgroup\hfil\vtop\bgroup}%
+      \setbox\@tempboxa\hbox{}%
+      \setbox\@tempboxa\hbox\bgroup\hfil\vtop\bgroup
+          \@counsel
+          \egroup\unhbox\@tempboxa
+      \egroup
+      \unhbox\@tempboxa
     }%
+    \ifx\@counselis\relax\else
+        \vskip\baselineskip
+        \hb@xt@\textwidth{%
+            \hfil\footnotesize\itshape\@counselis\hfil
+        }%
+    \fi
   \vfill\null
   \hrule
-  \vskip 2pt
-  \hrule
+  \vskip\p@
+  \hrule\@height\p@
   \end{titlepage}%
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
@@ -148,6 +160,7 @@
 }}
 \def\posture#1{\gdef\@posture{#1}}
 \def\counsel#1{\gdef\@counsel{#1}}
+\def\counselis#1{\gdef\@counselis{#1}}
 \newcommand*{\stopbreaks}{%
     \interlinepenalty\@M
     \def\par{\@@par\nobreak}%
@@ -161,28 +174,52 @@
         \raggedright
         \leftskip=.33\textwidth
         \everypar{\hangindent=1em\relax}%
+        \stopbreaks
         \def\\{\@testopt\@parwithskip\z@}%
         \def\@parwithskip[##1]{\par\vskip##1\relax}
         \def\and{\\[.5\baselineskip]}%
         \vskip2\baselineskip minus 1\baselineskip
-        \stopbreaks
         \emph{Respectfully submitted,}\par\vskip.5\baselineskip
         \@counsel\par
+        \vskip.5\baselineskip
+        \emph{\@counselis}\par
     \endgroup
 }
 \setcounter{secnumdepth}{3}
 \newcounter {part}
-\newcounter {section}
+\newcounter {section}[part]
 \newcounter {subsection}[section]
 \newcounter {subsubsection}[subsection]
 \newcounter {paragraph}[subsubsection]
 \newcounter {subparagraph}[paragraph]
+\newcounter {appendix}
 \renewcommand \thepart {}
 \renewcommand \thesection {\@Roman\c@section}
 \renewcommand\thesubsection   {\@Alph\c@subsection}
 \renewcommand\thesubsubsection{\@arabic\c@subsubsection}
 \renewcommand\theparagraph    {\@alph\c@paragraph}
 \renewcommand\thesubparagraph {\@roman\c@subparagraph}
+\renewcommand\theappendix{\@Alph\c@appendix}
+\def\appendix#1{%
+    \clearpage
+    \refstepcounter{appendix}%
+    \ifnum \c@secnumdepth >\m@ne
+      \vskip\baselineskip
+      \begin{centering}
+          \leavevmode
+          \refstepcounter{part}%
+          \addcontentsline{toc}{part}{%
+            \MakeUppercase{\appendixname\ \theappendix}: #1%
+          }\nobreak
+          \bfseries\MakeUppercase{\appendixname\ \theappendix}\par
+          \textsc{#1}\par
+      \end{centering}
+      \nobreak
+      \@afterheading
+    \else
+      \@spart{#1}
+    \fi
+}
 \newcommand\part{%
    \secdef\@part\@spart}
 
@@ -214,15 +251,15 @@
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {\baselineskip}%
                                    {1pt}%
-                                   {\normalfont\bfseries}}
+                                   {\normalfont\bfseries\scshape}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {\baselineskip}%
                                      {1pt}%
-                                     {\normalfont\bfseries}}
+                                     {\normalfont\bfseries\scshape}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {\baselineskip}%
                                      {1pt}%
-                                     {\normalfont\bfseries}}
+                                     {\normalfont\bfseries\scshape}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {0.5\baselineskip}%
                                     {-1em}%
@@ -301,10 +338,6 @@
       \setcounter{page}\@ne
     }%
     {\newpage}
-\newcommand\appendix{\par
-  \setcounter{section}{0}%
-  \setcounter{subsection}{0}%
-  \gdef\thesection{\@Alph\c@section}}
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -367,7 +400,6 @@
 \setcounter{tocdepth}{3}
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
-    \vskip \z@ \@plus.2\p@
     {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
      \parindent #2\relax\@afterindenttrue
      \interlinepenalty\@M
@@ -383,7 +415,7 @@
      \par}%
   \fi}
 \newcommand\tableofcontents{%
-    \part{\contentsname
+    \part*{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
@@ -486,6 +518,11 @@
 \def\arabicpagenumbers{%
     \c@page=\@ne
     \pagenumbering{arabic}%
+}
+\def\appendixpagenumbers{%
+    \c@page=\@ne
+    \pagenumbering{arabic}%
+    \gdef\thepage{\@arabic\c@page a}%
 }
 \flushbottom
 \onecolumn

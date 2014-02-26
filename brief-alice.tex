@@ -1,7 +1,9 @@
 \documentclass{scotus}
-\usepackage[ignoremissing]{bluebook}
+\usepackage{bluebook}
 \usepackage{ifxetex}
 \usepackage{xspace}
+\usepackage{enumitem}
+\setlist{topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=\parskip}
 
 \usepackage{listings}
 \input{lsthack.tex}
@@ -9,85 +11,8 @@
 \input{citations.tex}
 \input{claim26.tex}
 
-%
-% If you do not have these fonts, comment the next few lines out by changing
-% \ifxetex to \iffalse
-%
-\ifxetex
-    \usepackage{fontspec}
-    \setmainfont[BoldFont=ITC Century Std-Bold,Ligatures=TeX]{%
-        Century Expanded LT Std%
-    }
-    \def\titlefont{\fontspec{Cloister Black}\LARGE}
-    \def\basickeywordstyle{\addfontfeatures{Letters=UppercaseSmallCaps}}
-\else
-    \def\basickeywordstyle{\bfseries}
-\fi
-
-%
-% Macros for how long the computer program is
-%
-\def\numlines{seven\xspace}
-\def\Numlines{Seven\xspace}
-\def\wholeprogram{\programlines{1}{7}}
-
-%
-% Macros to format the claim language and/or computer program
-%
-\def\programlines#1#2{%
-    \lstset{keywordstyle=\basickeywordstyle,identifierstyle=\itshape}
-    \lstset{breaklines=true,showstringspaces=false}
-    \lstset{aboveskip=0pt,belowskip=0pt}
-    \lstset{language=[Visual]Basic,columns=fullflexible}
-    \lstinputlisting[firstline=#1,lastline=#2]{%
-        implementations/375claim26.bas%
-    }%
-}
-\long\def\inlinebox#1{%
-    \vskip\parskip
-    \hrule\kern1.5pt \hrule\nobreak
-    \begingroup
-        \vskip 4pt
-        \parskip=0pt
-        #1\par
-        \nobreak\vskip 4pt
-    \endgroup
-    \hrule\kern1.5pt \hrule
-}
-\long\def\claimtext#1#2{%
-    \noindent
-    \bblabel{appx:claim:#1}%
-    \textsc{Claim 26, #1:}\par
-    {\itshape#2\unskip}%
-}
-\long\def\claimbox#1#2{%
-    \vskip.5\baselineskip
-    \inlinebox{%
-        \claimtext{#1}{#2}%
-    }%
-}
-\long\def\codeandclaimbox#1#2#3#4{%
-    \vskip.5\baselineskip
-    \inlinebox{%
-        \claimtext{#1}{#2}%
-        \vskip 4pt
-        \hrule
-        \vskip 4pt
-        \noindent
-        \ifnum#3=#4\relax
-            \textsc{Computer code, line #30:}\par
-        \else
-            \textsc{Computer code, lines #30--#40:}\par
-        \fi
-        \programlines{#3}{#4}%
-    }%
-}%
-
-%
-% Other useful macros
-%
-\def\Amicus{\emph{Amicus}\xspace}
-\def\amicus{\emph{amicus}\xspace}
+% This sets up various macros used in this brief.
+\input{macros-for-brief.tex}
 
 \docket{13-298}
 \casecaption{
@@ -108,11 +33,20 @@ for the Federal Circuit}
 Washington, DC 20036 \\
 (202) 861-0020 \\
 cduan@publicknowledge.org \\
-\whois{Counsel for Amicus Curiae}
+\and
+\textsc{Jack Lerner} \\
+\textsc{USC Intellectual Property and Technology Law Clinic} \\
+University of Southern California Gould School of Law \\
+699 Exposition Blvd, Room 425 \\
+Los Angeles, CA 90089 \\
+(213) 740-2537 \\
+iptlcsct@law.usc.edu
 }
+\counselis{Counsel for Amici Curiae}
 
-\title{Brief of Public Knowledge as
-\protect\\\emph{Amicus Curiae} in Support of Respondent}
+\title{Brief of Public Knowledge \protect\\
+and the Application Developers Alliance \protect\\
+as \emph{Amici Curiae} in Support of Respondent}
 
 \begin{document}
 
@@ -128,7 +62,7 @@ cduan@publicknowledge.org \\
 \clearpage
 \arabicpagenumbers
 
-\part{Interest of \emph{Amicus Curiae}}
+\part{Interest of \emph{Amici Curiae}}
 
 Public Knowledge is a non-profit organization that is dedicated to preserving
 the openness of the Internet and the public's access to knowledge; promoting
@@ -136,93 +70,329 @@ creativity through balanced intellectual property rights; and upholding and
 protecting the rights of consumers to use innovative technology lawfully. As
 part of this mission, Public Knowledge advocates on behalf of the public
 interest for a balanced patent system, particularly with respect to new and
-emerging technologies.
+emerging technologies.\footnote{Per Supreme Court Rule 37(6), no counsel for a
+party authored this brief in whole or in part, and no counsel or party made a
+monetary contribution intended to fund the preparation or submission of the
+brief. No person or entity, other than \amici, their members, or their counsel,
+made a monetary contribution to the preparation or submission of this brief. Per
+Rule 37(3)(a), consent has been granted for the filing of this brief, as
+indicated by the blanket consents from counsel for petitioner and counsel for
+respondents docketed December 11, 2013.}
 
-Public Knowledge has previously served as \amicus in key patent cases.
+Public Knowledge has previously served as \emph{amicus} in key patent cases.
 \sentence{e.g., i4i; bilski; quanta}.
+
+The Application Developers Alliance (ADA) is a nonprofit industry association
+comprising more than 30,000 individual software developers and more than 150
+companies who design and build applications (“apps”) for consumers to use on
+mobile devices like smartphones and tablets. Apps run on software platforms,
+including Google’s Android, Apple’s iOS, and Facebook, and are sold or
+distributed through virtual stores like Google’s Play Store. ADA is dedicated to
+meeting the needs of app developers as creators, innovators, and entrepreneurs,
+by delivering essential information and resources and by advocating for public
+policies that promote the app ecosystem.
+
+App developers are both central to innovation and vulnerable to the patent laws
+that surround innovation. By innovating rapidly and cheaply, app developers
+represent an increasingly robust force in the economy. The app economy is now
+globally valued at over \$53 billion and has
+created approximately 466,000 jobs in the United States since
+2007.\footnote{\sentence{pappas; mandel at 13}.} But many app developers,
+including
+ADA members, are struggling as a result of abusive patent assertion, especially
+that originating from patent assertion entities (PAEs). Such entities often
+assert overly broad patents, propounding unfounded infringement allegations and
+aggressive litigation threats, which deeply chill
+innovation.\footnote{\sentence{wildtangent-ada}.}
+
+Inconsistency and uncertainty in areas of patent law, such as subject matter
+eligibility, are enabling factors in PAE litigation, as they enable aggressive
+patent assertors to take improper, overbroad positions.
+\sentence{e.g., eon-net at 1326-1328}. This forces many
+app developers to conclude that innovation is not worth the expensive baggage of
+defending against such claims, resulting in delays to and deficiencies in app
+development and overall innovation.\footnote{\sentence{see, e.g., chien-oti at
+17}.} Thus,
+ADA and its members have a strong interest in this Court providing clarity in
+this area of patent law.
+
+
 
 \fullcite{i4i}
 \fullcite{bilski}
 \fullcite{quanta}
 
+\clearpage
+
 \part{Summary of Argument}
 
-*
+Abstract ideas are not eligible for patenting because, as this Court has
+steadfastly maintained, certain fundamental subject matter must be fixed in the
+public domain, so that patents may serve their constitutional mandate to
+``promote the Progress of Science and the useful Arts.'' Being the basic tools
+of innovation, abstract ideas must remain available to the public; to do
+otherwise would impede innovation more than promote it.
+
+This case tests how far a patent may encroach on that valuable domain
+reserved to innovators, creators, and the public. Petitioner holds patents
+to computer technology. The patent claims at issue are
+lengthy and detailed, some over two hundred words long. But those claims
+actually cover very simple ideas; the verbose language is a mere facade
+masking basic concepts.
+
+To demonstrate this, \amici have implemented one of those 200-word
+claims---in just 7 lines of computer code.
+
+This computer program shows that the patent
+claims are directed to nothing more than an abstract idea implemented on a
+general-purpose computer, which should not be patent-eligible.
+%
+% Summary of I.C argument
+To hold otherwise would contravene this
+Court's precedent and undermine the rationale for unpatentability of
+abstract ideas. Such ``abstract-idea-plus-computer'' patents would be effective
+monopolies on the basic tools of innovation, a result that this
+Court has adamantly rejected.
+
+To prevent further errors of this sort, \amici identify three points of
+clarification on the law of subject matter eligibility, and urge this Court to
+enunciate these specific points. Doing so not
+only will correct the judgment below and guide the lower courts, but also will
+ensure that those valuable basic tools of innovation remain available to all.
 
 \part{Argument}
 
-\section{The Claims at Issue Are Ineligible Under Section 101 Because They
-Effectively Preempt Substantially All Uses of an Abstract Idea}
+This case presents the recurrent question of what constitutes patentable
+subject matter, particularly with regard to the fields of computer software and
+business methods. \Amici address two aspects of this question as they relate to
+the present case. First, \amici show that the patented claims at issue are
+directed to ineligible abstract ideas, by
+implementing one of those claims in seven lines of computer code. \sentence{this
+at fig:code}.
+Second, in view of the fractured opinions of the Federal Circuit below, \amici
+suggest three principles for guiding the lower courts in deciding future cases.
 
-\subsection{A \Numlines-Line Computer Implementation of the Patented Technology
-Illustrates that the Claims Are Not Meaningfully Limited Beyond an Abstract
-Idea}
 
-The claims use complex, technical-sounding language like ``shadow accounts''
-that make the claim to appear substantially limited beyond a mere abstract idea.
-However, a careful reading of the claims shows that this complex language does
-not in fact actually provide such substantial limitations.
 
-To demonstrate this, we prepare a computer program that implements all the
-features of the claims. The computer program is very short, indicating that the
-verbose language of the claims does not in fact demand specific, particular
-implementations but rather can expansively cover all implementations.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION I
+%
+\section{The Claims at Issue Are Ineligible for Patenting Because They
+Preempt an Abstract Idea}
 
+The question presented is whether Petitioner's claims are directed to
+patent-eligible subject matter. Generally, ``any new and
+useful process, machine, manufacture, or composition of matter'' is eligible for
+patenting. \sentence{101}. But three particular fields
+are nevertheless ineligible: laws of nature, physical phenomena, and abstract
+ideas. \sentence{e.g., mayo at 1293 (quoting \sentence{diehr at 185})}.
+
+The claims of these patents, as with many patents in the computer technology
+field, are full of complex technical language.
+But these claims actually present very basic concepts---so basic, in fact, that
+\amici have prepared a \numlines-line computer program
+that implements all the features of one of the most complex claims. The program,
+shown in Figure~\ref{code-listing} on page~\pageref{code-listing},
+demonstrates that the claims recite not specialized, technical systems, but
+rather a simple algorithm that reduces to nothing more than an
+abstract idea run on a computer. Because mere application of a general-purpose
+computer should not render an otherwise abstract idea patentable, \amici
+urge this Court to find the present claims ineligible.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION I.A
+%
+\subsection{The Claims Can Be Implemented in Just \Numlines Lines of
+Computer Code}
+
+Much of the disagreement in the lower court's fractured decision stemmed
+from a dispute over the nature of the patent claims at issue. Judge Lourie,
+writing for five judges,
+found the claims to recite ``a handful of
+computer components in generic, functional terms that would encompass any
+device'' and unduly preempt an abstract idea. \sentence{see cls-enbanc at 1290}.
+Judge Rader, writing for four judges, found those same claims narrowly tailored,
+``limited to an implementation that includes at least four separate structural
+components'' rendering the claim patent-eligible. \sentence{see cls-enbanc at
+1307}.
+
+The claims at issue do use technical-sounding, complex language, making them
+appear to be directed to a narrowly tailored invention. One of the claims at
+issue recites, among other things, a ``communications controller,'' a
+``data storage unit,'' and an ``instruction being an irrevocable, time invariant
+obligation.'' \sentence{pat375 at claim 26, col. 66-67}.\footnote{Claim 26 of
+\inline{pat375} is considered in this brief because it was found patentable by
+the greatest number of judges of the lower court decision. \sentence{see
+cls-enbanc at 1309 (Rader, Linn, Moore \& O'Malley, JJ.);
+cls-enbanc at 1327 (Newman, J.)}.
+\Amici could have easily used any other claim at issue.
+For reference, Claim
+26 is reprinted in \inline{this at appx:claim}.}
+
+But beneath this veneer
+of technical language is nothing more than a very simple, basic idea. As a
+demonstration, the computer program shown in Figure~\ref{code-listing}
+on the opposite page
+implements all the features of Claim 26 of \inline{pat375}.
+A complete explanation of the working of
+this program as it relates to Claim 26 of \inline{pat375} is presented in
+\inline{this at appx:code}.
+
+\def\floatpagefraction{.1}
+\begin{figure}[p]
 \inlinebox{\wholeprogram}%
+\vskip2\baselineskip
+\caption{Implementation of Claim 26 of \protect\inline{pat375}.}
+\label{code-listing}
+\bblabel[Figure~\#]{fig:code}
+\end{figure}
 
-Certain judges of the Federal Circuit were clearly misled by the claim language.
-They believed that the claim required particular, specific implementation
-details, due to the apparently technical language of the claims and the patent
-specification. However, our presented computer implementation shows these
-beliefs to be in error.
+As this Court will observe, the computer program is only \numlines lines long,
+indicating that
+the verbose language of the claims does not in fact demand specific, particular
+implementations but rather expansively preempts all uses of a simple, basic
+idea. Compared to ordinary computer programming, a \numlines-line computer
+program is remarkably simple:
+\begin{itemize}
+\item A single page of the Supreme Court's website is 926 lines long, including
+145 lines of computer code.\footnote{\sentence{scotus-web}.}
+\item A fourteen-year-old wrote an iPhone app with over 11,000 lines of
+code.\footnote{\sentence{forbes-iphone}.}
+\item The computer program that formatted the citations
+and table of authorities of this brief is 7,939 lines long.\footnote{That
+program, which was written by counsel of record on this brief, is available at
+\url{https://github.com/charlesduan/alice-brief}.}
+\end{itemize}
 
-\subsection{Read with Proper Expansiveness, the Claims Cover Substantially All
-Computer Implementations of a Basic, Abstract Accounting Idea of Third-Party
-Escrow}
+Certain
+\bblabel{computer-quotes}
+judges below were misled by the language of the
+claims and the patent.
+Judge Rader believed that Claim 26 involved
+``a complex problem'' that could only be solved with a specialized system
+with ``at least four separate structural components.'' \sentence{cls-enbanc at
+1307}. He reviewed the ``at least thirty two figures
+which
+provide detailed algorithms'' to conclude that ``[l]abeling
+this system claim an `abstract concept' wrenches all meaning from those words.''
+\sentence{cls-enbanc at 1309}. Judge Moore likewise found a
+similarly-worded claim ``limited to one that is configured to perform certain
+functions in a particular fashion'' and, based on one of the
+flowcharts, suggested that the claims demanded a dizzyingly long
+and complex algorithm. \sentence{cls-enbanc at 1318}. And Judge Linn
+concluded that, while they may be based
+on an abstract idea, ``the claims here are directed to very specific ways of
+doing that.''
+\sentence{cls-enbanc at 1741}.
+
+The common thread among all of these opinions is an assumption that, given the
+heavy use of technical language in the specification and claims, only a
+specific, complex, technical computer program could infringe the patents. As the
+above \numlines-line computer program demonstrates, this assumption was in
+error.
+
+The computer program devised by \amici reads
+the claim as a whole, as this Court requires. \sentence{see diehr at 188}. As
+the detailed appendix shows, every
+claim limitation is considered and implemented appropriately in the
+computer code, so it cannot be said that details or limitations have been
+stripped from the claim. \sentence{see this at appx:code; cf. diehr at 188 (``It
+is inappropriate to dissect the claims into old and new elements and then to
+ignore the presence of the old elements in the analysis.'')}. Furthermore,
+because
+the computer program is a functional, working implementation of the claim, it
+cannot be argued that it is a mere abstraction or generalization of the claims.
+
+Thus, Claim 26 of \inline{pat375} is directed not to a complex
+system requiring specialized hardware, but rather to a basic,
+\numlines-line computer algorithm.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION I.B
+%
+\subsection{The Claims Cover All
+Computer Implementations of an Abstract Idea}
+\bblabel[Section \#]{sec1b}
 
 The example computer program shows that the asserted claims, though lengthy and
 technical in appearance, are actually directed only to a very simple, basic
-computer procedure. \Amicus now turns to using this example computer program to
-show that the asserted claims are directed only to an abstract idea.
+computer procedure.
+In fact, the asserted claims would cover substantially all computer uses of
+the abstract idea of accounting by a third-party escrow.
 
-An abstract idea is [DEFINITION]. Claims directed merely to an abstract idea are
-not eligible under \inline{101}. Furthermore, inclusion of ``insignificant''
-post-solution or pre-solution activity to an otherwise abstract idea does not
-render a claim eligible, as this Court has held, because otherwise any
-``competent draftsman'' could circumvent the limitations of patent eligibility.
+This Court's precedent lays out several guidelines for determining whether a
+claim is directed to an abstract idea.
+``A principle, in the abstract, is a fundamental truth; an original cause; a
+motive; these cannot be patented.''
+\sentence{benson at 67 (quoting \sentence{leroy at 175})}.
+%Claims directed merely to an abstract idea are
+%not eligible under \inline{101}, because they are the ``basic tools of
+%scientific and technological work,'' \clause{benson at 67}, which therefore
+%are ``part of the storehouse of knowledge of all men\ldots free to all men and
+%reserved exclusively to none,'' \clause{bilski at 3225 (quoting
+%\sentence{funkbros
+%at 130}) (omission in original)}. Furthermore, inclusion
+Furthermore, ``conventional or
+obvious''
+post-solution or pre-solution activity cannot
+render a claim eligible, because otherwise
+``a competent draftsman could attach some form of post-solution activity'' to
+``transform an unpatentable principle into a patentable process.''
+\sentence{flook at 590; see also mayo at 1300 (holding ``conventional steps,
+specified at a high level of generality,'' to similarly not confer patent
+eligibility)}.
 
-As Respondents have argued, the claim is directed to nothing more than a
-general-purpose computer tied to the abstract idea of accounting by a
-third-party escrow. The following exposition will consider Claim 26, line by
-line, to determine that every claim element is an inherent aspect of this
-abstract idea, a standard component of a general-purpose computer, or
-insignificant pre- or post-solution activity.
+According to these guidelines, it is clear
+that every element of Claim 26 is (1) an inherent aspect of the
+abstract idea of third-party escrow, (2) a conventional component of a
+general-purpose computer, or
+(3) insignificant pre- or post-solution activity.
+The claim is therefore
+ineligible.
 
 
-Elements 1--2\footnote{Elements will be referenced by numbers corresponding to
-the claim reprinted in the appendix. \sentence{see this at appx:claim}.} of the
+Elements\footnote{This brief references elements by numbers corresponding to
+the claim reprinted in the appendix. \sentence{see this at appx:claim}.} 1--2 of
+the
 claim describe ordinary components of a general-purpose computer. \sentence{see
-this at appx:claim:elements 1--2}. The ``communications controller'' and
+this at appx:claim:elements 1--2}. ``Communications controller'' and
 ``first party device'' are broad, general terms that encompass basic computer
-components for interacting with users. Furthermore, these two components are
-only recited in conjunction with a step of receiving data, which as explained
-below is insignificant pre-solution activity.
+components for interacting with users.\footnote{\sentence{see turing at 231-232
+(describing the Turing machine, a fundamental model for all computers, as
+including a ``paper tape'' for communicating with the user)}.} Furthermore,
+these two components are only recited in conjunction with a step of receiving
+data, which as explained below is insignificant pre-solution activity.
+\nofullcite{turing}
 
-Elements 3--5 describe basic recordkeeping operations inherent in the idea of
+Elements 3--5 describe basic record-keeping operations inherent in the idea of
 third-party escrow. Although the claim language verbosely describes a ``data
 storage unit'' with ``information about a first account'' and second account,
-the computer implementation demonstrates that these claim elements in fact
-require nothing more than storing account balances---that is, recording two
+the computer program demonstrates that these elements in fact
+require nothing more than recording two
 numbers in a computer. \sentence{see this at appx:claim:elements 3--5}.
 Certainly one would necessarily store such account information as part of an
-escrow service.
+escrow service.\footnote{The ``data storage unit'' is an essential part of a
+general-purpose computer. \sentence{see turing at 231-232 (further explaining
+that the Turing machine includes an \emph{m}-configuration for storing the state
+of the machine)}.}
 
 Element 6 recites ``a computer,'' and as such only further describes a
 general-purpose computer.
 
-Element 7 states that the computer must ``receive a transaction.'' Steps of
-receiving data have been held by this Court and others to constitute
-insignificant pre-solution activity. \sentence{see, e.g., mayo}. As such, this
+Element 7 states that the computer must ``receive a transaction.'' This Court
+and others have repeatedly held that steps of
+obtaining data to be used for processing
+constitute insignificant pre-solution activity. \sentence{see, e.g., mayo at
+1297-1298 (treating as pre-solution activity a step of determining a level of
+metabolites prior to adjusting a treatment); meyer at 794 (``[A] data gathering
+step\ldots cannot make an otherwise nonstatutory claim statutory.'')}. As such,
+this
 claim element does not contribute to the eligibility of the claim.
 
 Element 8 describes two steps to be performed by the computer, both of which are
@@ -231,318 +401,500 @@ inherent in the idea of third-party escrow. First, the computer is tasked with
 in their accounts. The computer code shows that this amounts to nothing more
 than a comparison, checking whether an account balance is greater than an amount
 to be transferred out of that account. \sentence{see this at appx:claim:element
-8}. This is a necessary operation performed by a third-party escrow broker, who
-must ensure that the parties' accounts can satisfy the desired transaction.
+8}. This is the basic purpose of a third-party escrow broker, who
+must ensure that the parties' accounts contain sufficient funds.
 
 Second, element 8 requires the computer to ``electronically adjust said first
-account and said third account.'' This is performed in two lines of computer
-code, one of which subtracts from the first account and the other of which adds
-to the third account. \sentence{see this at appx:claim:element 8}. Again, this
-is inherent in a third-party escrow service, which must adjust account balance
+account and said third account.'' This operation, which amounts to only two
+lines of computer code,
+is inherent in any third-party escrow service, which must adjust account balance
 records to account for a transaction.
 
 Element 9 instructs that the computer ``generate an instruction to said first
 exchange institution and/or said second exchange institution to adjust said
-second account and/or said fourth account.'' Despite the fifty-nine-word length
-of this element, it reduces to a single computer operation of printing out a
-message describing the transaction that was just completed. \sentence{see this
-at appx:claim:element 9}. This elementary output step is post-solution activity
-that should not contribute to the eligibility of the claim. \sentence{see
-flook at 156 (quoting \sentence{benson at 57})}.
+second account and/or said fourth account.'' Despite its fifty-nine-word length,
+this element reduces to a single operation: producing a
+message describing the transaction just completed. \sentence{see this
+at appx:claim:element 9}. This elementary output step is quintessential
+post-solution activity
+that should not contribute to the eligibility of the claim. \sentence{cf.
+flook at 590 (treating as post-solution activity a step of adjusting an alarm
+limit following a computation)}.
 
-Accordingly, this claim is directed to nothing more than an abstract idea of
+Claim 26 is directed to nothing more than an abstract idea of
 third-party escrow, in conjunction with insignificant pre-solution and
-post-solution activity, and ordinary, albeit verbosely described, components of
+post-solution activity, and ordinary---albeit verbosely described---components
+of
 a general purpose computer.
+This Court should accordingly hold the claim, and all others like it,
+unpatentable.
 
 
 
-\subsection{The Court Should Disapprove the Preemption of Substantially All
-Computer Uses of an Abstract Idea, and Thus Hold the Claims at Issue Ineligible}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION I.C
+%
+\subsection{Claims that Preempt Substantially All Computer Implementations of an
+Abstract Idea Should Be Ineligible}
+\bblabel[Section \#]{sec1c}
 
-Under this Court's precedent, a patent claim is ineligible under \inline{101} if
-that claim has the ``practical effect'' of removing an abstract idea from the
-public domain.  \sentence{see benson at 71-72}.  As shown in the previous section,
-claim 26 of the '375 patent would have the practical effect of removing all uses
+% Trying to shorten things
+\iffalse
+A patent claim with the ``practical effect'' of removing an abstract idea from
+the public domain is ineligible under \inline{101}. \sentence{see benson at
+71-72}.
+Claim 26 of the '375 patent would have the practical effect of removing all uses
 of an abstract idea \emph{implemented on a general-purpose computer} from the
-public domain. The Court should make clear that abstract ideas, including
-algorithms, are reserved to the public, even when implemented on general-purpose
-computers.
+public domain.
+\fi
 
-Holding otherwise would contradict the purpose of the exception and undermine the
-justification for patent protection.  Abstract ideas are unpatentable because they
+This Court should hold that the recitation of a
+general-purpose computer, as in the claims at issue here, does not render the
+claims eligible under \inline{101}.
+This principle follows, first, from the goal of promoting innovation, a goal
+central to
+this Court's \inline{101} doctrine, and second, from the rules of law
+this Court has derived from these principles.
+
+The abstract ideas exception is grounded in the principle that certain
+fundamental subject matter must be fixed in the public domain, so that
+patents may serve their constitutional mandate to ``promote the Progress
+of\ldots the useful Arts.'' \sentence{patentclause}.
+Abstract ideas are unpatentable because they
 are ``the basic tools of scientific and technological work,'' \clause{benson at
 67}, and must remain ``free to all men and reserved exclusively to none,''
-\clause{bilski at 3218 (quoting \sentence{funkbros at 130})}. All patents
-necessarily remove something from the public domain, but where patents ``grant[]
+\clause{bilski at 3218 (quoting \sentence{funkbros at 130})}. ``[M]onopolization
+of those tools through the grant of a patent might tend to impede innovation
+more than it would tend to promote it.'' \sentence{mayo at 1293; accord bilski
+at 3228 (patent law must avoid ``granting
 monopolies over procedures that others would discover by independent, creative
-application of general principles,'' they reach impermissibly far. \sentence{see
-bilski at 3228}.
+application of general principles'')}.
 
-The exception's purpose is a practical one:  prohibiting patents on abstract ideas
-would be meaningless if ideas could still be patented within certain technical
-domains, or with the addition of routine steps. \footnote{Note to ourselves: 
-possible analogy to genus and species claims:  once the genus is disclosed, can’t
-patent individual species within it, because allowing otherwise would encourage a
-rush to cover the genus with individual patents, making the genus patent less
-valuable.  (In the analogy the genus patent is the public domain idea.)} Thus, in
-\inline{mayo} this Court held that processes reciting laws of nature are not
-patentable unless they require ``significantly more'' than the natural law,
-thereby providing ``practical assurance'' that the claim is not ``designed to
-monopolize the law of nature itself.''  \sentence{mayo at 1297; see also mayo at
-1294 (claims must be limited ``in practice'')}.
+To permit patents on abstract ideas merely tied to general-purpose computers
+would eviscerate this principle.
+Computers are in
+widespread use today, and they are essential to innovation and a productive
+economy. \sentence{see, e.g., brynjolfsson at 4}. 
+Allowing patents on abstract ideas merely tied to computers
+would relegate
+innovators to practicing abstract ideas on pencil and
+paper. Needless to say, given the general importance of computers, such an
+absurd state of affairs would cripple innovation.
+The basic tools of innovation must remain available to all, even
+when they are, or must be, implemented on general-purpose technologies.
 
-Implementing an abstract idea like an algorithm on a general-purpose computer does
-not provide the practical protection against monopoly that this Court's past cases
-require.  Recognizing this, \inline{benson} held that a claim to a method of
-programming a general-purpose computer was an abstract idea ineligible for patent
-despite the fact that it required computer implementation. \sentence{benson at
-71}.  The Court reasoned that because the claimed method had ``no substantial
-practical application except in connection with a digital computer,'' the patent
-``in \emph{practical effect} would be a patent on the algorithm itself.''
-\sentence{benson at 71-72 (emphasis added)}. \iffalse COMMENTED BECAUSE I THINK
-IT'S REDUNDANT WITH THE NEXT PARAGRAPH --ANNA Instead, requiring computer
-implementation is like adding “conventional activity” to an abstract idea,
-\clause{mayo at 1300}, or limiting it to a “particular technological environment,”
-\clause{bilski at 3230 (quoting \sentence{diehr at 191-192})}, both of which the
-Court rejects as attempts to “circumvent[]” the exception, \clause{mayo at 1294
-(quoting \sentence{bilski at 3225})}.  Thus, \inline{flook} held that neither
-limiting an abstract idea to use within the petrochemical industry, nor adding
-“post-solution activity” like adjusting a threshold value, could render it
-patent-eligible. \sentence{parker at 590}. \inline{bilski} held that a method of
-hedging was unpatentable even when limited to energy markets. \sentence{bilski at
-3231}.  And \inline{mayo} held that adding “well-understood, routine, conventional
-activity previously engaged in by researchers in the field” was not a “meaningful
-limit.” \sentence{mayo at 1294, 99999}. \fi
+As an analogy, consider a patent claim directed to long division performed with
+pencil and paper. Long division can, in theory, be practiced in the mind, but
+as a practical matter no ordinary person can do so. Thus, this pencil-and-paper
+patent would effectively make the abstract idea of long division unusable.
+Similarly, computers are capable of tasks that ordinary
+humans cannot perform unaided, even though those tasks may be
+abstract ideas. The public must be able to apply these abstract ideas to
+computers if those abstract ideas are to
+remain ``free to all men and reserved exclusively to none.''\footnote{%
+Advances in computer hardware are of course themselves eligible for patent
+protection.  \sentence{see cls-enbanc at 1292 (Lourie, J., concurring)
+(observing in dicta that computers \emph{per se} are ``surely patent-eligible
+machines'')}. Equally so would be advances in pencil technology. But these are
+distinguishable from mere annexation of abstract ideas to computers or pencils.}
 
-An abstract idea ``does not suddenly become patentable subject matter simply by
-having the applicant acquiesce to limiting the reach of the patent . . . to a
-particular technological use.''  \sentence{diehr at 192 n.14}. Implementing an
+In view of this important principle, this Court taken a practical, substantive
+approach to assessing the actual,
+effective scope of the claims.
+So, for example,
+``limiting the reach of the patent\ldots to a
+particular technological use'' does not render an abstract idea patentable.
+\sentence{diehr at 192 n. 14}. Nor does attachment of
+``post-solution activity,''
+\clause{flook at 584},
+or
+recitation of ``well-understood, routine, conventional activity previously
+engaged by researchers in the field,''
+\clause{mayo at 1300}.
+
+Based on this clear precedent, \amici urge this Court to hold that
+attachment of a general-purpose computer or other common platform does not
+render an abstract idea
+patentable, in the present claims or otherwise.
+Implementing an
 abstract idea in the form of an algorithm on a general-purpose computer is a
 ``well-understood, routine, conventional activity,'' \clause{mayo at 1300}, that
+merely
 applies the algorithm in a ``particular technological environment,''
-\clause{bilski at 3230 (quoting \sentence{diehr at 191-192})}.  The mere fact that
-a computer is involved does not make these meaningful limits. Unlike claims to
-``an application'' of an abstract idea that ``[do] not seek to pre-empt the use''
-of the abstract idea, \clause{see diehr at 187 (finding claim to such an
-application patent-eligible)}, requiring implementation on a general-purpose
-computer therefore does not limit the claim ``in practice,'' \clause{see mayo at
-1294}.\footnote{Algorithms run on a general-purpose computer are also far from the
-``industrial process'' the Court found to be a patent-eligible application in
-\inline{diehr}. \sentence{see diehr at 187 (describing a process with ``physical
-and chemical'' components including filling a mold with raw rubber and opening the
-surrounding press at a calculated moment, whose contribution to the art was its
-``process of constantly monitoring the actual temperature inside the mold.'')}.}
+\clause{bilski at 3230 (quoting \sentence{diehr at 191-192})}.
+Any ``competent draftsman'' could append elements of a
+general-purpose computer to any algorithm.
+This case is distinguishable from \inline{diehr}, which found patentable an
+algorithm intimately tied to a rubber-curing
+machine, \clause{see * at 187}, because unlike a rubber-curing machine, a
+computer is able to perform \emph{any} possible algorithm or mathematical
+procedure.
+Thus, in the claims at issue, the recitation of a general-purpose computer
+should not render the claims eligible under \inline{101}.
 
-The physical nature of a computer does not change this.  Holding otherwise would
-``exalt[] form over substance,'' \clause{see flook at 590}, and endorse an
-untenable legal fiction.  The Federal Circuit case \inline{alappat}, which Alice
-and some of its \emph{amici} cite approvingly, \iffalse COMMENTED AS UNNECESSARY
-EXPLANATION --ANNA illustrates why this Court has previously rejected such “rigid
-line-drawing.” \sentence{alappat; bilski at 99999}.  \inline{alappat} drew a
-formalistic distinction between general-purpose and special-purpose computers
-wherein ideas implemented on the second were patentable, then relied on the
-fiction that a \fi found that a general-purpose computer ``in effect'' becomes a
-patent-eligible special-purpose machine once it is programmed.  \sentence{see
-alappat at 1545}. But this is like saying that a television screen is
-``special-purpose'' at the moment it displays one frame from a movie, or, as Chief
-Judge Archer pointed out at the time, that a composer may patent the ``structure''
-of a song as recorded on a compact disc.  \sentence{see alappat at 1553-1554
-(Archer, C.J., dissenting)}. \inline{alappat}'s distinction between ``apparatus''
-and unpatentable ``mathematics,'' \clause{alappat at 1545}, is a fiction with no
-relevance to general-purpose machines that function through repeated logical
-operations. \iffalse COMMENTED BECAUSE I COULDN'T FIND THIS AND IT'S NOT NECESSARY
---ANNA and moreover this Court in \inline{bilski} rejected the idea that use of
-computer technology is categorically sufficient to confer patent protection.
-\sentence{see bilski at 3227}. \fi
 
-Like pencil and paper, programmable computers are a general-purpose innovation
-technology.  Just as most of us cannot solve, say, long division problems of a
-certain difficulty without writing them down, computers are capable of tasks we
-humans cannot practically perform unaided.  This is why general-purpose computers
-are so useful:  they can be put to any task for which they can be programmed.
-Advances in computer hardware are of course themselves eligible for patent
-protection.  \sentence{see cls-enbanc at 1292 (Lourie, J., plurality op.)
-(observing in dicta that computers \emph{per se} are ``surely patent-eligible
-machines'')}.  But so are machines made of graphite and wood.  This does not mean
-that the abstract idea of long division is eligible for protection because it can,
-or even sometimes practically must, be written down.
 
-The basic tools of innovation remain basic tools, even when they are implemented
-on general-purpose technologies, or must be implemented on general-purpose
-technologies.  To hold otherwise would allow processes to be patentable when run
-on a computer that we could not remove from the public domain when done by hand.
-This would hamstring innovators by limiting them to a previous generation's
-general-purpose technologies—pencils, calculators—and reserving the use of
-abstract ideas that can be most effectively, or even only, performed on
-general-purpose computers to those who patent them first.  Computers are in
-widespread use today, and are effectively unavoidable. Condemning the public to
-resort to pencil and paper to avoid patent infringement is untenable, and goes
-against the purpose of the abstract idea exception.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION II
+%
+\section{This Court Should Clarify the Law of Subject Matter Eligibility}
 
-This case is the Court's opportunity to reject the fiction that computers'
-physicality effectively limits the ideas they implement, continue its reasoning in
-\inline{mayo} and \inline{bilski}, and clearly hold that abstract ideas cannot be
-patented even when they are implemented on general-purpose computers.
+In past decisions, this Court has placed important limits on patentable subject
+matter to ensure that the building blocks of invention, including abstract ideas
+and laws of nature, remain available to all. \sentence{mayo at 1293}.  The flood
+of software patent litigation in recent years, and the ruthless exploitation of
+such litigation by patent assertion entities, have made these limitations more
+important than ever. \sentence{gao-report at 13}. However, recent Federal
+Circuit decisions have weakened these limitations and muddied the waters on
+patentable subject matter.  \sentence{gao-report at 13}.
 
-\section{The Court Should Proactively Clarify the Law of Subject Matter
-Eligibility in Order to Avoid Further Errors Relating to Abstract Ideas}
+This Court should now reaffirm the importance of \inline{101} limitations and
+reject the use of flawed analytical methods. In particular, this Court should
+instruct the lower courts not to rely on three red herrings: details in the
+specification, the statutory class of the claims,
+or the addition of details of a computer. By advising lower courts to consider
+eligibility carefully and thoroughly, this Court will help bring certainty to
+patent litigation and relief to innovators. 
 
-The Supreme Court has taken numerous subject matter eligibility cases recently.
-It does so because the Federal Circuit is in a confused state about the law of
-\inline{101}, primarily because a small faction of that court repeatedly applies
-incorrect analytical techniques to improperly find patents eligible even when
-this Court's precedents demand otherwise.
 
-To clearly enunciate the law for the Federal Circuit and to prevent the need for
-further appeals, this Court should explicitly reject those improper analytical
-techniques, some of which have been catalogued below.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION II.A
+%
+\subsection{Lower Courts Should Not Rely on
+Specification Details to Evaluate Eligibility}
 
-\subsection{The Court Should Enunciate the Inappropriateness of Using
-Specification Details to Evaluate Subject Matter Eligibility}
+This Court should reaffirm that the proper focus of a \inline{101} subject
+matter inquiry is the scope of the patent claims, and that courts should not
+rely on language in the specification to decide whether claims are sufficiently
+concrete. This would resolve a division among the Federal Circuit judges on the
+proper role of implementation details in determining eligibility.
 
-In assessing whether a claim is ineligible under \inline{101}, courts must
-consider the entire breadth of the claim. Claims directed to an abstract idea
-will still cover specific, concrete implementations of that abstract idea, so
-the mere fact that a claim covers a concrete implementation is no indicator that
-a claim is directed to eligible subject matter.
+It has long been established that ``the claims made in the patent are the sole
+measure of the grant.''
+\sentence{aro at 339; accord graver-tank at 538-539 (``We have frequently held
+that it is the claim which measures the grant to the patentee.''); white at 51
+(a claim is not ``like a nose of wax'')}. Since 1836, the Patent Act has
+required claims that
+``particularly specify and
+point out the part, improvement, or combination which he claims as his own
+invention or discovery.'' \sentence{keystone at 278;
+1870act[S 24] at 201; 112 at /b}. %; see generally sarnoff at 401-402}.
+While patent claims are read in light of the
+specification and prosecution history, the claims alone determine
+patent scope. \sentence{phillips at 1317}.
+        
+Specifications do not define the scope of an invention; they merely
+describe how to make and use the claimed
+invention. \sentence{112 at /a}. Thus, specifications, by their nature,
+will almost certainly include some detailed, concrete implementations of the
+invention at hand.
 
-Nevertheless, certain judges of the Federal Circuit persistently err by relying
-on specific examples to find patent claims eligible. In the present case, the
-plurality opinion justified its finding that the system claims of the patents at
-issue were eligible, by selecting a complex-looking flowchart from the
-specification to point to the supposed complexity and concreteness of the claim.
-By doing so, they failed to contemplate the possibility that other, simpler,
-abstract ideas were \emph{also} covered by that same claim---ideas such as the
-14-line computer program presented in this brief.
+However, ``the complexity of the
+implementing software or the level of detail in the specification does not
+transform a claim reciting only an abstract concept into a patent-eligible
+system or method.'' \sentence{accenture at 1345; oreilly at 120
+(holding ineligible a broad patent claim to electromagnetism, despite a
+specification disclosing patent-eligible telegraph technology)}.
 
-Ironically, those same judges of the Federal Circuit criticize their opposed
-colleagues for failing to read the ``claims as a whole.'' It is in fact those
-opposed colleagues who have actually read the claims as a whole, contemplating
-the vast scope of what they cover. It is that plurality of the Federal Circuit,
-instead, who fails to read the claims as a whole, focusing wrongly on specific
-examples and obfuscatory language that misleadingly make abstract ideas appear
-patentable.
+It is therefore
+critically important that, when deciding whether a patent claim is directed to
+patentable subject matter, courts pay close
+attention to what is actually being claimed, and be vigilant to ensure that,
+regardless of specification details, the claims do not envelop abstract ideas,
+laws of nature, or physical phenomena.
 
-\subsection{The Court Should Reaffirm its Longstanding View that Mere Drafting
-Decisions, such as Choosing Between System and Method Claims, Do Not Affect
-Subject Matter Eligibility}
+Here, Judge Lourie applied the correct approach,
+correctly observing that the claims were simply calling for ``a handful of
+computer components, in generic, functional terms that would encompass any
+device capable of performing the same ubiquitous calculation, storage, and
+connectivity functions.'' \sentence{cls-enbanc at 1290}.
 
-The formalistic approach favored by some judges of the Federal Circuit lends to
-easy circumvention by clever patent drafting. For example, the suggestion that
-the method claims in the present case are ineligibile, while system claims
-directed to the same technology are eligible, simply encourages patent
-applicants to use system claims in order to skirt the abstract ideas test.
+Several other judges, however, mistakenly relied on examples in the
+specification in determining patent eligibility.
+For instance, Judge Rader concluded that the claims
+were directed to patentable subject matter, in part by looking to
+complex-looking flowcharts and descriptions in the specification. Referring to
+one claim, he wrote: ``Lest it be
+said that these structural and functional limitations are
+mere conventional post-solution activity, \emph{the specification explains
+implementation} of the recited special purpose computer system.''
+\sentence{cls-enbanc at 1307 (emphasis added)}. The opinion mistakenly relied on
+specification details to conclude that the claims are intricate and concrete,
+and in so doing missed that the claims themselves still recite basic, abstract
+concepts.
 
-Granting such weight to mere formal drafting practices ignores the basic
-rationale behind the Supreme Court's exceptions to \inline{101}. In explaining
-the basis for the three exceptions to \inline{101}, this Court has applied the
-fundamental principle that patents must ultimately incentivize innovation. While
-patents on many inventions do serve this principle, patents to abstract ideas,
-laws of nature and physical phenomena would in fact deter innovation by taking
-away those ``basic tools of research available to all.''
+This is not the first time the Federal Circuit has erred this way.
+In \inline{ultramercial}, the court found certain
+computer-implemented patent claims to be patent-eligible, and not abstract
+ideas, in part because of the ``intricate and complex computer programming''
+in the specification. \sentence{* at 1350}. In doing so, the panel missed the
+highly abstract nature of the claims, which essentially cover basic e-commerce
+concepts. \sentence{see wildtangent-amicus at 8-10}.
 
-Several judges of the Federal Circuit ignore this basic rationale. Judge Rader,
-for example, has intimated that the three exceptions to \inline{101} are
-essentially tautological, because one ``cannot invent an abstract idea, law of
-nature or physical phenomenon'' since they have been around the whole time.
+If this Court does not reject improper use of the specification
+to determine subject matter eligibility, the confusion in the case below
+and in \inline{ultramercial} will allow clever
+drafters to circumvent this Court's precedent on abstract ideas,
+simply by adding details to the specification. This danger is particularly acute
+for software patents, as it is easy to ``recite common language (`boilerplate')
+that
+describes generic computers'' but that does
+not meaningfully limit the claims.
+\sentence{browning at 263}. If judges get lost in obfuscatory
+language in patent specifications, then many more abstract patents will be
+incorrectly held valid, which will encourage improper litigation and
+chill innovation.
 
-This unduly narrow, formalistic view of the exceptions to \S~101 fails to
-adequately protect the concerns about incentives for innovation explicitly
-relied upon by this Court. Under Judge Rader's view, mere addition of even the
-most insignificant step to an otherwise abstract method would suddenly make that
-abstract method patentable, because the combination would not have existed
-before. The Court has specifically denounced this possibility, in holding
-numerous times that insignificant post-solution activity and pre-solution
-activity cannot render an otherwise abstract idea patentable.
+\Amici urge this Court to instruct the lower courts, in unequivocal
+terms, not to rely on specification details to determine subject matter
+eligibility.
 
-\subsection{Recitation of Basic, Widely Available Platform Technologies,
-Regardless of Detail, Cannot Render an Abstract Idea Patentable}
 
-The Federal Circuit repeatedly cites recitations of basic general purpose
-computing hardware as evidence that a claim is directed to eligible
-subject matter under \inline{101}. This is often done by overstating this
-court's dicta in \inline{bilski}, that the ``machine or transformation'' test is
-an ``important clue'' in assessing subject matter eligibility.
 
-The Court should clarify that mere recitation of general purpose platform
-technologies, such as general purpose computers, cannot render an otherwise
-ineligible claim eligible. Such a holding would be consistent with this Court's
-precedent, and more importantly would strongly advance the principles of
-incentivizing innovation, by protecting those ``basic tools of innovation''
-meant to be ``available to all.''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION II.B
+%
+\subsection{System Claims Are Not More Patent-Eligible than Method Claims}
+\bblabel[Section \#]{sec2b}
 
-As an analogy, consider a claim directed to the basic idea of addition,
-performed with paper and pencil. The paper and pencil could be described in
-great detail:
-\begin{quote}
-Drawing one or more numerical figures, with a pencil comprising a wooden shaft
-substantially in the shape of a hexagonal prism, the wooden shaft surrounding a
-cylindrical graphite barrel, the wooden shaft having a distal end including a
-rubber eraser, the wooden shaft further having a proximal end sharpened to
-thereby expose a portion of the cylindrical graphite barrel.
-\end{quote}
-Such a claim would certainly satisfy the machine-or-transformation test (a
-pencil is a machine of sorts, and the adherence of graphite to paper would
-constitute transformation of matter, among other things), but certainly such a
-claim would not be eligible subject matter, regardless of the level of detail.
-This is because paper and pencil are the basic tools of invention. To permit the
-patenting of abstract ideas merely tied to such basic tools would be tantamount
-to permitting the patenting of those abstract ideas alone.
+This Court should reiterate that patent subject matter eligibility turns on the
+substance and not the form of patent claims, and direct
+the lower courts not to decide patent eligibility based on drafting
+decisions such as claiming “systems” as opposed to “methods.” 
 
-Certain judges of the Federal Circuit criticize this approach, believing that it
-improperly imports questions of novelty and obviousness into \inline{101}.
-However, as this Court's precedent makes clear, this is not the case.
-\sentence{see flook}.
+It has long been established that drafting formalities should not
+distract from
+the substantive \inline{101} analysis.  As this Court reaffirmed in
+\inline{mayo}, appending to an abstract idea
+a phrase such as “apply it” does
+not make otherwise ineligible subject matter suddenly patentable. \sentence{*
+at 1294}.  To hold differently would permit clever drafting to maneuver around
+\inline{101}'s important limitations, and ignore the basic rationale behind this
+Court's exceptions to \inline{101}. \sentence{see flook at 590}. One concurring
+opinion below, however, urged exactly that wrong approach. \sentence{cls-enbanc
+at 1309 (Rader, J.)}.
 
+In articulating these
+exceptions, this Court has time and again underscored the principle that patents
+must ultimately incentivize innovation. \sentence{mayo at 1293; bilski at 3228
+(Kennedy, J., op.)}. While many patents do serve this principle, any claim that
+covers an abstract idea, law of nature or physical phenomenon in fact deters
+innovation by taking away those “basic tools of scientific and technological
+work”  available to all. \sentence{benson at 67}. Any other approach
+would create uncertainty and hesitation for innovators, who may decide
+that developing technologies or releasing products is prohibitively
+expensive. \sentence{see ftcreport at 74}.
+
+One such drafting formality at issue in the case below is the choice of
+statutory class, such as a system
+claim or method claim.
+Such claims are certainly different in theory: the former covers a
+machine while the latter covers a process with steps. But, particularly for
+software, the difference is merely a drafting exercise, because any method can
+be transformed into a system claim by reciting “a computer configured to perform
+certain steps” rather than claiming the steps alone. 
+
+Lower courts have long noticed that system and method claims can and sometimes
+do identify the same subject matter.  One court, for example, observed
+that this Court's precedent on \inline{101} ``applies equally whether an
+invention is claimed as an apparatus or process, because the form of the claim
+is often an exercise in drafting.'' \sentence{johnson at 1070 (quoted in
+\sentence{alappat at 1542})}. Indeed, the Federal Circuit has previously held
+that ``the form of the claims should not trump basic issues of patentability.''
+\sentence{bancorp at 1277; accord cybersource at 1374 (``[W]e look to the
+underlying invention for patent-eligibility purposes.'')}.
+
+Despite this precedent, some judges still rely too heavily on
+the statutory class of a claim.  According to Judge Rader,
+the system claims in this case “do not claim only an abstract concept without
+limitations\ldots because they require a machine.” \sentence{cls-enbanc at
+1309}. Thus, Judge Rader held those system claims eligible, while holding
+method claims with nearly equivalent wording ineligible. \sentence{see
+cls-enbanc at 1312-1313}.
+
+Judge Rader’s reasoning inappropriately turns formalistic drafting practice into
+a substantive distinction.  As Judge Lourie observed, the “method and system
+claims use similar and often identical language to describe those actions,” so
+to have a threshold test turn on this designation would be unreasonable.
+\sentence{cls-enbanc at 1289}. He correctly determined that “despite minor
+differences in terminology\ldots the asserted method and system claims require
+performance of the same basic process.” \sentence{cls-enbanc at 1290}.  To hold
+otherwise would allow the form of the claims to trump basic issues of
+patentability, and would elevate an exercise in drafting to substantive
+significance.
+
+A formalistic approach to system and method claims would be more than a
+departure from Supreme Court precedent and long standing tradition; it would
+essentially make the abstract ideas exception a dead letter for a huge swath of
+patents in the computer arts. Judge Rader’s reasoning implies that a patent
+attorney can turn practically any method---abstract or not---into patentable
+subject matter simply by relabeling that claim a “system” with a simple
+reference to a computer.  This would contravene this Court's warning
+in \inline{flook}
+about the danger of the clever draftsman, and it would obliterate the purpose
+behind the
+abstract ideas exception. This Court should explicitly reject such a result.
+
+\Amici therefore urge this Court to reaffirm that lower courts must examine
+system and method claims with equal vigor, and that the entirety of
+\inline{101}’s applicability cannot turn on superficial drafting distinctions.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SECTION II.C
+%
+\subsection{Recitation of Details of a General-Purpose Computer Does Not Affect
+Eligibility}
+\bblabel[Section \#]{sec2c}
+
+This Court should make clear that a clever draftsman cannot turn an abstract
+idea into patentable subject matter simply by reciting
+aspects of a general-purpose computer, regardless of the level of detail with
+which the claims describe the general-purpose computer. Several of the opinions
+below were unduly impressed by detailed, technical language that in fact recited
+nothing more than parts of a general-purpose computer, \clause{this at
+computer-quotes}, and this Court should firmly reject that approach.
+
+Consider a hypothetical ineligible claim to a method of performing long
+division using pencil and paper, as \amici discuss above. One could
+recite at length the physical attributes of the pencil (``a pencil
+comprising a wooden shaft surrounding a cylindrical graphite barrel, the wooden
+shaft having a distal end including a rubber eraser, etc.''). But such a
+recitation would affect neither the tendency of such a claim to effectively
+preempt use of an abstract idea, nor the ineligibility of the claim. Allowing
+patent eligibility to turn on this sort of insignificant detail ``would make the
+determination of patentable subject matter depend simply on the draftsman's
+art,'' a result that this Court should seek to avoid. \sentence{flook at 593}.
+
+Just as details about a pencil should not confer patent
+eligibility, neither should details about a general-purpose
+computer.
+Thus, language from the claims at issue, such as
+``data storage unit'' and ``communications controller,'' should not affect the
+ineligibility of the claims. This Court should reaffirm this point clearly.
+
+One reason that the lower courts make this error is that they place undue
+reliance on the 1994 Federal Circuit decision \inline{alappat}. Although that
+case actually dealt with a special form of oscilloscope,
+the lower court stated in dicta
+that ``a general purpose computer in effect becomes a special purpose computer
+once it is programmed'' with software. \sentence{* at 1545}.
+Courts have used this statement to support a mistaken conclusion that recitation
+of general-purpose computer hardware can confer patent eligibility.
+\sentence{see, e.g., cls-enbanc at 1305 (Rader, J.); ultramercial at 1353}.
+
+This reliance on \inline{alappat} is mistaken because this
+Court's precedent regarding abstract ideas does not
+distinguish between whether something is labeled ``general'' or
+``special purpose.'' A
+compact disc becomes special-purpose when music is recorded on it, but no patent
+should issue on such a ``special-purpose compact disc.'' \sentence{* at
+1553-1554 (Archer, J., dissenting)}.
+
+The law of subject matter eligibility does not turn on labels. It
+turns on whether a patented claim would preempt virtually all
+implementations of an idea, suppressing innovation along the way.
+This Court should thus reject the
+continued reliance of the lower courts on this dicta from \inline{alappat}.
+
+By ensuring that patent eligibility does not turn on formal drafting practices,
+such as recitation of system-style claims or inclusion of details of
+general-purpose computer hardware, this Court will take \inline{101} analysis
+from the metaphysical confusion that the lower courts have created, and return
+it to first principles. At the core of those first principles, which date back
+to the drafting of the Constitution, are the imperatives that patents must
+be calibrated to promote innovation, and
+that the toolbox of abstract ideas must remain available to all. It is these
+principles that
+should guide this Court's decision.
+
+\clearpage
 \part{Conclusion}
 
-For the foregoing reasons, \amicus respectfully submits that the Court
-should affirm the district court.
+For the foregoing reasons, \amici respectfully submit that this Court
+should affirm the judgment below.
 
 \signature
 
 \appendix{Implementation of Claim 26 of the '375 Patent in \Numlines Lines of
 Computer Code}
+\bblabel[Appendix \#]{appx:code}
+\appendixpagenumbers
 
 The following \numlines-line computer program, written in the \textsc{basic}
-programming language, implements Claim 26 of the '375 Patent.
+programming language, implements Claim 26 of the '375 Patent.\footnote{A
+\textsc{basic} program interpreter to run this program is available at
+http://www.vintage-basic.net/.}
 
+\vskip\baselineskip
 \inlinebox{\wholeprogram}
+\vskip\baselineskip
 
-The subsequent text reviews the elements of the claim in detail and explains how
+The text below reviews the elements of the claim in detail and explains how
 a general-purpose computer, running the above computer program, would satisfy
 all the elements of the claim. For convenience, the entirety of the claim is
 reprinted in the next appendix.
+
+All of the computer programming techniques used here predate the patent.
+The earliest
+possible priority date of the patent is 1992. The \textsc{basic} language dates
+back to 1964. \sentence{see basic-manual}. Thus,
+the computer techniques used in this brief were
+``well-understood, routine, conventional activity
+previously engaged in by researchers in the field'' as of the priority date of
+the patent. \sentence{mayo at 1294; cf.
+cls-enbanc at 1310 (Rader, J.) (asserting that the use of computers in the
+claims did not involve such conventional activity)}.
 
 \claimbox{preamble}{\claimelt0}
 
 The preamble recites that the claim covers a general purpose computing system,
 called a ``data processing system'' by the claim language. The recitation that
 the system is ``to enable the exchange of an obligation'' is a statement of
-intended use, which should not contribute to the scope of the claim.
+field of use or intended use, which should not contribute to the scope of the
+claim.
+\sentence{see bilski at 3231 (``[L]imiting an abstract idea to one field of
+use\ldots did not make the concept patentable.''); mpep at S 2103/IC
+(instructing that ``statements of intended use or field of use'' ``may raise a
+question as to the limiting effect of the language in a claim'')}.
 
 \claimbox{elements 1--2}{\claimelt1\par\claimelt2}
 
 These elements recite general hardware inherent in a general purpose computer. A
 ``communications controller'' broadly refers to a component of a computer that
 receives and processes communications, and a ``first party device'' could refer
-to any computer hardware. A standard keyboard could potentially satisfy this
-limitation.
+to any computer hardware.\footnote{Petitioner has at least once
+described the communications controller as a device ``that allows communications
+over a wide-area network.'' \sentence{cls-dist95 at 6}. But the text of the
+patent belies that limited definition. \sentence{see pat375 at column 7, lines
+46-57 (``A number of communications controllers\ldots effect communications
+between the processing units and various external hardware devices\ldots. A
+large range of communications hardware products are supported, and collectively
+are referred to as the stakeholder input/output devices.'' (reference numbers
+omitted))}.} A computer must communicate with its users in order to be useful,
+so these components are necessary to any computer.
 
 \codeandclaimbox{elements 3--5}{\claimelt3\par\claimelt4\par\claimelt5}{1}{2}
 
 These elements of the claim simply require that a computer store two numbers
 representing account balances. The ``data storage unit'' might be any computer
 storage component, such as a hard disk or memory. The ``information about'' the
-first and third accounts broadly encompass any account information, such as an
+first and third accounts broadly encompasses any account information, such as an
 account balance.
 
 The recitations that the information be stored ``independent from'' various
-accounts maintained by exchange institutions are simply statements of intended
+accounts maintained by exchange institutions are statements of intended
 use, which should not contribute to the patentability of the claim. Petitioners
 have never suggested that the external exchange institutions are necessary
-parties to infringement of their claims.
+parties to infringement of their claims. Furthermore, so long as the two stored
+numbers reflect actual account balances in external banks, the ``independent
+from'' limitations are satisfied.
 
 The computer code implements these elements of the claim by instructing a
 computer to store two account balances, into variables named \emph{account1} and
@@ -558,13 +910,17 @@ communications controller, so that it may receive and output information.
 \codeandclaimbox{element 7}{\claimelt7}{3}{3}
 
 According to this element, the computer receives a ``transaction.'' An exchange
-of money between two accounts is one type of transaction. Thus, this element
-requires nothing more than receipt of an instruction to transfer money between
-two accounts.
+of money between two accounts is one type of transaction, and Petitioners have
+used described an ``exchange'' as an example of a transaction. (Petr.'s Br.\ 7.)
+Thus, this
+element requires nothing more than receipt of an instruction to transfer money
+between two accounts.
 
-The computer code implements this by requesting input of an amount of money to
-transfer between the first and third account. Upon running this line of code,
-a computer would print out a prompt message, and then await an outside user to
+The computer code implements this element by requesting the user to input an
+amount of money to
+transfer between the first and third account. This is performed by the
+\textsc{input} command. Upon running this line of code,
+a computer would print out the prompt message, and then await an outside user to
 enter a number indicating the amount of money to transfer. The amount to
 exchange is stored in a variable named \emph{exchange}.
 
@@ -572,7 +928,8 @@ exchange is stored in a variable named \emph{exchange}.
 
 This element describes two operations. First, a computer must check that at
 least one of the accounts has a large enough balance to permit the desired
-transfer of money (``ensuring that said first party...ha[s] adequate value in
+transfer of money (``ensuring that said first party\ldots ha[s] adequate value
+in
 said first account''). Second, the computer must record the transfer by
 adjusting the balances of the accounts (``electronically adjust said first
 account and said third account'').
@@ -584,17 +941,19 @@ than reiterate that the computer is transferring money between accounts.
 Furthermore, the claim recites that the computer must ensure ``adequate value in
 said first account and/or said third account,'' and the disjunctive ``and/or''
 means that the claim element is satisfied if only one of those accounts is
-checked.
+checked. \sentence{see mpep at S 2103/IC (``Language that suggests or makes
+optional but does not require steps to be performed\ldots does not limit the
+scope of a claim or claim limitation.'')}.
 
 The computer code implements the step of checking the account balances at line
 40, which halts execution (with \textsc{stop}) if the balance of
 \emph{account1} is less than the amount to be exchanged. The code implements the
-step of effecting the transfer at lines 50--60, which deducts the amount to be
-exchanged from \emph{account1} and adds that amount to \emph{account3}.
+step of effecting the transfer at lines 50--60, which deduct the amount to be
+exchanged from \emph{account1} and add that amount to \emph{account3}.
 
 \codeandclaimbox{element 9}{\claimelt9}{7}{7}
 
-This claim element requires only that a computer output an instruction to
+This claim element requires only that a computer produce an instruction to
 perform the desired transfer of money. The claim element recites ``an
 instruction to said first exchange institution and/or said second exchange
 institution,'' but the disjunctive ``and/or'' means that a single instruction
@@ -609,10 +968,16 @@ recipient of the instruction chooses whether to treat that text as irrevocable
 or time-invariant. Although this claim language could plausibly have been
 defined in the specification to require some sort of special format for the
 instruction, Petitioners have never identified any such special definition in
-any of their briefs to this Court or the Federal Circuit, and the text of the
+any of their briefs to this Court, the Federal Circuit, or the district
+court,\footnote{The district court briefs reviewed are identified on the docket
+as Documents Nos.\ 53, 54, 68, 95, and 99. The Federal Circuit briefs reviewed
+are identified on the docket as Documents Nos.\ 22, 33, 41, and 194.}
+and the
 specification contains neither term outside of the claims. Furthermore, even if
 these terms did have some special meaning, it would only dictate the content of
 the instruction text, and content of text does not contribute to patentability.
+\sentence{see mpep at S 2106/I (``a mere arrangement of printed matter'' is not
+directed to statutory subject matter)}.
 
 The computer code implements this element by causing a computer to print an
 instruction to adjust the second account. The instruction directs the
@@ -620,6 +985,7 @@ first institution to deduct the amount \emph{exchange} from the account.
 
 \appendix{Claim 26 of the '375 Patent}
 \bblabel[Appendix \#]{appx:claim}
+\addtotoa{pat375}
 
 \emph{Numbers, in square brackets, have been inserted before each element of the
 claim, to assist in referring to claim elements within the brief.}
