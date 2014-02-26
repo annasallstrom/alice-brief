@@ -92,8 +92,8 @@
       \vskip-3\baselineskip
       No.~\@docket\strut
       \vskip .5\baselineskip
-      \hrule
-      \vskip 2pt
+      \hrule\@height\p@
+      \vskip\p@
       \hrule
       \vskip .5\baselineskip
       \textsc{In the}\par
@@ -109,7 +109,7 @@
     \hb@xt@\textwidth{%
       \footnotesize
       \parindent\z@
-      \hsize.45\textwidth
+      \hsize.47\textwidth
       \everypar{\hangindent=1em\relax}%
       \def\\{\@testopt\@parwithskip\z@}%
       \def\@parwithskip[##1]{\par\vskip##1\relax}
@@ -131,8 +131,8 @@
     \fi
   \vfill\null
   \hrule
-  \vskip 2pt
-  \hrule
+  \vskip\p@
+  \hrule\@height\p@
   \end{titlepage}%
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
